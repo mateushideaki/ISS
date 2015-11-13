@@ -6,18 +6,22 @@
 package view;
 
 import controller.ControleFornecedor;
-import java.util.Vector;
-import javax.swing.JTable;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import model.Fornecedor;
+
 /**
  *
- * @author lucas
+ * @author Mateus
  */
 public class Fornecedores extends javax.swing.JFrame {
-    private ControleFornecedor controler = new ControleFornecedor();
-    private Vector cabecalho;
+    
+    private TableModel tableModelFornecedor;
+    
+    
     /**
-     * Creates new form Fornecedores
+     * Creates new form Fornecedoress
      */
     public Fornecedores() {
         initComponents();
@@ -31,19 +35,8 @@ public class Fornecedores extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        LirioPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("LirioPU").createEntityManager();
-        fornecedorQuery = java.beans.Beans.isDesignTime() ? null : LirioPUEntityManager.createQuery("SELECT f FROM Fornecedor f");
-        fornecedorList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fornecedorQuery.getResultList();
-        fornecedorQuery1 = java.beans.Beans.isDesignTime() ? null : LirioPUEntityManager.createQuery("SELECT f FROM Fornecedor f");
-        fornecedorList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fornecedorQuery1.getResultList();
-        fornecedorQuery2 = java.beans.Beans.isDesignTime() ? null : LirioPUEntityManager.createQuery("SELECT f FROM Fornecedor f");
-        fornecedorList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fornecedorQuery2.getResultList();
-        fornecedorQuery3 = java.beans.Beans.isDesignTime() ? null : LirioPUEntityManager.createQuery("SELECT f FROM Fornecedor f");
-        fornecedorList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fornecedorQuery3.getResultList();
-        fornecedorQuery4 = java.beans.Beans.isDesignTime() ? null : LirioPUEntityManager.createQuery("SELECT f FROM Fornecedor f");
-        fornecedorList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fornecedorQuery4.getResultList();
+        Voltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Cadastrar = new javax.swing.JButton();
         Excluir = new javax.swing.JButton();
@@ -52,9 +45,15 @@ public class Fornecedores extends javax.swing.JFrame {
         buscaFornecedor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaFornecedor = new javax.swing.JTable();
-        Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Voltar.setText("VOLTAR");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("FORNECEDORES");
@@ -88,35 +87,15 @@ public class Fornecedores extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fornecedorList4, tabelaFornecedor);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tel}"));
-        columnBinding.setColumnName("Tel");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
-        columnBinding.setColumnName("Nome");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${end}"));
-        columnBinding.setColumnName("End");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${email}"));
-        columnBinding.setColumnName("Email");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cnpj}"));
-        columnBinding.setColumnName("Cnpj");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
-        columnBinding.setColumnName("Id");
-        columnBinding.setColumnClass(Long.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(tabelaFornecedor);
+        tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        Voltar.setText("VOLTAR");
-        Voltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VoltarActionPerformed(evt);
+            },
+            new String [] {
+
             }
-        });
+        ));
+        jScrollPane1.setViewportView(tabelaFornecedor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,11 +110,11 @@ public class Fornecedores extends javax.swing.JFrame {
                         .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Excluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Voltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
                 .addGap(215, 215, 215)
@@ -146,19 +125,19 @@ public class Fornecedores extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Alterar)
-                        .addGap(43, 43, 43)
-                        .addComponent(Excluir))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Alterar)
+                        .addGap(43, 43, 43)
+                        .addComponent(Excluir)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,11 +145,13 @@ public class Fornecedores extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        bindingGroup.bind();
-
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        new Compra().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VoltarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         new CadastroFornecedor().setVisible(true);
@@ -184,13 +165,22 @@ public class Fornecedores extends javax.swing.JFrame {
         new AlterarFornecedor().setVisible(true);
     }//GEN-LAST:event_AlterarActionPerformed
 
-    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
-        new Compra().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_VoltarActionPerformed
-
     private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
-        //tabelaFornecedor = (JTable) controler.listarFornecedores(buscaFornecedor.getText());
+
+        String fornecedorNome = buscaFornecedor.getText();
+        ControleFornecedor controleFornecedor = new ControleFornecedor();
+        List<Fornecedor> lista = controleFornecedor.listarFornecedores(fornecedorNome);
+
+        Object[][] dados = new Object[lista.size()][2];
+        int i = 0;
+        for (Fornecedor f : lista) {
+            dados[i] = f.toArray();
+            i++;
+        }
+
+        Object[] colunas = new Object[]{"Código", "NomeFornecedor"};
+        tableModelFornecedor = new DefaultTableModel(dados, colunas);
+        tabelaFornecedor.setModel(tableModelFornecedor);
     }//GEN-LAST:event_buscaFornecedorKeyReleased
 
     /**
@@ -219,6 +209,7 @@ public class Fornecedores extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Fornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -232,23 +223,11 @@ public class Fornecedores extends javax.swing.JFrame {
     private javax.swing.JButton Alterar;
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Excluir;
-    private javax.persistence.EntityManager LirioPUEntityManager;
     private javax.swing.JButton Voltar;
     private javax.swing.JTextField buscaFornecedor;
-    private java.util.List<view.Fornecedor> fornecedorList;
-    private java.util.List<view.Fornecedor> fornecedorList1;
-    private java.util.List<view.Fornecedor> fornecedorList2;
-    private java.util.List<view.Fornecedor> fornecedorList3;
-    private java.util.List<view.Fornecedor> fornecedorList4;
-    private javax.persistence.Query fornecedorQuery;
-    private javax.persistence.Query fornecedorQuery1;
-    private javax.persistence.Query fornecedorQuery2;
-    private javax.persistence.Query fornecedorQuery3;
-    private javax.persistence.Query fornecedorQuery4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaFornecedor;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

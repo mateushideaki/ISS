@@ -39,6 +39,16 @@ public class FornecedorDao {
         cri.addOrder(Order.asc("nome"));
         this.listaFornecedores = cri.list();
         return this.listaFornecedores;
+        
+        /*String hql = "from Fornecedor f where f.nome like :nomeFornecedor";
+        
+        sessao = HibernateUtil.getSessionFactory().getCurrentSession();
+        trans = sessao.beginTransaction();
+        List lista = sessao.createQuery(hql)
+                .setParameter("nome", "%"+nomeFornecedor+"%")
+                .list();
+        trans.commit();
+        return lista;*/
     }
 
     public void cadastrarFornecedor(Fornecedor f) {

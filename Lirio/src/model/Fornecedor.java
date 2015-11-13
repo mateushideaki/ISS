@@ -74,6 +74,10 @@ public class Fornecedor implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Object[] toArray(){
+        return  new Object[]{this.id, this.nome};
+    }
 
     @Override
     public int hashCode() {
