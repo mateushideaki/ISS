@@ -178,7 +178,7 @@ public class Fornecedores extends javax.swing.JFrame {
             i++;
         }
 
-        Object[] colunas = new Object[]{"Código", "NomeFornecedor"};
+        Object[] colunas = new Object[]{"Cód", "Fornecedor", "Tel", "Endereço"};
         tableModelFornecedor = new DefaultTableModel(dados, colunas);
         tabelaFornecedor.setModel(tableModelFornecedor);
     }//GEN-LAST:event_buscaFornecedorKeyReleased

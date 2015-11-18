@@ -24,7 +24,7 @@ public class Fornecedor implements Serializable {
     private String nome;
     private String cnpj;
     private String tel;
-    private String end; //endereço
+    private String ender; //endereço
     private String email;
 
     public Long getId() {
@@ -60,11 +60,11 @@ public class Fornecedor implements Serializable {
     }
 
     public String getEnd() {
-        return end;
+        return ender;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEnd(String ender) {
+        this.ender = ender;
     }
 
     public String getEmail() {
@@ -76,7 +76,7 @@ public class Fornecedor implements Serializable {
     }
     
     public Object[] toArray(){
-        return  new Object[]{this.id, this.nome};
+        return  new Object[]{this.id, this.nome, this.tel, this.ender};
     }
 
     @Override
