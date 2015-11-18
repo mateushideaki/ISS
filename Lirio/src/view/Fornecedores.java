@@ -17,6 +17,7 @@ import model.Fornecedor;
  */
 public class Fornecedores extends javax.swing.JFrame {
     
+    private ControleFornecedor controleFor = new ControleFornecedor();
     private TableModel tableModelFornecedor;
     
     
@@ -158,7 +159,7 @@ public class Fornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        // TODO add your handling code here:
+        controleFor.excluirFornecedor((Fornecedor) tabelaFornecedor.getSelectionModel());
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
