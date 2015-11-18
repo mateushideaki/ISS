@@ -20,18 +20,18 @@ import javax.persistence.Id;
 public class Fornecedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String nome;
     private String cnpj;
     private String tel;
     private String ender; //endereço
     private String email;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,15 +74,19 @@ public class Fornecedor implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public Object[] toArray(){
-        return  new Object[]{this.id, this.nome, this.tel, this.ender};
+
+    public String getEnder() {
+        return ender;
+    }
+
+    public void setEnder(String ender) {
+        this.ender = ender;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 29 * hash + this.id;
         return hash;
     }
 
@@ -95,11 +99,12 @@ public class Fornecedor implements Serializable {
             return false;
         }
         final Fornecedor other = (Fornecedor) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
+
     
    
     

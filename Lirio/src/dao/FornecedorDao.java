@@ -5,7 +5,6 @@
  */
 package dao;
 
-
 import java.util.List;
 import model.Fornecedor;
 import org.hibernate.Criteria;
@@ -22,33 +21,25 @@ import util.HibernateUtil;
  * @author Mateus
  */
 public class FornecedorDao {
+
     private Session sessao = HibernateUtil.getSessionFactory().openSession();
     private Transaction trans;
     private List<Fornecedor> listaFornecedores;
-    
+
     public List<Fornecedor> listarFornecedores(String nomeFornecedor) {
         if (sessao.isConnected()) {
             sessao.close();
         }
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
-        
+
         Criteria cri = sessao.createCriteria(Fornecedor.class);
         Criterion _nome = Restrictions.like("nome", nomeFornecedor, MatchMode.ANYWHERE);
         cri.add(_nome);
         cri.addOrder(Order.asc("nome"));
         this.listaFornecedores = cri.list();
         return this.listaFornecedores;
-        
-        /*String hql = "from Fornecedor f where f.nome like :nomeFornecedor";
-        
-        sessao = HibernateUtil.getSessionFactory().getCurrentSession();
-        trans = sessao.beginTransaction();
-        List lista = sessao.createQuery(hql)
-                .setParameter("nome", "%"+nomeFornecedor+"%")
-                .list();
-        trans.commit();
-        return lista;*/
+
     }
 
     public void cadastrarFornecedor(Fornecedor f) {
@@ -61,7 +52,7 @@ public class FornecedorDao {
             sessao.save(f);
             trans.commit();
         } catch (Exception e) {
-            e.printStackTrace();   
+            e.printStackTrace();
         }
     }
 
@@ -72,10 +63,10 @@ public class FornecedorDao {
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
-
+            
             sessao.delete(f);
             trans.commit();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,6 +86,5 @@ public class FornecedorDao {
             e.printStackTrace();
         }
     }
-    
-    
+
 }

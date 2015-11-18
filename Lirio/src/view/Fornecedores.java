@@ -7,22 +7,25 @@ package view;
 
 import controller.ControleFornecedor;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Fornecedor;
+import util.FornecedorTableModel;
 
 /**
  *
  * @author Mateus
  */
 public class Fornecedores extends javax.swing.JFrame {
-    
+
     private ControleFornecedor controleFor = new ControleFornecedor();
     private TableModel tableModelFornecedor;
-    
+    private Fornecedor f = new Fornecedor();
+    FornecedorTableModel modelFornecedor;
     
     /**
-     * Creates new form Fornecedoress
+     * Creates new form Fornecedores
      */
     public Fornecedores() {
         initComponents();
@@ -159,7 +162,14 @@ public class Fornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        controleFor.excluirFornecedor((Fornecedor) tabelaFornecedor.getSelectionModel());
+        int linhaSelecionada = tabelaFornecedor.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.f = this.modelFornecedor.get(linhaSelecionada);
+            controleFor.excluirFornecedor(this.f);
+        } else {
+            JOptionPane.showMessageDialog(this, "É necessário selecionar uma linha!", "Selecione uma linha", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
@@ -171,17 +181,21 @@ public class Fornecedores extends javax.swing.JFrame {
         String fornecedorNome = buscaFornecedor.getText();
         ControleFornecedor controleFornecedor = new ControleFornecedor();
         List<Fornecedor> lista = controleFornecedor.listarFornecedores(fornecedorNome);
+        this.modelFornecedor = new FornecedorTableModel(lista);
+        tabelaFornecedor.setModel(this.modelFornecedor);
 
-        Object[][] dados = new Object[lista.size()][2];
-        int i = 0;
-        for (Fornecedor f : lista) {
-            dados[i] = f.toArray();
-            i++;
-        }
+        //this.f = modelFornecedor.get(tabelaFornecedor.getSelectedRow());
+        
+        /*Object[][] dados = new Object[lista.size()][2];
+         int i = 0;
+         for (Fornecedor f : lista) {
+         dados[i] = f.toArray();
+         i++;
+         }
 
-        Object[] colunas = new Object[]{"Cód", "Fornecedor", "Tel", "Endereço"};
-        tableModelFornecedor = new DefaultTableModel(dados, colunas);
-        tabelaFornecedor.setModel(tableModelFornecedor);
+         Object[] colunas = new Object[]{"Cód", "Fornecedor", "Tel", "Endereço"};
+         tableModelFornecedor = new DefaultTableModel(dados, colunas);
+         tabelaFornecedor.setModel(tableModelFornecedor);*/
     }//GEN-LAST:event_buscaFornecedorKeyReleased
 
     /**
