@@ -275,7 +275,8 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         fornecedor.setNome(nomeFornecedor.getText());
         fornecedor.setTel(telFornecedor.getText());
         controler.cadastrarFornecedor(fornecedor);
-        dispose();
+        new Fornecedores().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void nomeFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFornecedorActionPerformed

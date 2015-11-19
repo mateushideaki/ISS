@@ -7,6 +7,7 @@ package controller;
 
 import dao.FornecedorDao;
 import java.util.List;
+import java.util.Objects;
 import model.Fornecedor;
 
 /**
@@ -31,17 +32,13 @@ public class ControleFornecedor {
         fornecedorDao.excluirFornecedor(f);
     }
     
-    public void carregarDisciplina(Fornecedor f){
+    public void carregarFornecedor(Fornecedor f) {
         this.fornecedor = f;
     }
     
-    public void alterarFornecedor(){
-        fornecedorDao.alterarFornecedor(this.fornecedor);
-        this.fornecedor.setCnpj(null);
-        this.fornecedor.setEmail(null);
-        this.fornecedor.setEnd(null);
-        this.fornecedor.setNome(null);
-        this.fornecedor.setTel(null);
+    public void alterarFornecedor(Fornecedor f){
+        fornecedorDao.alterarFornecedor(f);
+        
     }
 
     public Fornecedor getFornecedor() {
@@ -50,6 +47,28 @@ public class ControleFornecedor {
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.fornecedor);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ControleFornecedor other = (ControleFornecedor) obj;
+        if (!Objects.equals(this.fornecedor, other.fornecedor)) {
+            return false;
+        }
+        return true;
     }
 
     

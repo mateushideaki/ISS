@@ -31,7 +31,6 @@ public class FornecedorDao {
             sessao.close();
         }
         sessao = HibernateUtil.getSessionFactory().openSession();
-        trans = sessao.beginTransaction();
 
         Criteria cri = sessao.createCriteria(Fornecedor.class);
         Criterion _nome = Restrictions.like("nome", nomeFornecedor, MatchMode.ANYWHERE);
@@ -39,7 +38,6 @@ public class FornecedorDao {
         cri.addOrder(Order.asc("nome"));
         this.listaFornecedores = cri.list();
         return this.listaFornecedores;
-
     }
 
     public void cadastrarFornecedor(Fornecedor f) {
@@ -49,8 +47,10 @@ public class FornecedorDao {
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
+
             sessao.save(f);
             trans.commit();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +63,7 @@ public class FornecedorDao {
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
-            
+
             sessao.delete(f);
             trans.commit();
 

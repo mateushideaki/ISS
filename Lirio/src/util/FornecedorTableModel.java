@@ -27,7 +27,11 @@ public class FornecedorTableModel extends AbstractTableModel{
     public FornecedorTableModel(List<Fornecedor> lista) {
         this.lista = new ArrayList<Fornecedor>(lista);
     }
-
+    
+    public void setLista(List<Fornecedor> l){
+        this.lista = new ArrayList<Fornecedor>(l);
+    }
+    
     public int getRowCount() {
         //Quantas linhas tem sua tabela? Uma para cada item da lista.  
         return lista.size();

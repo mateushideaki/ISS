@@ -19,16 +19,18 @@ import util.FornecedorTableModel;
  */
 public class Fornecedores extends javax.swing.JFrame {
 
+    private String fornecedorNome;
     private ControleFornecedor controleFor = new ControleFornecedor();
-    private TableModel tableModelFornecedor;
+    private List<Fornecedor> lista = controleFor.listarFornecedores("");
+    private FornecedorTableModel modelFornecedor = new FornecedorTableModel(lista);
     private Fornecedor f = new Fornecedor();
-    FornecedorTableModel modelFornecedor;
-    
+
     /**
      * Creates new form Fornecedores
      */
     public Fornecedores() {
         initComponents();
+        tabelaFornecedor.setModel(modelFornecedor);
     }
 
     /**
@@ -150,6 +152,7 @@ public class Fornecedores extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
@@ -159,6 +162,7 @@ public class Fornecedores extends javax.swing.JFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         new CadastroFornecedor().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
@@ -168,24 +172,37 @@ public class Fornecedores extends javax.swing.JFrame {
             this.f = this.modelFornecedor.get(linhaSelecionada);
             controleFor.excluirFornecedor(this.f);
         } else {
-            JOptionPane.showMessageDialog(this, "É necessário selecionar uma linha!", "Selecione uma linha", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor.", "Erro: Nenhum fornecedor selecionado.", JOptionPane.ERROR_MESSAGE);
         }
+
+        this.lista = controleFor.listarFornecedores("");
+        this.modelFornecedor = new FornecedorTableModel(this.lista);
+        tabelaFornecedor.setModel(this.modelFornecedor);
+
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        new AlterarFornecedor().setVisible(true);
+        int linhaSelecionada = tabelaFornecedor.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.f = this.modelFornecedor.get(linhaSelecionada);
+            //controleFor.carregarFornecedor(this.f);
+            new AlterarFornecedor(this.f).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor.", "Erro: Nenhum fornecedor selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
 
-        String fornecedorNome = buscaFornecedor.getText();
-        ControleFornecedor controleFornecedor = new ControleFornecedor();
-        List<Fornecedor> lista = controleFornecedor.listarFornecedores(fornecedorNome);
-        this.modelFornecedor = new FornecedorTableModel(lista);
+        this.fornecedorNome = buscaFornecedor.getText();
+        this.lista = controleFor.listarFornecedores(this.fornecedorNome);
+        this.modelFornecedor = new FornecedorTableModel(this.lista);
         tabelaFornecedor.setModel(this.modelFornecedor);
 
-        //this.f = modelFornecedor.get(tabelaFornecedor.getSelectedRow());
-        
         /*Object[][] dados = new Object[lista.size()][2];
          int i = 0;
          for (Fornecedor f : lista) {
@@ -229,7 +246,9 @@ public class Fornecedores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new Fornecedores().setVisible(true);
+
             }
         });
     }
