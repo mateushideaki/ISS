@@ -9,6 +9,6 @@ package controller;
  *
  * @author usuario
  */
-public class ContoleEstoque {
+public class ContoleProduto {
  
 }
