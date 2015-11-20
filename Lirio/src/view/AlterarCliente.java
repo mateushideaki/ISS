@@ -5,9 +5,14 @@
  */
 package view;
 
+import controller.ControleCliente;
+import javax.swing.JOptionPane;
+import model.Cliente;
+
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 
@@ -17,11 +22,25 @@ import javax.swing.text.MaskFormatter;
  */
 public class AlterarCliente extends javax.swing.JFrame {
 
+    private ControleCliente controler = new ControleCliente();
+    private Cliente cliente;
+    
+    
     /**
      * Creates new form AlterarFornecedor
      */
-    public AlterarCliente() {
+    public AlterarCliente(Cliente c) {
+        this.cliente = c;
+        groupButton();
         initComponents();
+        nomeCliente.setText(c.getNome());
+        rg.setText(c.getRg());
+        cpf.setText(c.getCpf());
+        endereco.setText(c.getEndereco());
+        //dataNasc.setText(c.getDataNasc());
+        telCliente.setText(c.getTel());
+        tel2Cliente.setText(c.getTel2());
+        emailCliente.setText(c.getEmail());
     }
 
     /**
@@ -34,27 +53,27 @@ public class AlterarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         Fem = new javax.swing.JRadioButton();
-        Endereco = new javax.swing.JTextField();
+        endereco = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        DataNasc = new javax.swing.JTextField();
+        dataNasc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        Telefone = new javax.swing.JTextField();
+        telCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Telefone2 = new javax.swing.JTextField();
+        tel2Cliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        Alterar = new javax.swing.JButton();
+        AlterarCliente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         Cancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        Email = new javax.swing.JTextField();
-        Nome = new javax.swing.JTextField();
+        emailCliente = new javax.swing.JTextField();
+        nomeCliente = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        RG = new javax.swing.JTextField();
+        rg = new javax.swing.JTextField();
         Masc = new javax.swing.JRadioButton();
-        CPF = new javax.swing.JTextField();
+        cpf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,9 +84,9 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
-        DataNasc.addActionListener(new java.awt.event.ActionListener() {
+        dataNasc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DataNascActionPerformed(evt);
+                dataNascActionPerformed(evt);
             }
         });
 
@@ -77,10 +96,10 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         jLabel5.setText("Endereço:");
 
-        Alterar.setText("ALTERAR");
-        Alterar.addActionListener(new java.awt.event.ActionListener() {
+        AlterarCliente.setText("ALTERAR");
+        AlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarActionPerformed(evt);
+                AlterarClienteActionPerformed(evt);
             }
         });
 
@@ -99,17 +118,17 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         jLabel8.setText("Telefone2:");
 
-        Nome.addActionListener(new java.awt.event.ActionListener() {
+        nomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NomeActionPerformed(evt);
+                nomeClienteActionPerformed(evt);
             }
         });
 
         jLabel10.setText("Sexo:");
 
-        RG.addActionListener(new java.awt.event.ActionListener() {
+        rg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RGActionPerformed(evt);
+                rgActionPerformed(evt);
             }
         });
 
@@ -133,14 +152,14 @@ public class AlterarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RG, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Nome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DataNasc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telefone2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dataNasc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tel2Cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Fem, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
@@ -152,7 +171,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8)
-                                    .addComponent(Alterar)
+                                    .addComponent(AlterarCliente)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10))
                                 .addGap(30, 30, 30)
@@ -171,35 +190,35 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(DataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(Telefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tel2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -209,7 +228,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Alterar)
+                    .addComponent(AlterarCliente)
                     .addComponent(Cancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -218,11 +237,19 @@ public class AlterarCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeActionPerformed
+    private void groupButton(){
+        ButtonGroup sexo = new ButtonGroup();
+        
+        sexo.add(Masc);
+        sexo.add(Fem);
+       
+    }
+    
+    private void nomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomeActionPerformed
+    }//GEN-LAST:event_nomeClienteActionPerformed
 
-    private void RGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RGActionPerformed
+    private void rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgActionPerformed
         // TODO add your handling code here:
         MaskFormatter format = null;
         try {
@@ -231,18 +258,34 @@ public class AlterarCliente extends javax.swing.JFrame {
             Logger.getLogger(AlterarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         JFormattedTextField field = new JFormattedTextField(format);
-    }//GEN-LAST:event_RGActionPerformed
+    }//GEN-LAST:event_rgActionPerformed
 
-    private void DataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataNascActionPerformed
+    private void dataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DataNascActionPerformed
+    }//GEN-LAST:event_dataNascActionPerformed
 
-    private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
+    private void AlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarClienteActionPerformed
+        this.cliente.setRg(rg.getText());
+        this.cliente.setCpf(cpf.getText());
+        this.cliente.setEmail(emailCliente.getText());
+        this.cliente.setEndereco(endereco.getText());
+        //this.cliente.setDataNasc(dataNasc.getText());
+        this.cliente.setNome(nomeCliente.getText());
+        this.cliente.setTel(telCliente.getText());
+        this.cliente.setTel2(tel2Cliente.getText());
+        if(Masc.isSelected()){
+            this.cliente.setSexo("M");
+        }else{
+            this.cliente.setSexo("F");
+        }
+        controler.alterarCliente(this.cliente);
         this.dispose();
-    }//GEN-LAST:event_AlterarActionPerformed
+        new Clientes().setVisible(true);
+    }//GEN-LAST:event_AlterarClienteActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
+        new Fornecedores().setVisible(true);
     }//GEN-LAST:event_CancelarActionPerformed
 
     /**
@@ -276,24 +319,19 @@ public class AlterarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlterarCliente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Alterar;
-    private javax.swing.JTextField CPF;
+    private javax.swing.JButton AlterarCliente;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JTextField DataNasc;
-    private javax.swing.JTextField Email;
-    private javax.swing.JTextField Endereco;
     private javax.swing.JRadioButton Fem;
     private javax.swing.JRadioButton Masc;
-    private javax.swing.JTextField Nome;
-    private javax.swing.JTextField RG;
-    private javax.swing.JTextField Telefone;
-    private javax.swing.JTextField Telefone2;
+    private javax.swing.JTextField cpf;
+    private javax.swing.JTextField dataNasc;
+    private javax.swing.JTextField emailCliente;
+    private javax.swing.JTextField endereco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -305,5 +343,9 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField nomeCliente;
+    private javax.swing.JTextField rg;
+    private javax.swing.JTextField tel2Cliente;
+    private javax.swing.JTextField telCliente;
     // End of variables declaration//GEN-END:variables
 }

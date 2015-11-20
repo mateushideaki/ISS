@@ -35,14 +35,14 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RG" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="Nome" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="CPF" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="Endereco" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="DataNasc" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="Telefone" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="Telefone2" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <Component id="Email" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="rg" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="nomeCliente" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="cpf" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="endereco" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="dataNasc" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="telCliente" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="tel2Cliente" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                          <Component id="emailCliente" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
                           <Component id="Fem" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Alterar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AlterarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -84,42 +84,42 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="RG" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Endereco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="endereco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="DataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Telefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="telCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Telefone2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tel2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Email" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -131,7 +131,7 @@
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Alterar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="AlterarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -145,7 +145,7 @@
         <Property name="text" type="java.lang.String" value="Feminino"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Endereco">
+    <Component class="javax.swing.JTextField" name="endereco">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
@@ -157,9 +157,9 @@
         <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="DataNasc">
+    <Component class="javax.swing.JTextField" name="dataNasc">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataNascActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataNascActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -167,26 +167,26 @@
         <Property name="text" type="java.lang.String" value="RG:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Telefone">
+    <Component class="javax.swing.JTextField" name="telCliente">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="CPF:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Telefone2">
+    <Component class="javax.swing.JTextField" name="tel2Cliente">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Alterar">
+    <Component class="javax.swing.JButton" name="AlterarCliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="ALTERAR"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlterarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlterarClienteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -217,11 +217,11 @@
         <Property name="text" type="java.lang.String" value="Telefone2:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Email">
+    <Component class="javax.swing.JTextField" name="emailCliente">
     </Component>
-    <Component class="javax.swing.JTextField" name="Nome">
+    <Component class="javax.swing.JTextField" name="nomeCliente">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NomeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeClienteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
@@ -229,9 +229,9 @@
         <Property name="text" type="java.lang.String" value="Sexo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="RG">
+    <Component class="javax.swing.JTextField" name="rg">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RGActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rgActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="Masc">
@@ -239,7 +239,7 @@
         <Property name="text" type="java.lang.String" value="Masculino"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="CPF">
+    <Component class="javax.swing.JTextField" name="cpf">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

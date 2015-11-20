@@ -5,7 +5,13 @@
  */
 package view;
 
+import javax.swing.ButtonGroup;
 import controller.ControleCliente;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 import model.Cliente;
 
 /**
@@ -19,6 +25,7 @@ public class CadastroCliente extends javax.swing.JFrame {
      */
     public CadastroCliente() {
         initComponents();
+        groupButton();
     }
 
     /**
@@ -73,6 +80,18 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel8.setText("Telefone2:");
 
+        rg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rgActionPerformed(evt);
+            }
+        });
+
+        dataNasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataNascActionPerformed(evt);
+            }
+        });
+
         telCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telClienteActionPerformed(evt);
@@ -105,6 +124,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         });
 
         Fem.setText("Feminino");
+        Fem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FemActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("ID: 3549");
 
@@ -208,15 +232,28 @@ public class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void groupButton(){
+        ButtonGroup sexo = new ButtonGroup();
+        
+        sexo.add(Masc);
+        sexo.add(Fem);
+       
+    }
+    
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         Cliente cliente = new Cliente();
         cliente.setRg(rg.getText());
         cliente.setCpf(cpf.getText());
         cliente.setEndereco(enderecoCliente.getText());
-        cliente.setDataNasc(dataNasc.getText());
+        //cliente.setDataNasc(dataNasc.getText());
         cliente.setNome(nomeCliente.getText());
         cliente.setTel(telCliente.getText());
         cliente.setTel2(tel2Cliente.getText());
+        if(Masc.isSelected()){
+            cliente.setSexo("M");
+        }else{
+            cliente.setSexo("F");
+        }
         cliente.setEmail(emailCliente.getText());
         controler.cadastrarCliente(cliente);
         new Clientes().setVisible(true);
@@ -232,9 +269,27 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telClienteActionPerformed
 
+    private void dataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataNascActionPerformed
+
     private void MascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MascActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MascActionPerformed
+
+    private void FemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FemActionPerformed
+
+    private void rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgActionPerformed
+        MaskFormatter format = null;
+        try {
+            format = new MaskFormatter("##.###.###-#");
+        } catch (ParseException ex) {
+            Logger.getLogger(AlterarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JFormattedTextField field = new JFormattedTextField(format);
+    }//GEN-LAST:event_rgActionPerformed
 
     /**
      * @param args the command line arguments

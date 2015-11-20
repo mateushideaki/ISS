@@ -46,11 +46,11 @@ public class Clientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Cadastrar = new javax.swing.JButton();
         Excluir = new javax.swing.JButton();
-        Alterar = new javax.swing.JButton();
+        AlterarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaCliente = new javax.swing.JTable();
         Menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,27 +72,27 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        Alterar.setText("ALTERAR");
-        Alterar.addActionListener(new java.awt.event.ActionListener() {
+        AlterarCliente.setText("ALTERAR");
+        AlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarActionPerformed(evt);
+                AlterarClienteActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Pesquise um Cliente:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Nome", "RG", "CPF", "..."
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaCliente);
 
         Menu.setText("MENU PRINCIPAL");
         Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +121,7 @@ public class Clientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                             .addComponent(Excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(AlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(jLabel1)))
@@ -139,7 +139,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Alterar)
+                        .addComponent(AlterarCliente)
                         .addGap(43, 43, 43)
                         .addComponent(Excluir))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,7 +154,7 @@ public class Clientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
+    private void AlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarClienteActionPerformed
         int linhaSelecionada = tabelaCliente.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
@@ -165,7 +165,7 @@ public class Clientes extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_AlterarActionPerformed
+    }//GEN-LAST:event_AlterarClienteActionPerformed
 
     private void MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuActionPerformed
        new MenuInicial().setVisible(true);
@@ -228,14 +228,14 @@ public class Clientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Alterar;
+    private javax.swing.JButton AlterarCliente;
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Excluir;
     private javax.swing.JButton Menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaCliente;
     // End of variables declaration//GEN-END:variables
 }
