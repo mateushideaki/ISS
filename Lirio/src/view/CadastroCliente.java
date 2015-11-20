@@ -8,6 +8,8 @@ package view;
 import javax.swing.ButtonGroup;
 import controller.ControleCliente;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -136,7 +138,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
 
         try {
-            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -254,7 +256,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         cliente.setRg(rg.getText());
         cliente.setCpf(cpf.getText());
         cliente.setEndereco(enderecoCliente.getText());
-        //cliente.setDataNasc(dataNasc.getText());
+        SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("yyyy/MM/dd");
+        Date dataNascimento = new Date();
+        try {
+            cliente.setDataNasc(formatoBrasileiro.parse(dataNasc.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cliente.setDataNasc(dataNascimento);
         cliente.setNome(nomeCliente.getText());
         cliente.setTel(telCliente.getText());
         cliente.setTel2(tel2Cliente.getText());

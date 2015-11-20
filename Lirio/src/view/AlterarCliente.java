@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import model.Cliente;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -37,7 +39,10 @@ public class AlterarCliente extends javax.swing.JFrame {
         rg.setText(c.getRg());
         cpf.setText(c.getCpf());
         endereco.setText(c.getEndereco());
-        //dataNasc.setText(c.getDataNasc());
+        
+        SimpleDateFormat formataData = new SimpleDateFormat("yyyy/MM/dd");
+        String data = formataData.format(c.getDataNasc());
+        dataNasc.setText(data);
         telCliente.setText(c.getTel());
         tel2Cliente.setText(c.getTel2());
         emailCliente.setText(c.getEmail());
@@ -135,7 +140,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         }
 
         try {
-            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -277,7 +282,14 @@ public class AlterarCliente extends javax.swing.JFrame {
         this.cliente.setCpf(cpf.getText());
         this.cliente.setEmail(emailCliente.getText());
         this.cliente.setEndereco(endereco.getText());
-        //this.cliente.setDataNasc(dataNasc.getText());
+       SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataNascimento = new Date();
+        try {
+            cliente.setDataNasc(formatoBrasileiro.parse(dataNasc.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.cliente.setDataNasc(dataNascimento);
         this.cliente.setNome(nomeCliente.getText());
         this.cliente.setTel(telCliente.getText());
         this.cliente.setTel2(tel2Cliente.getText());
