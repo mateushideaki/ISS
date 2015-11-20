@@ -5,17 +5,33 @@
  */
 package view;
 
+import controller.ControleCliente;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import model.Cliente;
+import util.ClienteTableModel;
+
+
 /**
  *
  * @author lucas
  */
-public class Cliente extends javax.swing.JFrame {
+public class Clientes extends javax.swing.JFrame {
 
+    private String clienteNome;
+    private ControleCliente controleCli = new ControleCliente();
+    private List<Cliente> lista = controleCli.listarClientes("");
+    private ClienteTableModel modelCliente = new ClienteTableModel(lista);
+    private Cliente c = new Cliente();
+    
     /**
      * Creates new form Cliente
      */
-    public Cliente() {
+    public Clientes() {
         initComponents();
+        tabelaCliente.setModel(modelCliente);
     }
 
     /**
@@ -139,7 +155,16 @@ public class Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        new AlterarCliente().setVisible(true);
+        int linhaSelecionada = tabelaCliente.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.c = this.modelCliente.get(linhaSelecionada);
+            //controleFor.carregarFornecedor(this.f);
+            new AlterarCliente(this.c).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuActionPerformed
@@ -152,7 +177,18 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabelaCliente.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.c = this.modelCliente.get(linhaSelecionada);
+            controleCli.excluirCliente(this.c);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.lista = controleCli.listarClientes("");
+        this.modelCliente = new ClienteTableModel(this.lista);
+        tabelaCliente.setModel(this.modelCliente);
     }//GEN-LAST:event_ExcluirActionPerformed
 
     /**
@@ -172,20 +208,21 @@ public class Cliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new Clientes().setVisible(true);
             }
         });
     }

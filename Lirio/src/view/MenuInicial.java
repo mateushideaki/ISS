@@ -203,7 +203,7 @@ public class MenuInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_VendaActionPerformed
 
     private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
-        new Cliente().setVisible(true);
+        new Clientes().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ClienteActionPerformed
 

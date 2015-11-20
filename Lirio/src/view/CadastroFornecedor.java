@@ -75,6 +75,12 @@ public class CadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        cnpj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnpjActionPerformed(evt);
+            }
+        });
+
         RemoverProd.setText("REMOVER PRODUTO");
         RemoverProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +288,10 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     private void nomeFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFornecedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeFornecedorActionPerformed
+
+    private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnpjActionPerformed
 
     /**
      * @param args the command line arguments
