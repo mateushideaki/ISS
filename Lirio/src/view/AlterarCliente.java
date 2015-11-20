@@ -54,13 +54,9 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         Fem = new javax.swing.JRadioButton();
         endereco = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dataNasc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        telCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tel2Cliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         AlterarCliente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -71,24 +67,19 @@ public class AlterarCliente extends javax.swing.JFrame {
         emailCliente = new javax.swing.JTextField();
         nomeCliente = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        rg = new javax.swing.JTextField();
         Masc = new javax.swing.JRadioButton();
-        cpf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        rg = new javax.swing.JFormattedTextField();
+        cpf = new javax.swing.JFormattedTextField();
+        dataNasc = new javax.swing.JFormattedTextField();
+        telCliente = new javax.swing.JFormattedTextField();
+        tel2Cliente = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Fem.setText("Feminino");
 
-        jLabel11.setText("ID: 3549");
-
         jLabel2.setText("Nome:");
-
-        dataNasc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataNascActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("RG:");
 
@@ -126,16 +117,40 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         jLabel10.setText("Sexo:");
 
-        rg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rgActionPerformed(evt);
-            }
-        });
-
         Masc.setText("Masculino");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("ALTERAR DADOS CLIENTE");
+
+        try {
+            rg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            telCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            tel2Cliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,35 +167,45 @@ public class AlterarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dataNasc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tel2Cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Fem, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(25, 25, 25))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Fem)
+                                .addGap(5, 5, 5))
+                            .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel11)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(AlterarCliente)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(AlterarCliente)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Cancelar)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(Masc)
-                                        .addGap(143, 143, 143)))))
-                        .addContainerGap(19, Short.MAX_VALUE))))
+                                        .addGap(143, 143, 143)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dataNasc)
+                                    .addComponent(telCliente)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(tel2Cliente))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(emailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +249,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(Masc)
                     .addComponent(Fem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AlterarCliente)
                     .addComponent(Cancelar))
@@ -248,21 +271,6 @@ public class AlterarCliente extends javax.swing.JFrame {
     private void nomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeClienteActionPerformed
-
-    private void rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgActionPerformed
-        // TODO add your handling code here:
-        MaskFormatter format = null;
-        try {
-            format = new MaskFormatter("##.###.###-#");
-        } catch (ParseException ex) {
-            Logger.getLogger(AlterarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JFormattedTextField field = new JFormattedTextField(format);
-    }//GEN-LAST:event_rgActionPerformed
-
-    private void dataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataNascActionPerformed
 
     private void AlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarClienteActionPerformed
         this.cliente.setRg(rg.getText());
@@ -328,13 +336,12 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JButton Cancelar;
     private javax.swing.JRadioButton Fem;
     private javax.swing.JRadioButton Masc;
-    private javax.swing.JTextField cpf;
-    private javax.swing.JTextField dataNasc;
+    private javax.swing.JFormattedTextField cpf;
+    private javax.swing.JFormattedTextField dataNasc;
     private javax.swing.JTextField emailCliente;
     private javax.swing.JTextField endereco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -344,8 +351,8 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nomeCliente;
-    private javax.swing.JTextField rg;
-    private javax.swing.JTextField tel2Cliente;
-    private javax.swing.JTextField telCliente;
+    private javax.swing.JFormattedTextField rg;
+    private javax.swing.JFormattedTextField tel2Cliente;
+    private javax.swing.JFormattedTextField telCliente;
     // End of variables declaration//GEN-END:variables
 }
