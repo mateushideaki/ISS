@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
-
+import java.util.Calendar;
 /**
  *
  * @author lucas
@@ -138,7 +138,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
 
         try {
-            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -256,14 +256,16 @@ public class CadastroCliente extends javax.swing.JFrame {
         cliente.setRg(rg.getText());
         cliente.setCpf(cpf.getText());
         cliente.setEndereco(enderecoCliente.getText());
-        SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("yyyy/MM/dd");
-        Date dataNascimento = new Date();
-        try {
-            cliente.setDataNasc(formatoBrasileiro.parse(dataNasc.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cliente.setDataNasc(dataNascimento);
+        String dia = dataNasc.getText().substring(0,1);
+        int diaInt = Integer.valueOf(dia);
+        String mes = dataNasc.getText().substring(3,4);
+        int mesInt= Integer.valueOf(mes);
+        String ano = dataNasc.getText().substring(6);
+        int anoInt = Integer.valueOf(ano);
+        Calendar c = Calendar.getInstance();
+        c.set(anoInt,mesInt,diaInt);
+        Date d = c.getTime();
+        cliente.setDataNasc(d);
         cliente.setNome(nomeCliente.getText());
         cliente.setTel(telCliente.getText());
         cliente.setTel2(tel2Cliente.getText());
