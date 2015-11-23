@@ -150,7 +150,7 @@ public class AlterarFornecedor extends javax.swing.JFrame {
         jLabel6.setText("Endereço:");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("ALTERAR DE FORNECEDOR");
+        jLabel1.setText("ALTERAR FORNECEDOR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
