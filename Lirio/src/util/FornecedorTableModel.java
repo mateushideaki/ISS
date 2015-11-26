@@ -23,7 +23,7 @@ public class FornecedorTableModel extends AbstractTableModel{
 
     private List<Fornecedor> lista;
 
-    //Esse é um construtor, que recebe a nossa lista de livros  
+
     public FornecedorTableModel(List<Fornecedor> lista) {
         this.lista = new ArrayList<Fornecedor>(lista);
     }
@@ -33,12 +33,10 @@ public class FornecedorTableModel extends AbstractTableModel{
     }
     
     public int getRowCount() {
-        //Quantas linhas tem sua tabela? Uma para cada item da lista.  
         return lista.size();
     }
 
     public int getColumnCount() {
-        //Quantas colunas tem a tabela? Nesse exemplo, só 2.  
         return 4;
     }
 
@@ -75,28 +73,16 @@ public class FornecedorTableModel extends AbstractTableModel{
         return ""; //Nunca deve ocorrer  
     }
 
-    /*public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Fornecedor titulo = lista.get(rowIndex);
-        //Vamos alterar o valor da coluna columnIndex na linha rowIndex com o valor aValue passado no parâmetro.  
-        //Note que vc poderia alterar 2 campos ao invés de um só.  
-        if (columnIndex == COL_TITULO) {
-            titulo.setTitulo(aValue.toString());
-        } else if (columnIndex == COL_AUTOR) {
-            titulo.getAutor().setNome(aValue.toString());
-        }
-    }*/
+
 
     public Class<?> getColumnClass(int columnIndex) {
-        //Qual a classe das nossas colunas? Como estamos exibindo texto, é string.  
         return String.class;
     }
 
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        //Indicamos se a célula da rowIndex e da columnIndex é editável. Nossa tabela toda é.  
+    public boolean isCellEditable(int rowIndex, int columnIndex) { 
         return false;
     }
-    //Já que esse tableModel é de livros, vamos fazer um get que retorne um livro inteiro.  
-    //Isso elimina a necessidade de chamar o getValueAt() nas telas.   
+
 
     public Fornecedor get(int row) {
         return lista.get(row);

@@ -17,6 +17,7 @@ import java.util.Date;
  *
  * @author lucas
  */
+@Entity
 public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -113,7 +114,7 @@ public class Cliente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 29 * hash + this.id;
         return hash;
     }
@@ -132,4 +133,6 @@ public class Cliente implements Serializable {
         }
         return true;
     }
+
+  
 }

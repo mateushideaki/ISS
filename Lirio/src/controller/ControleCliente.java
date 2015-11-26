@@ -50,8 +50,8 @@ public class ControleCliente {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.cliente);
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.cliente);
         return hash;
     }
 
@@ -69,4 +69,6 @@ public class ControleCliente {
         }
         return true;
     }
+
+    
 }
