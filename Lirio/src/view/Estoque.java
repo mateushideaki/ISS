@@ -5,17 +5,30 @@
  */
 package view;
 
+import controller.ControleProduto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import model.Produto;
+import util.ProdutoTableModel;
 /**
  *
- * @author lucas
+ * @author Danilo
  */
 public class Estoque extends javax.swing.JFrame {
 
+    private String produtoNome;
+    private ControleProduto controleProd = new ControleProduto();
+    private List<Produto> lista = controleProd.listarProdutos("");
+    private ProdutoTableModel modelProduto = new ProdutoTableModel(lista);
+    private Produto p = new Produto();
     /**
      * Creates new form Estoque
      */
     public Estoque() {
         initComponents();
+        tabelaProduto.setModel(modelProduto);
     }
 
     /**
@@ -31,18 +44,18 @@ public class Estoque extends javax.swing.JFrame {
         CadastrarProd = new javax.swing.JButton();
         MenosVendido = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        buscaProduto = new javax.swing.JTextField();
         MenuPrincipal = new javax.swing.JButton();
         AjustarPreco = new javax.swing.JButton();
         ExcluirProd = new javax.swing.JButton();
         AlterarProd = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("ESTOQUE");
+        jLabel1.setText("PRODUTO");
 
         CadastrarProd.setText("CADASTRAR PRODUTO");
         CadastrarProd.addActionListener(new java.awt.event.ActionListener() {
@@ -60,18 +73,11 @@ public class Estoque extends javax.swing.JFrame {
 
         jLabel2.setText("Pesquise um produto:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID_Prod", "Produto", "Quantidade", "..."
+        buscaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaProdutoKeyReleased(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
         MenuPrincipal.setText("MENU PRINCIPAL");
         MenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +107,16 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
+        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaProduto);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,18 +130,17 @@ public class Estoque extends javax.swing.JFrame {
                         .addComponent(AjustarPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(MenosVendido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ExcluirProd, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AlterarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addGap(276, 276, 276)
                 .addComponent(jLabel1)
@@ -144,16 +159,16 @@ public class Estoque extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(AlterarProd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ExcluirProd))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(ExcluirProd)
+                        .addGap(47, 47, 47)
+                        .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
         );
 
@@ -171,7 +186,18 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuPrincipalActionPerformed
 
     private void ExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirProdActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabelaProduto.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.p = this.modelProduto.get(linhaSelecionada);
+            controleProd.excluirProduto(this.p);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.lista = controleProd.listarProdutos("");
+        this.modelProduto = new ProdutoTableModel(this.lista);
+        tabelaProduto.setModel(this.modelProduto);
     }//GEN-LAST:event_ExcluirProdActionPerformed
 
     private void CadastrarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarProdActionPerformed
@@ -179,12 +205,27 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarProdActionPerformed
 
     private void AlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarProdActionPerformed
-        new AlterarProduto().setVisible(true);
+        int linhaSelecionada = tabelaProduto.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.p = this.modelProduto.get(linhaSelecionada);
+            new AlterarProduto(this.p).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um produto.", "Erro: Nenhum produto selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AlterarProdActionPerformed
 
     private void AjustarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjustarPrecoActionPerformed
         new AjustarPreco().setVisible(true);
     }//GEN-LAST:event_AjustarPrecoActionPerformed
+
+    private void buscaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoKeyReleased
+        this.produtoNome = buscaProduto.getText();
+        this.lista = controleProd.listarProdutos(this.produtoNome);
+        this.modelProduto = new ProdutoTableModel(this.lista);
+        tabelaProduto.setModel(this.modelProduto);
+    }//GEN-LAST:event_buscaProdutoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -228,10 +269,10 @@ public class Estoque extends javax.swing.JFrame {
     private javax.swing.JButton ExcluirProd;
     private javax.swing.JButton MenosVendido;
     private javax.swing.JButton MenuPrincipal;
+    private javax.swing.JTextField buscaProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaProduto;
     // End of variables declaration//GEN-END:variables
 }

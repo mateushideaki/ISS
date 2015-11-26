@@ -195,7 +195,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Estoque">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ESTOQUE"/>
+        <Property name="text" type="java.lang.String" value="PRODUTO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EstoqueActionPerformed"/>

@@ -89,7 +89,7 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
-        Estoque.setText("ESTOQUE");
+        Estoque.setText("PRODUTO");
         Estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EstoqueActionPerformed(evt);
