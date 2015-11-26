@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lucas/Downloads/Aulas%202015/ISS/Projeto/ISS/Lirio/src/view/CadastroCliente.java</file>
-            <file>file:/C:/Users/lucas/Downloads/Aulas%202015/ISS/Projeto/ISS/Lirio/src/view/Clientes.java</file>
-            <file>file:/C:/Users/lucas/Downloads/Aulas%202015/ISS/Projeto/ISS/Lirio/src/view/AlterarCliente.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/model/Cliente.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/controller/ControleProduto.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/controller/ControleCliente.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/view/AlterarFornecedor.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/view/Fornecedores.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/dao/ClienteDao.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISS/Lirio/src/model/Produto.java</file>
         </group>
     </open-files>
 </project-private>

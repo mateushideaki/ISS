@@ -23,7 +23,7 @@ public class Produto implements Serializable {
     private String categoria;
     private int qntAtual; //quantidade atual em estoque
     private int qntMinima; //quantidade minima
-    private float precoCusto; //preço de custo
+    private float precoCusto; //preço de custo//
     private float precoVenda; //preço de venda
 
     public int getId() {
