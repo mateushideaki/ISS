@@ -21,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Danilo
  */
 public class ProdutoDao {
-    private Session sessao;
+    private Session sessao = HibernateUtil.getSessionFactory().openSession();;
     private Transaction trans;
     private List<Produto> listaProdutos;
     
@@ -30,7 +30,7 @@ public class ProdutoDao {
             sessao.close();
         }
         sessao = HibernateUtil.getSessionFactory().openSession();
-
+        
         Criteria cri = sessao.createCriteria(Produto.class);
         Criterion _nome = Restrictions.like("nome", nomeProduto, MatchMode.ANYWHERE);
         cri.add(_nome);

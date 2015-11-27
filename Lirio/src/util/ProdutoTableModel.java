@@ -38,7 +38,7 @@ public class ProdutoTableModel extends AbstractTableModel{
     }
 
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
     
     public String getColumnName(int column) {
