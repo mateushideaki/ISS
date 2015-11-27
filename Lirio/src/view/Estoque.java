@@ -21,14 +21,14 @@ public class Estoque extends javax.swing.JFrame {
     private String produtoNome;
     private ControleProduto controleProd = new ControleProduto();
     private List<Produto> lista = controleProd.listarProdutos("");
-   /* private ProdutoTableModel modelProduto = new ProdutoTableModel(lista);
+    private ProdutoTableModel modelProduto = new ProdutoTableModel(lista);
     private Produto p = new Produto();
     /**
      * Creates new form Estoque
      */
     public Estoque() {
         initComponents();
-        //tabelaProduto.setModel(modelProduto);
+        tabelaProduto.setModel(modelProduto);
     }
 
     /**
@@ -186,7 +186,7 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuPrincipalActionPerformed
 
     private void ExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirProdActionPerformed
-        /*int linhaSelecionada = tabelaProduto.getSelectedRow();
+        int linhaSelecionada = tabelaProduto.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
             this.p = this.modelProduto.get(linhaSelecionada);
@@ -197,15 +197,16 @@ public class Estoque extends javax.swing.JFrame {
 
         this.lista = controleProd.listarProdutos("");
         this.modelProduto = new ProdutoTableModel(this.lista);
-        tabelaProduto.setModel(this.modelProduto);*/
+        tabelaProduto.setModel(this.modelProduto);
     }//GEN-LAST:event_ExcluirProdActionPerformed
 
     private void CadastrarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarProdActionPerformed
         new CadastroProduto().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CadastrarProdActionPerformed
 
     private void AlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarProdActionPerformed
-        /*int linhaSelecionada = tabelaProduto.getSelectedRow();
+        int linhaSelecionada = tabelaProduto.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
             this.p = this.modelProduto.get(linhaSelecionada);
@@ -213,7 +214,7 @@ public class Estoque extends javax.swing.JFrame {
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um produto.", "Erro: Nenhum produto selecionado.", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_AlterarProdActionPerformed
 
     private void AjustarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjustarPrecoActionPerformed
@@ -221,10 +222,10 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_AjustarPrecoActionPerformed
 
     private void buscaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoKeyReleased
-        /*this.produtoNome = buscaProduto.getText();
+        this.produtoNome = buscaProduto.getText();
         this.lista = controleProd.listarProdutos(this.produtoNome);
         this.modelProduto = new ProdutoTableModel(this.lista);
-        tabelaProduto.setModel(this.modelProduto);*/
+        tabelaProduto.setModel(this.modelProduto);
     }//GEN-LAST:event_buscaProdutoKeyReleased
 
     /**
