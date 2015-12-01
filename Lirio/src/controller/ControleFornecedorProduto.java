@@ -43,7 +43,7 @@ public class ControleFornecedorProduto {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.fp);
+        hash = 53 * hash + Objects.hashCode(this.fp);
         return hash;
     }
 
@@ -61,7 +61,8 @@ public class ControleFornecedorProduto {
         }
         return true;
     }
-    
+
+     
     
 
 }

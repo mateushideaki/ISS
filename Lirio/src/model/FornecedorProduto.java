@@ -39,6 +39,7 @@ public class FornecedorProduto implements Serializable{
         this.produto = prod;
         this.nomeFornecedor = forn.getNome();
         this.nomeProduto = prod.getNome();
+        this.preco = custo;
     }
     
     public String getNomeProduto() {

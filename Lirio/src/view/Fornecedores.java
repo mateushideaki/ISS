@@ -109,13 +109,13 @@ public class Fornecedores extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(buscaFornecedor))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Excluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -186,7 +186,6 @@ public class Fornecedores extends javax.swing.JFrame {
 
         if (linhaSelecionada >= 0) {
             this.f = this.modelFornecedor.get(linhaSelecionada);
-            //controleFor.carregarFornecedor(this.f);
             new AlterarFornecedor(this.f).setVisible(true);
             this.dispose();
         } else {
@@ -203,16 +202,7 @@ public class Fornecedores extends javax.swing.JFrame {
         this.modelFornecedor = new FornecedorTableModel(this.lista);
         tabelaFornecedor.setModel(this.modelFornecedor);
 
-        /*Object[][] dados = new Object[lista.size()][2];
-         int i = 0;
-         for (Fornecedor f : lista) {
-         dados[i] = f.toArray();
-         i++;
-         }
-
-         Object[] colunas = new Object[]{"Cód", "Fornecedor", "Tel", "Endereço"};
-         tableModelFornecedor = new DefaultTableModel(dados, colunas);
-         tabelaFornecedor.setModel(tableModelFornecedor);*/
+     
     }//GEN-LAST:event_buscaFornecedorKeyReleased
 
     /**

@@ -6,10 +6,12 @@
 package view;
 
 import controller.ControleFornecedor;
+import controller.ControleFornecedorProduto;
 import controller.ControleProduto;
 import java.util.List;
-import javax.swing.table.TableModel;
+import javax.swing.JOptionPane;
 import model.Fornecedor;
+import model.FornecedorProduto;
 import model.Produto;
 import util.FornecedorTableModel;
 import util.ProdutoTableModel;
@@ -19,20 +21,26 @@ import util.ProdutoTableModel;
  * @author Mateus
  */
 public class viewFornecedorProduto extends javax.swing.JFrame {
+
     private String produtoNome;
-    private TableModel modelProduto;
-    private List<Produto> listaProduto;
-    private List<Fornecedor> listaFornecedor;
     private String fornecedorNome;
-    private TableModel modelFornecedor;
     private ControleFornecedor controlefor = new ControleFornecedor();
     private ControleProduto controleProd = new ControleProduto();
+    private List<Produto> listaProduto = controleProd.listarProdutos("");
+    private List<Fornecedor> listaFornecedor = controlefor.listarFornecedores("");
+    private FornecedorTableModel modelFornecedor = new FornecedorTableModel(listaFornecedor);
+    private ProdutoTableModel modelProduto = new ProdutoTableModel(listaProduto);
+    private Produto produto;
+    private Fornecedor fornecedor;
+    private ControleFornecedorProduto cfp = new ControleFornecedorProduto();
 
     /**
      * Creates new form viewFornecedorProduto
      */
     public viewFornecedorProduto() {
         initComponents();
+        tabelaProduto.setModel(modelProduto);
+        tabelaFornecedor.setModel(modelFornecedor);
     }
 
     /**
@@ -49,12 +57,10 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         tabelaFornecedor = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         buscaFornecedor = new javax.swing.JTextField();
-        selecionarFornecedor = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         buscaProduto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaProduto = new javax.swing.JTable();
-        selecionarProduto = new javax.swing.JButton();
         btnVincular = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -81,13 +87,6 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
             }
         });
 
-        selecionarFornecedor.setText("SELECIONAR");
-        selecionarFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecionarFornecedorActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Pesquise um produto:");
 
         buscaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -106,11 +105,19 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelaProduto);
 
-        selecionarProduto.setText("SELECIONAR");
-
         btnVincular.setText("VINCULAR");
+        btnVincular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVincularActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,10 +142,7 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(buscaFornecedor)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(selecionarFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(selecionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(144, 144, 144))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVincular, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,17 +159,13 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selecionarFornecedor))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(buscaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selecionarProduto)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVincular, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,21 +183,8 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         this.modelFornecedor = new FornecedorTableModel(this.listaFornecedor);
         tabelaFornecedor.setModel(this.modelFornecedor);
 
-        /*Object[][] dados = new Object[lista.size()][2];
-        int i = 0;
-        for (Fornecedor f : lista) {
-            dados[i] = f.toArray();
-            i++;
-        }
 
-        Object[] colunas = new Object[]{"Cód", "Fornecedor", "Tel", "Endereço"};
-        tableModelFornecedor = new DefaultTableModel(dados, colunas);
-        tabelaFornecedor.setModel(tableModelFornecedor);*/
     }//GEN-LAST:event_buscaFornecedorKeyReleased
-
-    private void selecionarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selecionarFornecedorActionPerformed
 
     private void buscaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoKeyReleased
         this.produtoNome = buscaProduto.getText();
@@ -205,6 +192,30 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         this.modelProduto = new ProdutoTableModel(this.listaProduto);
         tabelaProduto.setModel(this.modelProduto);
     }//GEN-LAST:event_buscaProdutoKeyReleased
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        new Compra().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVincularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVincularActionPerformed
+        int linhaSelecionada = tabelaFornecedor.getSelectedRow();
+        int linhaSelecionada2 = tabelaProduto.getSelectedRow();
+
+        if (linhaSelecionada >= 0 && linhaSelecionada2 >= 0) {
+            this.fornecedor = this.modelFornecedor.get(linhaSelecionada);
+            this.produto = this.modelProduto.get(linhaSelecionada2);
+            
+            float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o preco: "));
+            FornecedorProduto fp = new FornecedorProduto(this.produto, this.fornecedor, preco);
+            cfp.cadastrarFP(fp);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Erro: É necessario selecionar um fornecedor e um produto.", "Selecione um fornecedor e um produto.", JOptionPane.ERROR_MESSAGE);
+        }
+        
+
+    }//GEN-LAST:event_btnVincularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,8 +262,6 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton selecionarFornecedor;
-    private javax.swing.JButton selecionarProduto;
     private javax.swing.JTable tabelaFornecedor;
     private javax.swing.JTable tabelaProduto;
     // End of variables declaration//GEN-END:variables
