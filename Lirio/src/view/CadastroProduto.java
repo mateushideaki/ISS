@@ -165,6 +165,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        new Estoque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 

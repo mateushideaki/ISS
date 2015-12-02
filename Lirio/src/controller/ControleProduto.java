@@ -35,6 +35,15 @@ public class ControleProduto {
     public void alterarProduto(Produto p){
         produtoDao.alterarProduto(p);
     }
+    
+    public void incdecProduto(Produto p){
+        produtoDao.incdecProduto(p);
+    }
+    
+    public void ajustarPreco(Produto p){
+        produtoDao.ajustarPreco(p);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

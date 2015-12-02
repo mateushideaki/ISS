@@ -93,4 +93,32 @@ public class ProdutoDao {
             e.printStackTrace();
         }
     }
+        public void incdecProduto(Produto p) {
+        try {
+            if (sessao.isConnected()) {
+                sessao.close();
+            }
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            trans = sessao.beginTransaction();
+
+            sessao.update(p);
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        public void ajustarPreco(Produto p) {
+        try {
+            if (sessao.isConnected()) {
+                sessao.close();
+            }
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            trans = sessao.beginTransaction();
+
+            sessao.update(p);
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

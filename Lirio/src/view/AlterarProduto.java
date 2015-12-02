@@ -174,6 +174,7 @@ public class AlterarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        new Estoque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 

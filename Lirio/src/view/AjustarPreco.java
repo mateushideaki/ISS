@@ -5,16 +5,24 @@
  */
 package view;
 
+import controller.ControleProduto;
+import javax.swing.JOptionPane;
+import model.Produto;
+import java.util.List;
+
 /**
  *
  * @author lucas
  */
 public class AjustarPreco extends javax.swing.JFrame {
 
+    private ControleProduto controler = new ControleProduto();
+    private List<Produto> lista;
     /**
      * Creates new form AjustarPreco
      */
-    public AjustarPreco() {
+    public AjustarPreco(List<Produto> l) {
+        this.lista = l;
         initComponents();
     }
 
@@ -29,10 +37,11 @@ public class AjustarPreco extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        Confirmar = new javax.swing.JButton();
+        Diminuir = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
+        Aumentar = new javax.swing.JButton();
+        quantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,18 +50,12 @@ public class AjustarPreco extends javax.swing.JFrame {
 
         jLabel2.setText("Reajuste:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("%");
 
-        Confirmar.setText("CONFIRMAR");
-        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+        Diminuir.setText("DIMINUIR PREÇO");
+        Diminuir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmarActionPerformed(evt);
+                DiminuirActionPerformed(evt);
             }
         });
 
@@ -63,62 +66,108 @@ public class AjustarPreco extends javax.swing.JFrame {
             }
         });
 
+        Aumentar.setText("AUMENTAR PREÇO");
+        Aumentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AumentarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Confirmar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(quantidade)))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)))
-                .addGap(47, 47, 47))
+                        .addComponent(jLabel3)
+                        .addGap(47, 47, 47))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Aumentar)
+                        .addGap(41, 41, 41)
+                        .addComponent(Diminuir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(42, 42, 42)
+                    .addComponent(jLabel3)
+                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(Diminuir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Aumentar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        new Estoque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_ConfirmarActionPerformed
+    private void DiminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiminuirActionPerformed
+        float dec = Integer.parseInt(quantidade.getText());
+        dec = dec/100;
+        float aux,aux2;
+        if ((dec <100) && (dec>0)){
+            for(Produto p : lista){
+                aux = p.getPrecoVenda();
+                aux2 = aux * dec;
+                aux = aux - aux2;
+                p.setPrecoVenda(aux);
+                controler.ajustarPreco(p);
+            }
+            new Estoque().setVisible(true);
+            this.dispose();
+        } else{
+            JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DiminuirActionPerformed
+
+    private void AumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AumentarActionPerformed
+        float dec = Integer.parseInt(quantidade.getText());
+        dec = dec/100;
+        float aux,aux2;
+        if ((dec <100) && (dec>0)){
+            for(Produto p : lista){
+                aux = p.getPrecoVenda();
+                aux2 = aux * dec;
+                aux = aux + aux2;
+                p.setPrecoVenda(aux);
+                controler.ajustarPreco(p);
+            }
+            new Estoque().setVisible(true);
+            this.dispose();
+        } else{
+            JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AumentarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,17 +199,18 @@ public class AjustarPreco extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjustarPreco().setVisible(true);
+                //new AjustarPreco().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Aumentar;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JButton Confirmar;
+    private javax.swing.JButton Diminuir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField quantidade;
     // End of variables declaration//GEN-END:variables
 }
