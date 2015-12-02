@@ -5,6 +5,7 @@
  */
 package view;
 
+import util.ValidarCpf;
 import javax.swing.ButtonGroup;
 import controller.ControleCliente;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 /**
  *
  * @author lucas
@@ -118,6 +120,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        rg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rgActionPerformed(evt);
+            }
+        });
 
         try {
             cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -130,6 +137,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        telCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telClienteActionPerformed(evt);
+            }
+        });
 
         try {
             tel2Cliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -253,32 +265,45 @@ public class CadastroCliente extends javax.swing.JFrame {
     
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         Cliente cliente = new Cliente();
-        cliente.setRg(rg.getText());
-        cliente.setCpf(cpf.getText());
-        cliente.setEndereco(enderecoCliente.getText());
-        String dia = dataNasc.getText().substring(0,1);
-        int diaInt = Integer.valueOf(dia);
-        String mes = dataNasc.getText().substring(3,4);
-        int mesInt= Integer.valueOf(mes);
-        String ano = dataNasc.getText().substring(6);
-        int anoInt = Integer.valueOf(ano);
-        Calendar c = Calendar.getInstance();
-        c.set(anoInt,mesInt,diaInt);
-        Date d = c.getTime();
-        cliente.setDataNasc(d);
-        cliente.setNome(nomeCliente.getText());
-        cliente.setTel(telCliente.getText());
-        cliente.setTel2(tel2Cliente.getText());
-        if(Masc.isSelected()){
-            cliente.setSexo("M");
+        ValidarCpf cpf2 = new ValidarCpf();
+        boolean verificaCpf = cpf2.isCPF(cpf.getText());
+        if(verificaCpf == true){
+            cliente.setRg(rg.getText());
+            cliente.setCpf(cpf.getText());
+            cliente.setEndereco(enderecoCliente.getText());
+            String dia = dataNasc.getText().substring(0,2);
+            int diaInt = Integer.valueOf(dia);
+            String mes = dataNasc.getText().substring(3,5);
+            int mesInt= Integer.valueOf(mes);
+            String ano = dataNasc.getText().substring(6,10);
+            int anoInt = Integer.valueOf(ano);
+            Calendar c = Calendar.getInstance();
+            c.set(anoInt,mesInt,diaInt);
+            Date d = c.getTime();
+            cliente.setDataNasc(d);
+            cliente.setNome(nomeCliente.getText());
+            cliente.setTel(telCliente.getText());
+            cliente.setTel2(tel2Cliente.getText());
+            if(Masc.isSelected()){
+                cliente.setSexo("M");
+                cliente.setEmail(emailCliente.getText());
+                controler.cadastrarCliente(cliente);
+                new Clientes().setVisible(true);
+                this.dispose();
+            }else if(Fem.isSelected()){
+                cliente.setSexo("F");
+                cliente.setEmail(emailCliente.getText());
+                controler.cadastrarCliente(cliente);
+                new Clientes().setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Não foi selecionado nenhum sexo", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }else{
-            cliente.setSexo("F");
+            JOptionPane.showMessageDialog(null, "Digite um cpf válido no campo de cpf", "Erro de validação", JOptionPane.ERROR_MESSAGE);
         }
-        cliente.setEmail(emailCliente.getText());
-        controler.cadastrarCliente(cliente);
-        new Clientes().setVisible(true);
         
-        this.dispose();
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
@@ -286,12 +311,20 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void MascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MascActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_MascActionPerformed
 
     private void FemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_FemActionPerformed
+
+    private void rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rgActionPerformed
+
+    private void telClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telClienteActionPerformed
 
     /**
      * @param args the command line arguments

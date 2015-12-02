@@ -11,6 +11,7 @@ import model.Cliente;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,20 +28,32 @@ public class AlterarCliente extends javax.swing.JFrame {
     private ControleCliente controler = new ControleCliente();
     private Cliente cliente;
     
-    
+    private void groupButton(){
+        ButtonGroup sexo = new ButtonGroup();
+        
+        sexo.add(Masc);
+        sexo.add(Fem);
+       
+    }
     /**
      * Creates new form AlterarFornecedor
      */
     public AlterarCliente(Cliente c) {
-        this.cliente = c;
+        
         groupButton();
+        this.cliente = c;
         initComponents();
         nomeCliente.setText(c.getNome());
         rg.setText(c.getRg());
         cpf.setText(c.getCpf());
-        endereco.setText(c.getEndereco());
-        
-        SimpleDateFormat formataData = new SimpleDateFormat("yyyy/MM/dd");
+        enderecoCliente.setText(c.getEndereco());
+        if(c.getSexo().equals("M")){
+            Masc.doClick();
+        }else{
+            Fem.doClick();
+        }
+        enderecoCliente.setText(c.getEndereco());
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         String data = formataData.format(c.getDataNasc());
         dataNasc.setText(data);
         telCliente.setText(c.getTel());
@@ -58,7 +71,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         Fem = new javax.swing.JRadioButton();
-        endereco = new javax.swing.JTextField();
+        enderecoCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -132,6 +145,11 @@ public class AlterarCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        rg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rgActionPerformed(evt);
+            }
+        });
 
         try {
             cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -140,10 +158,15 @@ public class AlterarCliente extends javax.swing.JFrame {
         }
 
         try {
-            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+            dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        dataNasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataNascActionPerformed(evt);
+            }
+        });
 
         try {
             telCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -175,7 +198,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(Fem)
                                 .addGap(5, 5, 5))
-                            .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enderecoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -232,7 +255,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -265,13 +288,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void groupButton(){
-        ButtonGroup sexo = new ButtonGroup();
-        
-        sexo.add(Masc);
-        sexo.add(Fem);
-       
-    }
+    
     
     private void nomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeClienteActionPerformed
         // TODO add your handling code here:
@@ -281,15 +298,17 @@ public class AlterarCliente extends javax.swing.JFrame {
         this.cliente.setRg(rg.getText());
         this.cliente.setCpf(cpf.getText());
         this.cliente.setEmail(emailCliente.getText());
-        this.cliente.setEndereco(endereco.getText());
-       SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataNascimento = new Date();
-        try {
-            cliente.setDataNasc(formatoBrasileiro.parse(dataNasc.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.cliente.setDataNasc(dataNascimento);
+        this.cliente.setEndereco(enderecoCliente.getText());
+        String dia = dataNasc.getText().substring(0,2);
+        int diaInt = Integer.valueOf(dia);
+        String mes = dataNasc.getText().substring(3,5);
+        int mesInt= Integer.valueOf(mes);
+        String ano = dataNasc.getText().substring(6,10);
+        int anoInt = Integer.valueOf(ano);
+        Calendar c = Calendar.getInstance();
+        c.set(anoInt,mesInt,diaInt);
+        Date data = c.getTime();
+        this.cliente.setDataNasc(data);
         this.cliente.setNome(nomeCliente.getText());
         this.cliente.setTel(telCliente.getText());
         this.cliente.setTel2(tel2Cliente.getText());
@@ -305,8 +324,16 @@ public class AlterarCliente extends javax.swing.JFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
-        new Fornecedores().setVisible(true);
+        new Clientes().setVisible(true);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void dataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataNascActionPerformed
+
+    private void rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,7 +378,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField cpf;
     private javax.swing.JFormattedTextField dataNasc;
     private javax.swing.JTextField emailCliente;
-    private javax.swing.JTextField endereco;
+    private javax.swing.JTextField enderecoCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

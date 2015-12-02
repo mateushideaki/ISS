@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
         return rg;
     }
 
-    public void setRg(String Rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
     
@@ -60,7 +60,7 @@ public class Cliente implements Serializable {
         return cpf;
     }
 
-    public void setCpf(String Cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

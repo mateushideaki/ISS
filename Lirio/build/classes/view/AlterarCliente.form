@@ -39,7 +39,7 @@
                               <Component id="Fem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="endereco" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
+                          <Component id="enderecoCliente" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
                           <Component id="cpf" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
                           <Component id="rg" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
                           <Component id="nomeCliente" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="endereco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="enderecoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -159,7 +159,7 @@
         <Property name="text" type="java.lang.String" value="Feminino"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="endereco">
+    <Component class="javax.swing.JTextField" name="enderecoCliente">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -248,6 +248,9 @@
           <Format format="##.###.###-#" subtype="-1" type="5"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rgActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="cpf">
       <Properties>
@@ -259,9 +262,12 @@
     <Component class="javax.swing.JFormattedTextField" name="dataNasc">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="####-##-##" subtype="-1" type="5"/>
+          <Format format="##-##-####" subtype="-1" type="5"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataNascActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="telCliente">
       <Properties>

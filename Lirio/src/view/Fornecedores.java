@@ -87,6 +87,11 @@ public class Fornecedores extends javax.swing.JFrame {
 
         jLabel2.setText("Pesquise um Fornecedor:");
 
+        buscaFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaFornecedorActionPerformed(evt);
+            }
+        });
         buscaFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscaFornecedorKeyReleased(evt);
@@ -204,6 +209,10 @@ public class Fornecedores extends javax.swing.JFrame {
 
      
     }//GEN-LAST:event_buscaFornecedorKeyReleased
+
+    private void buscaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaFornecedorActionPerformed
 
     /**
      * @param args the command line arguments

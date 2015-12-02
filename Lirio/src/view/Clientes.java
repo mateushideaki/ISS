@@ -48,7 +48,7 @@ public class Clientes extends javax.swing.JFrame {
         Excluir = new javax.swing.JButton();
         AlterarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        buscaCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
         Menu = new javax.swing.JButton();
@@ -80,6 +80,17 @@ public class Clientes extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Pesquise um Cliente:");
+
+        buscaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaClienteActionPerformed(evt);
+            }
+        });
+        buscaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaClienteKeyReleased(evt);
+            }
+        });
 
         tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,7 +126,7 @@ public class Clientes extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1)))
+                                    .addComponent(buscaCliente)))
                             .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +146,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -159,7 +170,6 @@ public class Clientes extends javax.swing.JFrame {
 
         if (linhaSelecionada >= 0) {
             this.c = this.modelCliente.get(linhaSelecionada);
-            //controleFor.carregarFornecedor(this.f);
             new AlterarCliente(this.c).setVisible(true);
             this.dispose();
         } else {
@@ -191,6 +201,18 @@ public class Clientes extends javax.swing.JFrame {
         this.modelCliente = new ClienteTableModel(this.lista);
         tabelaCliente.setModel(this.modelCliente);
     }//GEN-LAST:event_ExcluirActionPerformed
+
+    
+    private void buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaClienteActionPerformed
+
+    private void buscaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaClienteKeyReleased
+        this.clienteNome = buscaCliente.getText();
+        this.lista = controleCli.listarClientes(this.clienteNome);
+        this.modelCliente = new ClienteTableModel(this.lista);
+        tabelaCliente.setModel(this.modelCliente);
+    }//GEN-LAST:event_buscaClienteKeyReleased
 
     /**
      * @param args the command line arguments
@@ -233,10 +255,10 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Excluir;
     private javax.swing.JButton Menu;
+    private javax.swing.JTextField buscaCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tabelaCliente;
     // End of variables declaration//GEN-END:variables
 }
