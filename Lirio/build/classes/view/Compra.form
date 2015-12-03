@@ -25,26 +25,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="RegistrarCompra" min="-2" pref="153" max="-2" attributes="0"/>
-                  <Component id="Fornecedores" min="-2" pref="153" max="-2" attributes="0"/>
-              </Group>
+              <Component id="Fornecedores" min="-2" pref="153" max="-2" attributes="0"/>
               <EmptySpace pref="39" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="MenuPrincipal" min="-2" pref="153" max="-2" attributes="0"/>
-                  <Component id="RelatorioCompra" min="-2" pref="153" max="-2" attributes="0"/>
-              </Group>
+              <Component id="MenuPrincipal" min="-2" pref="153" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="Compras" min="-2" pref="153" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,10 +56,7 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="RegistrarCompra" pref="55" max="32767" attributes="0"/>
-                  <Component id="RelatorioCompra" max="32767" attributes="0"/>
-              </Group>
+              <Component id="Compras" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="MenuPrincipal" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
@@ -79,20 +78,12 @@
         <Property name="text" type="java.lang.String" value="COMPRA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="RegistrarCompra">
+    <Component class="javax.swing.JButton" name="Compras">
       <Properties>
-        <Property name="text" type="java.lang.String" value="REGISTRAR COMPRA"/>
+        <Property name="text" type="java.lang.String" value="COMPRAS"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrarCompraActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="RelatorioCompra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="RELAT&#xd3;RIO COMPRA"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RelatorioCompraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComprasActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="MenuPrincipal">

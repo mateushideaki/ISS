@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 import java.util.Calendar;
+import javax.persistence.JoinColumn;
+import org.hibernate.mapping.OneToOne;
 /**
  *
  * @author lucas
@@ -24,6 +26,7 @@ public class Cliente implements Serializable {
     private int id;
     private String nome;
     private String rg;
+    @JoinColumn(name = "cpf", unique = true)
     private String cpf;
     private String endereco;
     private Date dataNasc;

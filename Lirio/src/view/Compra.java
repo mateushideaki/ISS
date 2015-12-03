@@ -28,8 +28,7 @@ public class Compra extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        RegistrarCompra = new javax.swing.JButton();
-        RelatorioCompra = new javax.swing.JButton();
+        Compras = new javax.swing.JButton();
         MenuPrincipal = new javax.swing.JButton();
         Fornecedores = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -39,17 +38,10 @@ public class Compra extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("COMPRA");
 
-        RegistrarCompra.setText("REGISTRAR COMPRA");
-        RegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
+        Compras.setText("COMPRAS");
+        Compras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarCompraActionPerformed(evt);
-            }
-        });
-
-        RelatorioCompra.setText("RELATÓRIO COMPRA");
-        RelatorioCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RelatorioCompraActionPerformed(evt);
+                ComprasActionPerformed(evt);
             }
         });
 
@@ -80,22 +72,23 @@ public class Compra extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RegistrarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Fornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RelatorioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(78, 78, 78))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,9 +96,7 @@ public class Compra extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RegistrarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RelatorioCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,15 +115,10 @@ public class Compra extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_MenuPrincipalActionPerformed
 
-    private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
-        new RegistrarCompra().setVisible(true);
+    private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
+        new Compras().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_RegistrarCompraActionPerformed
-
-    private void RelatorioCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioCompraActionPerformed
-        new RelatorioCompra().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_RelatorioCompraActionPerformed
+    }//GEN-LAST:event_ComprasActionPerformed
 
     private void FornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FornecedoresActionPerformed
         new Fornecedores().setVisible(true);
@@ -176,10 +162,9 @@ public class Compra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Compras;
     private javax.swing.JButton Fornecedores;
     private javax.swing.JButton MenuPrincipal;
-    private javax.swing.JButton RegistrarCompra;
-    private javax.swing.JButton RelatorioCompra;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
