@@ -166,7 +166,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        new Venda().setVisible(true);
+        new Vendas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 

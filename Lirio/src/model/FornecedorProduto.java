@@ -34,12 +34,39 @@ public class FornecedorProduto implements Serializable{
     private String nomeFornecedor;
     private float preco;
 
-    public FornecedorProduto(Produto prod, Fornecedor forn, float custo){
-        this.fornecedor = forn;
-        this.produto = prod;
-        this.nomeFornecedor = forn.getNome();
-        this.nomeProduto = prod.getNome();
-        this.preco = custo;
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor f) {
+        this.fornecedor = f;
+        this.nomeFornecedor = f.getNome();
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto p) {
+        this.produto = p;
+        this.nomeProduto = p.getNome();
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
     }
     
     public String getNomeProduto() {
@@ -60,37 +87,7 @@ public class FornecedorProduto implements Serializable{
 
     
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public float getPreco() {
-        return preco;
-    }
-
-    public void setPreco(float preco) {
-        this.preco = preco;
-    }
+    
     
     @Override
     public int hashCode() {

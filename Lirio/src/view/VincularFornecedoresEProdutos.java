@@ -20,7 +20,7 @@ import util.ProdutoTableModel;
  *
  * @author Mateus
  */
-public class viewFornecedorProduto extends javax.swing.JFrame {
+public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
 
     private String produtoNome;
     private String fornecedorNome;
@@ -37,7 +37,7 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
     /**
      * Creates new form viewFornecedorProduto
      */
-    public viewFornecedorProduto() {
+    public VincularFornecedoresEProdutos() {
         initComponents();
         tabelaProduto.setModel(modelProduto);
         tabelaFornecedor.setModel(modelFornecedor);
@@ -62,7 +62,7 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaProduto = new javax.swing.JTable();
         btnVincular = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        VOLTAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,10 +112,10 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        VOLTAR.setText("VOLTAR");
+        VOLTAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                VOLTARActionPerformed(evt);
             }
         });
 
@@ -123,31 +123,28 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(109, 109, 109))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(35, 35, 35)
-                                .addComponent(buscaProduto))
-                            .addComponent(jScrollPane2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(buscaFornecedor)))
-                        .addGap(144, 144, 144))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVincular, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                        .addComponent(VOLTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(35, 35, 35)
+                        .addComponent(buscaProduto))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscaFornecedor)))
+                .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +166,12 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVincular, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(VOLTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
@@ -193,10 +191,10 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
         tabelaProduto.setModel(this.modelProduto);
     }//GEN-LAST:event_buscaProdutoKeyReleased
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void VOLTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOLTARActionPerformed
         new Compra().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_VOLTARActionPerformed
 
     private void btnVincularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVincularActionPerformed
         int linhaSelecionada = tabelaFornecedor.getSelectedRow();
@@ -207,7 +205,10 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
             this.produto = this.modelProduto.get(linhaSelecionada2);
             
             float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o preco: "));
-            FornecedorProduto fp = new FornecedorProduto(this.produto, this.fornecedor, preco);
+            FornecedorProduto fp = new FornecedorProduto();
+            fp.setFornecedor(this.fornecedor);
+            fp.setProduto(this.produto);
+            fp.setPreco(preco);
             cfp.cadastrarFP(fp);
         }
         else {
@@ -234,26 +235,29 @@ public class viewFornecedorProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewFornecedorProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewFornecedorProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewFornecedorProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewFornecedorProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewFornecedorProduto().setVisible(true);
+                new VincularFornecedoresEProdutos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton VOLTAR;
     private javax.swing.JButton btnVincular;
     private javax.swing.JTextField buscaFornecedor;
     private javax.swing.JTextField buscaProduto;

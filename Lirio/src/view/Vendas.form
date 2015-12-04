@@ -57,12 +57,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" max="32767" attributes="0"/>
+                                      <Component id="buscaProduto" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" min="-2" pref="290" max="-2" attributes="0"/>
+                                      <Component id="buscaCliente" min="-2" pref="290" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -72,25 +72,25 @@
                                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                                       <Component id="jScrollPane3" min="-2" pref="293" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="RealizarVenda" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="btnRealizarVenda" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="qtdProduto" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="AdicionarProd" max="32767" attributes="0"/>
+                                          <Component id="btnAddProduto" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnConfirmaCli" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jSpinner2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="RemoverProd" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnRemoverProd" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="RelatorioVenda1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnCadastrarCli" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="Cancelar" min="-2" pref="142" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" min="-2" pref="142" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -113,20 +113,20 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RelatorioVenda1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buscaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCadastrarCli" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnConfirmaCli" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="AdicionarProd" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buscaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAddProduto" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="qtdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="50" max="-2" attributes="0"/>
@@ -143,12 +143,12 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="RealizarVenda" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="Cancelar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="btnRealizarVenda" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="RemoverProd" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="btnRemoverProd" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -166,20 +166,20 @@
         <Property name="text" type="java.lang.String" value="VENDA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="RealizarVenda">
+    <Component class="javax.swing.JButton" name="btnRealizarVenda">
       <Properties>
         <Property name="text" type="java.lang.String" value="REALIZAR VENDA"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RealizarVendaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRealizarVendaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Cancelar">
+    <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="CANCELAR VENDA"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -189,16 +189,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tabelaProdutosEscolhidos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="ID Produto" type="java.lang.Object"/>
-                <Column editable="true" title="Produto" type="java.lang.Object"/>
-                <Column editable="true" title="Categoria" type="java.lang.Object"/>
-                <Column editable="true" title="Quantidade" type="java.lang.Object"/>
-                <Column editable="true" title="Pre&#xe7;o" type="java.lang.Object"/>
-              </Table>
+              <Table columnCount="0" rowCount="4"/>
             </Property>
           </Properties>
         </Component>
@@ -212,12 +206,12 @@
         <Property name="text" type="java.lang.String" value="TOTAL:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AdicionarProd">
+    <Component class="javax.swing.JButton" name="btnAddProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="ADD PRODUTO"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarProdActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddProdutoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -225,7 +219,11 @@
         <Property name="text" type="java.lang.String" value="Cliente:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="buscaCliente">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscaClienteActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscaClienteKeyReleased"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -234,7 +232,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tabelaClientes">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="4"/>
@@ -243,18 +241,21 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="RelatorioVenda1">
+    <Component class="javax.swing.JButton" name="btnCadastrarCli">
       <Properties>
         <Property name="text" type="java.lang.String" value="CADASTRAR CLIENTE"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RelatorioVenda1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarCliActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnConfirmaCli">
       <Properties>
         <Property name="text" type="java.lang.String" value="CONFIRMAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmaCliActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
@@ -263,7 +264,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable3">
+        <Component class="javax.swing.JTable" name="tabelaProdutos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="4"/>
@@ -277,9 +278,12 @@
         <Property name="text" type="java.lang.String" value="Produto:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="buscaProduto">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscaProdutoKeyReleased"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="qtdProduto">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -291,12 +295,12 @@
     </Component>
     <Component class="javax.swing.JSpinner" name="jSpinner2">
     </Component>
-    <Component class="javax.swing.JButton" name="RemoverProd">
+    <Component class="javax.swing.JButton" name="btnRemoverProd">
       <Properties>
         <Property name="text" type="java.lang.String" value="REMOVER PRODUTO"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoverProdActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverProdActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">

@@ -12,5 +12,7 @@
     <mapping class="model.Produto"/>
     <mapping class="model.Cliente"/>
     <mapping class="model.FornecedorProduto"/>
+    <mapping class="model.Venda"/>
+    <mapping class="model.VendaProduto"/>
   </session-factory>
 </hibernate-configuration>
