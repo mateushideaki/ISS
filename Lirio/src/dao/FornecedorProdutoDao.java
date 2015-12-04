@@ -54,7 +54,21 @@ public class FornecedorProdutoDao {
             e.printStackTrace();
         }
     }
+    
+    public void alterarFP(FornecedorProduto fp) {
+        try {
+            if (sessao.isConnected()) {
+                sessao.close();
+            }
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            trans = sessao.beginTransaction();
 
+            sessao.update(fp);
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void excluir(FornecedorProduto fp) {
         try {
             if (sessao.isConnected()) {

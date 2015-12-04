@@ -14,11 +14,10 @@ import model.VendaProduto;
  * @author Mateus
  */
 public class VendaProdutoTableModel extends AbstractTableModel{
-     private static final int Cod = 0;
-    private static final int Venda = 1;
-    private static final int Produto = 2;
-    private static final int Quantidade = 3;
-    private static final int Custo = 4;
+    private static final int Cod = 0;
+    private static final int Produto = 1;
+    private static final int Quantidade = 2;
+    private static final int Custo = 3;
 
     private List<VendaProduto> lista;
 
@@ -42,13 +41,13 @@ public class VendaProdutoTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         //Qual é o nome das nossas colunas?  
         if (column == Cod) {
-            return "Codigo";
-        }
-        if (column == Venda) {
-            return "Venda";
+            return "IDProduto";
         }
         if (column == Produto) {
             return "Produto";
+        }
+        if (column == Quantidade) {
+            return "Quantidade";
         }
         if (column == Custo) {
             return "Custo";
@@ -60,9 +59,7 @@ public class VendaProdutoTableModel extends AbstractTableModel{
         //Precisamos retornar o valor da coluna column e da linha row.  
         VendaProduto vp = lista.get(row);
         if (column == Cod) {
-            return vp.getId();
-        } else if (column == Venda) {
-            return vp.getVenda().getId();
+            return vp.getProduto().getId();
         } else if (column == Produto) {
             return vp.getProduto().getNome();
         } else if (column == Quantidade) {
@@ -73,8 +70,6 @@ public class VendaProdutoTableModel extends AbstractTableModel{
         
         return ""; //Nunca deve ocorrer  
     }
-
-
 
     public Class<?> getColumnClass(int columnIndex) {
         return String.class;

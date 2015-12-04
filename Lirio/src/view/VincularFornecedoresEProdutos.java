@@ -192,7 +192,7 @@ public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaProdutoKeyReleased
 
     private void VOLTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOLTARActionPerformed
-        new Compra().setVisible(true);
+        new FornecedoresEProdutos().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VOLTARActionPerformed
 
@@ -201,20 +201,24 @@ public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
         int linhaSelecionada2 = tabelaProduto.getSelectedRow();
 
         if (linhaSelecionada >= 0 && linhaSelecionada2 >= 0) {
-            this.fornecedor = this.modelFornecedor.get(linhaSelecionada);
-            this.produto = this.modelProduto.get(linhaSelecionada2);
-            
-            float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o preco: "));
-            FornecedorProduto fp = new FornecedorProduto();
-            fp.setFornecedor(this.fornecedor);
-            fp.setProduto(this.produto);
-            fp.setPreco(preco);
-            cfp.cadastrarFP(fp);
-        }
-        else {
+            try {
+                this.fornecedor = this.modelFornecedor.get(linhaSelecionada);
+                this.produto = this.modelProduto.get(linhaSelecionada2);
+
+                float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o preco: "));
+                FornecedorProduto fp = new FornecedorProduto();
+                fp.setFornecedor(this.fornecedor);
+                fp.setProduto(this.produto);
+                fp.setPreco(preco);
+                cfp.cadastrarFP(fp);
+                JOptionPane.showMessageDialog(this, "Vinculo realizado com sucesso", "Vinculo fornecedor e produto", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "O Preco deve ser um numero com ponto dividindo a parte decimal.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Erro: É necessario selecionar um fornecedor e um produto.", "Selecione um fornecedor e um produto.", JOptionPane.ERROR_MESSAGE);
         }
-        
+
 
     }//GEN-LAST:event_btnVincularActionPerformed
 
@@ -232,16 +236,21 @@ public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VincularFornecedoresEProdutos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

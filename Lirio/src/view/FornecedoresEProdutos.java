@@ -7,6 +7,8 @@ package view;
 
 import controller.ControleFornecedorProduto;
 import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 import model.FornecedorProduto;
 import util.FornecedorProdutoTableModel;
 
@@ -15,11 +17,13 @@ import util.FornecedorProdutoTableModel;
  * @author Mateus
  */
 public class FornecedoresEProdutos extends javax.swing.JFrame {
+
     private String fornecedorNome;
     private ControleFornecedorProduto controleFp = new ControleFornecedorProduto();
     private List<FornecedorProduto> lista = controleFp.listarFP("");
     private FornecedorProdutoTableModel modelFp = new FornecedorProdutoTableModel(lista);
-    
+    private FornecedorProduto fornecedorP = new FornecedorProduto();
+
     /**
      * Creates new form FornecedoresEProdutos
      */
@@ -45,11 +49,18 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
         btnVincular = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("FORNECEDORES E PRODUTOS");
+
+        buscaFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaFornecedorKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Pesquise um fornecedor:");
 
@@ -74,8 +85,25 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
         });
 
         btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("EXCLUIR");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnAlterar.setText("ALTERAR");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +120,9 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
                                 .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVincular)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,7 +146,9 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 113, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 68, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -133,6 +165,54 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
         new VincularFornecedoresEProdutos().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVincularActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        new Fornecedores().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
+        this.fornecedorNome = buscaFornecedor.getText();
+        this.lista = controleFp.listarFP(this.fornecedorNome);
+        this.modelFp = new FornecedorProdutoTableModel(this.lista);
+        tabelaFP.setModel(this.modelFp);
+    }//GEN-LAST:event_buscaFornecedorKeyReleased
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linhaSelecionada = tabelaFP.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir este vinculo?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                this.fornecedorP = this.modelFp.get(linhaSelecionada);
+                controleFp.excluirFP(this.fornecedorP);
+                JOptionPane.showMessageDialog(this, "Vinculo excluido com sucesso.", "Mensagem informativa", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um vinculo.", "Erro: Nenhum vinculo selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.lista = controleFp.listarFP("");
+        this.modelFp = new FornecedorProdutoTableModel(this.lista);
+        tabelaFP.setModel(this.modelFp);
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        int linhaSelecionada = tabelaFP.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.fornecedorP = this.modelFp.get(linhaSelecionada);
+            float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o novo preco: "));
+            this.fornecedorP.setPreco(preco);
+            controleFp.alterarFP(this.fornecedorP);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um vinculo.", "Erro: Nenhum vinculo selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.lista = controleFp.listarFP("");
+        this.modelFp = new FornecedorProdutoTableModel(this.lista);
+        tabelaFP.setModel(this.modelFp);
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +249,7 @@ public class FornecedoresEProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVincular;
     private javax.swing.JButton btnVoltar;

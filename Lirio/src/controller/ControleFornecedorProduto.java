@@ -28,6 +28,10 @@ public class ControleFornecedorProduto {
         fpDao.cadastrar(fp);
     }
     
+    public void alterarFP(FornecedorProduto fp){
+        fpDao.alterarFP(fp);
+    }
+    
     public void excluirFP(FornecedorProduto fp){
         fpDao.excluir(fp);
     }

@@ -56,7 +56,7 @@ public class FornecedorDao {
         }
     }
 
-    public void excluirFornecedor(Fornecedor f) {
+    public void excluirFornecedor(Fornecedor f) throws Exception {
         try {
             if (sessao.isConnected()) {
                 sessao.close();
@@ -67,9 +67,10 @@ public class FornecedorDao {
             sessao.delete(f);
             trans.commit();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception e){
+            throw e;
         }
+
     }
 
     public void alterarFornecedor(Fornecedor f) {

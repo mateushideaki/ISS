@@ -8,6 +8,7 @@ package view;
 import controller.ControleFornecedor;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Fornecedor;
@@ -192,8 +193,16 @@ public class Fornecedores extends javax.swing.JFrame {
         int linhaSelecionada = tabelaFornecedor.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            this.f = this.modelFornecedor.get(linhaSelecionada);
-            controleFor.excluirFornecedor(this.f);
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir o fornecedor?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                try {
+                    this.f = this.modelFornecedor.get(linhaSelecionada);
+                    controleFor.excluirFornecedor(this.f);
+                    JOptionPane.showMessageDialog(this, "Fornecedor excluido com sucesso.", "Mensagem informativa", JOptionPane.INFORMATION_MESSAGE);
+                } catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "Existem vinculos com o fornecedor, exclua-os primeiro.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um fornecedor.", "Erro: Nenhum fornecedor selecionado.", JOptionPane.ERROR_MESSAGE);
         }
@@ -225,7 +234,7 @@ public class Fornecedores extends javax.swing.JFrame {
         this.modelFornecedor = new FornecedorTableModel(this.lista);
         tabelaFornecedor.setModel(this.modelFornecedor);
 
-     
+
     }//GEN-LAST:event_buscaFornecedorKeyReleased
 
     private void buscaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaFornecedorActionPerformed
