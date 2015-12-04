@@ -162,15 +162,19 @@ public class AlterarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        this.produto.setCategoria(categoria.getText());
-        this.produto.setQntAtual(Integer.parseInt(qntatual.getText()));
-        this.produto.setQntMinima(Integer.parseInt(qntminima.getText()));
-        this.produto.setNome(nomeProd.getText());
-        this.produto.setPrecoCusto(Float.valueOf(precocusto.getText()));
-        this.produto.setPrecoVenda(Float.valueOf(precovenda.getText()));
-        controler.alterarProduto(this.produto);
-        new Estoque().setVisible(true);
-        this.dispose();
+        try{   
+            this.produto.setCategoria(categoria.getText());
+            this.produto.setQntAtual(Integer.parseInt(qntatual.getText()));
+            this.produto.setQntMinima(Integer.parseInt(qntminima.getText()));
+            this.produto.setNome(nomeProd.getText());
+            this.produto.setPrecoCusto(Float.valueOf(precocusto.getText()));
+            this.produto.setPrecoVenda(Float.valueOf(precovenda.getText()));
+            controler.alterarProduto(this.produto);
+            new Estoque().setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed

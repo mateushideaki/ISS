@@ -120,19 +120,22 @@ public class IncrementaDecrementa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DecrementarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecrementarActionPerformed
-        int dec = Integer.parseInt(quantidade.getText());
-        int atual = this.produto.getQntAtual();
-        
-        if (atual >= dec) {
-            this.produto.setQntAtual(atual - dec);
-            controler.alterarProduto(this.produto);
-            if(this.produto.getQntAtual() < this.produto.getQntMinima()){
-               JOptionPane.showMessageDialog(this, "Produto em Baixa Quantidade no Estoque.", "Aviso", JOptionPane.WARNING_MESSAGE); 
+        try{
+            int dec = Integer.parseInt(quantidade.getText());
+            int atual = this.produto.getQntAtual();
+            if (atual >= dec) {
+                this.produto.setQntAtual(atual - dec);
+                controler.alterarProduto(this.produto);
+                if(this.produto.getQntAtual() < this.produto.getQntMinima()){
+                    JOptionPane.showMessageDialog(this, "Produto em Baixa Quantidade no Estoque.", "Aviso", JOptionPane.WARNING_MESSAGE); 
+                }
+                new Estoque().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Quantidade invalida.", "Erro: Quantidade Invalida.", JOptionPane.ERROR_MESSAGE);
             }
-            new Estoque().setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Quantidade invalida.", "Erro: Quantidade Invalida.", JOptionPane.ERROR_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_DecrementarActionPerformed
@@ -143,12 +146,16 @@ public class IncrementaDecrementa extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void IncrementarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncrementarActionPerformed
-        int inc = Integer.parseInt(quantidade.getText());
-        int atual = this.produto.getQntAtual();
-        this.produto.setQntAtual(atual + inc);
-        controler.alterarProduto(this.produto);
-        new Estoque().setVisible(true);
-        this.dispose();
+        try{    
+            int inc = Integer.parseInt(quantidade.getText());
+            int atual = this.produto.getQntAtual();
+            this.produto.setQntAtual(atual + inc);
+            controler.alterarProduto(this.produto);
+            new Estoque().setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_IncrementarActionPerformed
 
     /**

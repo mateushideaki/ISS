@@ -6,6 +6,7 @@
 package view;
 
 import controller.ControleProduto;
+import javax.swing.JOptionPane;
 import model.Produto;
 /**
  *
@@ -152,16 +153,20 @@ public class CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        Produto produto = new Produto();
-        produto.setCategoria(categoria.getText());
-        produto.setQntAtual(Integer.parseInt(qntatual.getText()));
-        produto.setQntMinima(Integer.parseInt(qntminima.getText()));
-        produto.setNome(nomeProd.getText());
-        produto.setPrecoCusto(Float.valueOf(precocusto.getText()));
-        produto.setPrecoVenda(Float.valueOf(precovenda.getText()));
-        controler.cadastrarProduto(produto);
-        new Estoque().setVisible(true);
-        this.dispose();
+        try{
+            Produto produto = new Produto();
+            produto.setCategoria(categoria.getText());
+            produto.setQntAtual(Integer.parseInt(qntatual.getText()));
+            produto.setQntMinima(Integer.parseInt(qntminima.getText()));
+            produto.setNome(nomeProd.getText());
+            produto.setPrecoCusto(Float.valueOf(precocusto.getText()));
+            produto.setPrecoVenda(Float.valueOf(precovenda.getText()));
+             controler.cadastrarProduto(produto);
+            new Estoque().setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed

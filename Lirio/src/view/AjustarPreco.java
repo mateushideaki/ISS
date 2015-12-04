@@ -132,40 +132,48 @@ public class AjustarPreco extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void DiminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiminuirActionPerformed
-        float dec = Integer.parseInt(quantidade.getText());
-        dec = dec/100;
-        float aux,aux2;
-        if ((dec <100) && (dec>0)){
-            for(Produto p : lista){
-                aux = p.getPrecoVenda();
-                aux2 = aux * dec;
-                aux = aux - aux2;
-                p.setPrecoVenda(aux);
-                controler.ajustarPreco(p);
+        try{   
+            float dec = Float.valueOf(quantidade.getText());
+            dec = dec/100;
+            float aux,aux2;
+            if ((dec <100) && (dec>0)){
+                for(Produto p : lista){
+                    aux = p.getPrecoVenda();
+                    aux2 = aux * dec;
+                    aux = aux - aux2;
+                    p.setPrecoVenda(aux);
+                    controler.ajustarPreco(p);
+                }
+                new Estoque().setVisible(true);
+                this.dispose();
+            } else{
+                JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            new Estoque().setVisible(true);
-            this.dispose();
-        } else{
-            JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_DiminuirActionPerformed
 
     private void AumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AumentarActionPerformed
-        float dec = Integer.parseInt(quantidade.getText());
-        dec = dec/100;
-        float aux,aux2;
-        if ((dec <100) && (dec>0)){
-            for(Produto p : lista){
-                aux = p.getPrecoVenda();
-                aux2 = aux * dec;
-                aux = aux + aux2;
-                p.setPrecoVenda(aux);
-                controler.ajustarPreco(p);
+        try{   
+            float dec = Float.valueOf(quantidade.getText());
+            dec = dec/100;
+            float aux,aux2;
+            if ((dec <100) && (dec>0)){
+                for(Produto p : lista){
+                    aux = p.getPrecoVenda();
+                    aux2 = aux * dec;
+                    aux = aux + aux2;
+                    p.setPrecoVenda(aux);
+                    controler.ajustarPreco(p);
+                }
+                new Estoque().setVisible(true);
+                this.dispose();
+            } else{
+                JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            new Estoque().setVisible(true);
-            this.dispose();
-        } else{
-            JOptionPane.showMessageDialog(this, "Porcentagem Invalida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Dado Invalido.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AumentarActionPerformed
 
