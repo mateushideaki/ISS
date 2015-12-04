@@ -23,7 +23,6 @@ public class Venda implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private Date dataVenda;
-    private String nomeCliente;
     private float total;
     @ManyToOne
     private Cliente cliente;
@@ -44,16 +43,6 @@ public class Venda implements Serializable{
         this.total = total;
     }
     
-
-    public String getNomeCliente() {
-        return nomeCliente;
-    }
-
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
-    }
-    
-    
     public Date getDataVenda() {
         return dataVenda;
     }
@@ -68,7 +57,6 @@ public class Venda implements Serializable{
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        this.nomeCliente = cliente.getNome();
     }
 
 
