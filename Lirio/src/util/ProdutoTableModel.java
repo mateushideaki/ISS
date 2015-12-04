@@ -20,8 +20,7 @@ public class ProdutoTableModel extends AbstractTableModel{
     private static final int Categoria = 2;
     private static final int QuantidadeAtual = 3;
     private static final int QuantidadeMinima = 4;
-    private static final int PrecoCusto = 5;
-    private static final int PrecoVenda = 6;
+    private static final int PrecoVenda = 5;
     
     private List<Produto> lista;
     
@@ -38,7 +37,7 @@ public class ProdutoTableModel extends AbstractTableModel{
     }
 
     public int getColumnCount() {
-        return 7;
+        return 6;
     }
     
     public String getColumnName(int column) {
@@ -56,10 +55,7 @@ public class ProdutoTableModel extends AbstractTableModel{
         }
         if (column == QuantidadeMinima) {
             return "QuantidadeMinima";
-        }
-        if (column == PrecoCusto) {
-            return "PrecoCusto";
-        }
+        }  
         if (column == PrecoVenda) {
             return "PrecoVenda";
         }
@@ -80,8 +76,6 @@ public class ProdutoTableModel extends AbstractTableModel{
             return p.getQntAtual();
         } else if (column == QuantidadeMinima) {
             return p.getQntMinima();
-        } else if (column == PrecoCusto) {
-            return p.getPrecoCusto();
         } else if (column == PrecoVenda) {
             return p.getPrecoVenda();
         }

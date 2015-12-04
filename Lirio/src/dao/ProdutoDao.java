@@ -47,15 +47,7 @@ public class ProdutoDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
         
-            Produto produto = new Produto();
-            produto.setNome(p.getNome());
-            produto.setCategoria(p.getCategoria());
-            produto.setQntAtual(p.getQntAtual());
-            produto.setQntMinima(p.getQntMinima());
-            produto.setPrecoCusto(p.getPrecoCusto());
-            produto.setPrecoVenda(p.getPrecoVenda());
-        
-            sessao.save(produto);
+            sessao.save(p);
             trans.commit();
         
         } catch (Exception e) {
