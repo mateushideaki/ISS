@@ -6,73 +6,63 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 /**
  *
  * @author lucas
  */
+
 @Entity
-public class CompraProduto implements Serializable{
+public class Compra implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private Date dataCompra;
+    private float total;
     @ManyToOne
-    private Compra compra;
-    @ManyToOne
-    private FornecedorProduto produto;
-    private int quantidade;
-    private float custo;
-
-    public int getId() {
+    private Fornecedor fornecedor;public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
     
-    public Compra getCompra() {
-        return compra;
+    public Date getDataCompra() {
+        return dataCompra;
     }
 
-    public void setCompra(Compra compra) {
-        this.compra = compra;
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
-    public FornecedorProduto getProduto() {
-        return produto;
+    public Fornecedor getFornecedor() {
+        return fornecedor;
     }
 
-    public void setProduto(FornecedorProduto produto) {
-        this.produto = produto;
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public float getCusto() {
-        return custo;
-    }
-
-    public void setCusto(float custo) {
-        this.custo = custo;
-    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.id;
+        hash = 29 * hash + this.id;
         return hash;
     }
 
@@ -84,11 +74,10 @@ public class CompraProduto implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CompraProduto other = (CompraProduto) obj;
+        final Compra other = (Compra) obj;
         if (this.id != other.id) {
             return false;
         }
         return true;
     }
-    
 }

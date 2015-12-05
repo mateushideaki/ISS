@@ -194,6 +194,11 @@ public class Vendas extends javax.swing.JFrame {
 
         jLabel4.setText("Produto:");
 
+        buscaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaProdutoActionPerformed(evt);
+            }
+        });
         buscaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscaProdutoKeyReleased(evt);
@@ -472,6 +477,10 @@ public class Vendas extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnConfirmaCliActionPerformed
+
+    private void buscaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaProdutoActionPerformed
 
     /**
      * @param args the command line arguments

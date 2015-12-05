@@ -110,6 +110,10 @@ public class FornecedorProduto implements Serializable{
         }
         return true;
     }
+
+    public Object getNome() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

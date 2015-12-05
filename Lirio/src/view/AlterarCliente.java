@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+import util.ValidarCpf;
 
 /**
  *
@@ -295,31 +296,38 @@ public class AlterarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_nomeClienteActionPerformed
 
     private void AlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarClienteActionPerformed
-        this.cliente.setRg(rg.getText());
-        this.cliente.setCpf(cpf.getText());
-        this.cliente.setEmail(emailCliente.getText());
-        this.cliente.setEndereco(enderecoCliente.getText());
-        String dia = dataNasc.getText().substring(0,2);
-        int diaInt = Integer.valueOf(dia);
-        String mes = dataNasc.getText().substring(3,5);
-        int mesInt= Integer.valueOf(mes);
-        String ano = dataNasc.getText().substring(6,10);
-        int anoInt = Integer.valueOf(ano);
-        Calendar c = Calendar.getInstance();
-        c.set(anoInt,(mesInt-1),diaInt);//estava somando 1 no mês
-        Date data = c.getTime();
-        this.cliente.setDataNasc(data);
-        this.cliente.setNome(nomeCliente.getText());
-        this.cliente.setTel(telCliente.getText());
-        this.cliente.setTel2(tel2Cliente.getText());
-        if(Masc.isSelected()){
-            this.cliente.setSexo("M");
+        ValidarCpf cpf2 = new ValidarCpf();
+        boolean verificaCpf = cpf2.isCPF(cpf.getText());
+        if(verificaCpf == true){
+            this.cliente.setRg(rg.getText());
+            this.cliente.setCpf(cpf.getText());
+            this.cliente.setEmail(emailCliente.getText());
+            this.cliente.setEndereco(enderecoCliente.getText());
+            String dia = dataNasc.getText().substring(0,2);
+            int diaInt = Integer.valueOf(dia);
+            String mes = dataNasc.getText().substring(3,5);
+            int mesInt= Integer.valueOf(mes);
+            String ano = dataNasc.getText().substring(6,10);
+            int anoInt = Integer.valueOf(ano);
+            Calendar c = Calendar.getInstance();
+            c.set(anoInt,(mesInt-1),diaInt);//estava somando 1 no mês
+            Date data = c.getTime();
+            this.cliente.setDataNasc(data);
+            this.cliente.setNome(nomeCliente.getText());
+            this.cliente.setTel(telCliente.getText());
+            this.cliente.setTel2(tel2Cliente.getText());
+            if(Masc.isSelected()){
+                this.cliente.setSexo("M");
+            }else{
+                this.cliente.setSexo("F");
+            }
+            controler.alterarCliente(this.cliente);
+            this.dispose();
+            new Clientes().setVisible(true);
         }else{
-            this.cliente.setSexo("F");
+            JOptionPane.showMessageDialog(null, "Digite um cpf válido no campo de cpf", "Erro de validação", JOptionPane.ERROR_MESSAGE);
         }
-        controler.alterarCliente(this.cliente);
-        this.dispose();
-        new Clientes().setVisible(true);
+        
     }//GEN-LAST:event_AlterarClienteActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed

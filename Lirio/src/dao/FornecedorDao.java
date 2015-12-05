@@ -56,7 +56,7 @@ public class FornecedorDao {
         }
     }
 
-    public void excluirFornecedor(Fornecedor f) throws Exception {
+    public void excluirFornecedor(Fornecedor f) {
         try {
             if (sessao.isConnected()) {
                 sessao.close();

@@ -167,10 +167,11 @@ public class Compras extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
-        new JanelaEscolhePagamentoCompra().setVisible(true);
+        new RegistrarCompra().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RegistrarCompraActionPerformed
 

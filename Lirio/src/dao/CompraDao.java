@@ -6,7 +6,6 @@
 package dao;
 
 import java.util.List;
-import model.CompraProduto;
 import model.Compra;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -20,27 +19,27 @@ import util.HibernateUtil;
  *
  * @author lucas
  */
-public class CompraProdutoDao {
+public class CompraDao {
 
     private Session sessao = HibernateUtil.getSessionFactory().openSession();
     private Transaction trans;
-    private List<CompraProduto> listaCP;
-    
-    public List<CompraProduto> listarCP(String codCompra) {
+    private List<Compra> listaCompras;
+
+    public List<Compra> listarCompras(String nomeFornecedor) {
         if (sessao.isConnected()) {
             sessao.close();
         }
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(Compra.class);
-        Criterion _codigo = Restrictions.like("compra", codCompra, MatchMode.ANYWHERE);
-        cri.add(_codigo);
-        cri.addOrder(Order.asc("compra"));
-        this.listaCP = cri.list();
-        return this.listaCP;
+        Criterion _nome = Restrictions.like("nomeFornecedor", nomeFornecedor, MatchMode.ANYWHERE);
+        cri.add(_nome);
+        cri.addOrder(Order.asc("nomeFornecedor"));
+        this.listaCompras = cri.list();
+        return this.listaCompras;
     }
 
-    public void cadastrarCP(CompraProduto cp) {
+    public void cadastrarCompra(Compra c) {
         try {
             if (sessao.isConnected()) {
                 sessao.close();
@@ -48,7 +47,7 @@ public class CompraProdutoDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            sessao.save(cp);
+            sessao.save(c);
             trans.commit();
 
         } catch (Exception e) {
@@ -56,7 +55,7 @@ public class CompraProdutoDao {
         }
     }
 
-    public void excluirCP(CompraProduto cp) {
+    public void excluirCompra(Compra c) {
         try {
             if (sessao.isConnected()) {
                 sessao.close();
@@ -64,23 +63,23 @@ public class CompraProdutoDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            sessao.delete(cp);
+            sessao.delete(c);
             trans.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void alterarCP(CompraProduto cp) {
-        try {
+
+    public void alterarCompra(Compra c) {
+    try {
             if (sessao.isConnected()) {
                 sessao.close();
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            sessao.update(cp);
+            sessao.update(c);
             trans.commit();
         } catch (Exception e) {
             e.printStackTrace();
