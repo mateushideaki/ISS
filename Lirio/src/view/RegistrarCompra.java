@@ -5,21 +5,22 @@
  */
 package view;
 
+import controller.ControleCompra;
 import controller.ControleFornecedor;
-import controller.ControleProduto;
 import controller.ControleCompraProduto;
 import controller.ControleFornecedorProduto;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
+import model.Compra;
 import model.Fornecedor;
-import javax.swing.table.TableModel;
-import model.Produto;
 import model.CompraProduto;
 import model.FornecedorProduto;
+import model.Produto;
+import sun.util.calendar.BaseCalendar.Date;
 import util.FornecedorTableModel;
-import util.ProdutoTableModel;
 import util.CompraProdutoTableModel;
 import util.FornecedorProdutoTableModel;
 
@@ -37,11 +38,13 @@ public class RegistrarCompra extends javax.swing.JFrame {
     private Fornecedor f = new Fornecedor();
     
     private String produtoNome;
-    private ControleFornecedorProduto controleProd = new ControleFornecedorProduto();
-    private List<FornecedorProduto> listaProdutosF = controleProd.listarProdutos("");
+    private ControleFornecedorProduto controleFp = new ControleFornecedorProduto();
+    private List<FornecedorProduto> listaProdutosF = controleFp.listarFP("");
+    private List<FornecedorProduto> listaProdutosF2 = controleFp.listar2FP("","");
     private FornecedorProdutoTableModel modelFornecedorProduto = new FornecedorProdutoTableModel(listaProdutosF);
     
     private ArrayList<CompraProduto> listaCompra = new ArrayList<CompraProduto>();
+    private ControleCompra controleCompra = new ControleCompra();
     private ControleCompraProduto controleCP = new ControleCompraProduto();
     private CompraProdutoTableModel modelCP;
     private Compra compra = new Compra();
@@ -52,7 +55,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
     public RegistrarCompra() {
         initComponents();
         tabelaFornecedor.setModel(modelFornecedor);
-        tabelaProdutosF.setModel(modelFornecedorProduto);
+
     }
 
     /**
@@ -83,6 +86,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         AdicionarProd = new javax.swing.JButton();
         qtdProduto = new javax.swing.JSpinner();
         ConfirmarFor = new javax.swing.JButton();
+        qtdRemover = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -196,14 +200,11 @@ public class RegistrarCompra extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(RegistrarCompra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(totalTxt)))
-                .addContainerGap())
+                        .addComponent(totalTxt))
+                    .addComponent(RegistrarCompra))
+                .addContainerGap(549, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,20 +225,26 @@ public class RegistrarCompra extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(ConfirmarFor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AdicionarProd)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7))
+                                        .addGap(207, 207, 207)))
+                                .addGap(0, 49, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(qtdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(qtdRemover))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RemoverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AdicionarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,18 +262,18 @@ public class RegistrarCompra extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AdicionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
-                .addGap(33, 33, 33)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AdicionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(RemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(qtdRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -288,30 +295,96 @@ public class RegistrarCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void RemoverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabelaProdutosComprados.getSelectedRow();
+        CompraProduto cp = new CompraProduto();
+        ListIterator listIt = this.listaCompra.listIterator();
+        FornecedorProduto produtof = new FornecedorProduto();
+        Produto produto;
+        int posicao = 0;           //posicao onde sera re-inserido o objeto na lista
+
+        if (linhaSelecionada >= 0) {                                            //verifica se algum produto foi selecionado
+            if ((int) qtdRemover.getValue() > 0) {                              //verifica se a quantidade e positiva
+                cp = this.modelCP.get(linhaSelecionada);
+                produto = cp.getProduto();
+                String fornecedor = this.compra.getFornecedor().getNome();
+                String nomeProd = produto.getNome();
+                listaProdutosF2 = controleFp.listar2FP(fornecedor,nomeProd);
+                produtof = listaProdutosF2.get(0);
+                cp.setProduto(produto);
+                while (listIt.hasNext()) {                      //remove o produto da lista
+                    posicao++;
+                    CompraProduto cpIt = (CompraProduto) listIt.next();
+                    if (cpIt == cp) {
+                        posicao--;
+                        listIt.remove();
+                        break;
+                    }
+                }
+
+                if ((int) qtdRemover.getValue() < cp.getQuantidade()) {        //se for verdadeiro adiciona com a quantidade calculada
+                    cp.setQuantidade(cp.getQuantidade() - (int) qtdRemover.getValue());
+                    cp.setCusto(cp.getCusto() - (int) qtdRemover.getValue() * produtof.getPreco());
+                    listaCompra.add(posicao, cp);
+                    produtof.getFornecedor();
+                    this.compra.setTotal(this.compra.getTotal() - produtof.getPreco() * (int) qtdRemover.getValue());
+                } else {
+                    this.compra.setTotal(this.compra.getTotal() - produtof.getPreco() * cp.getQuantidade());
+                }
+                
+                this.modelCP = new CompraProdutoTableModel(this.listaCompra);  //atualiza a tabela
+                tabelaProdutosComprados.setModel(this.modelCP);
+                
+                totalTxt.setText("" + this.compra.getTotal());
+
+            } else {
+                JOptionPane.showMessageDialog(this, "A quantidade a ser removida deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_RemoverProdActionPerformed
 
     private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
-        new Compras().setVisible(true);
-        this.dispose();
+        Compra compra = new Compra();
+        float total = this.compra.getTotal();
+        if (total <= 0){
+            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " não possui preço. Por isso não será cadastrada.", "Compra não cadastrada.", JOptionPane.INFORMATION_MESSAGE);
+            new Compras().setVisible(true);
+            this.dispose();
+        }else{
+            compra.setFornecedor(this.fornecedor);
+            compra.setTotal(total);
+            Calendar date = Calendar.getInstance();
+            compra.setDataCompra(date.getTime());
+            controleCompra.cadastrarCompra(compra);
+            int i = 0;
+            for(i = 0; i < listaCompra.size();i++){
+                controleCP.cadastrarCP(listaCompra.get(i));                
+            }
+            new Compras().setVisible(true);
+            this.dispose();
+        }
+        
+        
     }//GEN-LAST:event_RegistrarCompraActionPerformed
 
     private void AdicionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarProdActionPerformed
         int linhaSelecionada = tabelaProdutosF.getSelectedRow();
         CompraProduto cp = new CompraProduto();
-        FornecedorProduto produto = new FornecedorProduto();
+        FornecedorProduto produtof = new FornecedorProduto();
+        Produto produto = new Produto();
         ListIterator listIt = this.listaCompra.listIterator();
         int posicao = 0;
         
         if (linhaSelecionada >= 0) {                                            //verifica se algum produto foi selecionado
             if ((int) qtdProduto.getValue() > 0) {                              //verifica se a quantidade e positiva
-                produto = this.modelFornecedorProduto.get(linhaSelecionada);
-
+                    produtof = this.modelFornecedorProduto.get(linhaSelecionada);
+                    produto = produtof.getProduto();
                     cp.setProduto(produto);
-                    //cp.setCompra(this.compra);
+                    cp.setCompra(this.compra);
                     cp.setQuantidade((int) qtdProduto.getValue());
-                    cp.setCusto((int) qtdProduto.getValue() * produto.getPreco());
-                    
+                    cp.setCusto((int) qtdProduto.getValue() * produtof.getPreco());
+                    cp.setId(produtof.getProduto().getId());
                     while (listIt.hasNext()) {
                         posicao++;
                         CompraProduto cpIt = (CompraProduto) listIt.next();
@@ -324,11 +397,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
                             break;
                         }
                     }
-                    
-                    
-                    //this.modelFornecedorProduto = new ProdutoTableModel(controleProd.listarProdutos(""));
-                    //tabelaProdutosComprados.setModel(this.modelProduto);
-                    
+                                        
                     this.listaCompra.add(posicao, cp);                                //add na lista
 
                     this.modelCP = new CompraProdutoTableModel(this.listaCompra);  //atualiza a tabela
@@ -359,6 +428,21 @@ public class RegistrarCompra extends javax.swing.JFrame {
     private void ConfirmarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarForActionPerformed
         int linhaSelecionada = tabelaFornecedor.getSelectedRow();
         FornecedorProduto fornecedor = new FornecedorProduto();
+        
+        
+        if (linhaSelecionada >= 0) { //Verifica se a linha do fornecedor foi selecionada
+            String nome = (String) tabelaFornecedor.getValueAt(linhaSelecionada, 1);
+            this.fornecedorNome = nome;
+            this.listaProdutosF = controleFp.listarFP(this.fornecedorNome);
+            this.modelFornecedorProduto = new FornecedorProdutoTableModel(this.listaProdutosF);
+            tabelaProdutosF.setModel(this.modelFornecedorProduto);
+            this.fornecedor = this.modelFornecedor.get(linhaSelecionada);
+            this.compra.setFornecedor(this.fornecedor);
+            JOptionPane.showMessageDialog(this, "Fornecedor " + this.fornecedor.getNome() + " selecionado.", "Fornecedor selecionado.", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor.", "Erro: Nenhum fornecedor selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_ConfirmarForActionPerformed
 
     /**
@@ -413,6 +497,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner qtdProduto;
+    private javax.swing.JSpinner qtdRemover;
     private javax.swing.JTable tabelaFornecedor;
     private javax.swing.JTable tabelaProdutosComprados;
     private javax.swing.JTable tabelaProdutosF;

@@ -5,16 +5,18 @@
  */
 package view;
 
+import model.Fornecedor;
+
 /**
  *
  * @author lucas
  */
-public class Compra extends javax.swing.JFrame {
+public class GerenciarCompras extends javax.swing.JFrame {
 
     /**
      * Creates new form Compra
      */
-    public Compra() {
+    public GerenciarCompras() {
         initComponents();
     }
 
@@ -27,7 +29,7 @@ public class Compra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        GerenciarCompras = new javax.swing.JLabel();
         Compras = new javax.swing.JButton();
         MenuPrincipal = new javax.swing.JButton();
         Fornecedores = new javax.swing.JButton();
@@ -35,8 +37,8 @@ public class Compra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("COMPRA");
+        GerenciarCompras.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        GerenciarCompras.setText("GERENCIAR COMPRAS");
 
         Compras.setText("COMPRAS");
         Compras.addActionListener(new java.awt.event.ActionListener() {
@@ -70,10 +72,6 @@ public class Compra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -87,13 +85,17 @@ public class Compra extends javax.swing.JFrame {
                     .addComponent(MenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(GerenciarCompras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
+                .addGap(28, 28, 28)
+                .addComponent(GerenciarCompras)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,8 +147,9 @@ public class Compra extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -154,7 +157,7 @@ public class Compra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Compra().setVisible(true);
+                new GerenciarCompras().setVisible(true);
             }
         });
     }
@@ -162,9 +165,9 @@ public class Compra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Compras;
     private javax.swing.JButton Fornecedores;
+    private javax.swing.JLabel GerenciarCompras;
     private javax.swing.JButton MenuPrincipal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
     float getTotal() {
@@ -172,6 +175,10 @@ public class Compra extends javax.swing.JFrame {
     }
 
     void setTotal(float f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setFornecedor(Fornecedor fornecedor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

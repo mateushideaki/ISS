@@ -24,6 +24,11 @@ public class ControleFornecedorProduto {
         return this.listaFP;
     }
     
+    public List<FornecedorProduto> listar2FP(String busca,String busca2){
+        this.listaFP = fpDao.listar2(busca,busca2);
+        return this.listaFP;
+    }
+    
     public void cadastrarFP(FornecedorProduto fp){
         fpDao.cadastrar(fp);
     }
@@ -64,10 +69,6 @@ public class ControleFornecedorProduto {
             return false;
         }
         return true;
-    }
-
-    public List<FornecedorProduto> listarProdutos(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
      

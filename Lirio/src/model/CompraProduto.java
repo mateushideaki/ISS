@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import view.GerenciarCompras;
 
 
 /**
@@ -25,7 +26,7 @@ public class CompraProduto implements Serializable{
     @ManyToOne
     private Compra compra;
     @ManyToOne
-    private FornecedorProduto produto;
+    private Produto produto;
     private int quantidade;
     private float custo;
 
@@ -40,16 +41,16 @@ public class CompraProduto implements Serializable{
     public Compra getCompra() {
         return compra;
     }
-
+    
     public void setCompra(Compra compra) {
         this.compra = compra;
     }
 
-    public FornecedorProduto getProduto() {
+    public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(FornecedorProduto produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
@@ -89,6 +90,6 @@ public class CompraProduto implements Serializable{
             return false;
         }
         return true;
-    }
+    } 
     
 }

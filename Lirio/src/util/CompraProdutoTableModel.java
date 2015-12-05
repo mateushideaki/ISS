@@ -49,7 +49,7 @@ public class CompraProdutoTableModel extends AbstractTableModel{
             return "Quantidade";
         }
         if (column == Custo) {
-            return "Custo";
+            return "CustoCompra";
         }
         return ""; //Nunca deve ocorrer  
         
@@ -57,15 +57,15 @@ public class CompraProdutoTableModel extends AbstractTableModel{
         
         public Object getValueAt(int row, int column) {
         //Precisamos retornar o valor da coluna column e da linha row.  
-        CompraProduto vp = lista.get(row);
+        CompraProduto cp = lista.get(row);
         if (column == Cod) {
-            return vp.getProduto().getId();
+            return cp.getProduto().getId();
         } else if (column == Produto) {
-            return vp.getProduto().getNome();
+            return cp.getProduto().getNome();
         } else if (column == Quantidade) {
-            return vp.getQuantidade();
+            return cp.getQuantidade();
         } else if (column == Custo) {
-            return vp.getCusto();
+            return cp.getCusto();
         }
         
         return ""; //Nunca deve ocorrer  

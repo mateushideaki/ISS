@@ -238,7 +238,7 @@ public class MenuInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_RelatorioCompraActionPerformed
 
     private void CompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompraActionPerformed
-        new Compra().setVisible(true);
+        new GerenciarCompras().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CompraActionPerformed
 

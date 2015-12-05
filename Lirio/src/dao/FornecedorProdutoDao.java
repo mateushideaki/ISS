@@ -8,6 +8,7 @@ package dao;
 import java.util.List;
 import model.Fornecedor;
 import model.FornecedorProduto;
+import model.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -24,7 +25,8 @@ public class FornecedorProdutoDao {
     private Session sessao = HibernateUtil.getSessionFactory().openSession();
     private Transaction trans;
     private List<FornecedorProduto> lista;
-
+    private List<FornecedorProduto> lista2;
+    
     public List<FornecedorProduto> listar(String nomeFornecedor) {
         if (sessao.isConnected()) {
             sessao.close();
@@ -37,6 +39,24 @@ public class FornecedorProdutoDao {
         cri.addOrder(Order.asc("nomeFornecedor"));
         this.lista = cri.list();
         return this.lista;
+    }
+    
+    public List<FornecedorProduto> listar2(String nomeFornecedor, String nomeProduto) {
+        if (sessao.isConnected()) {
+            sessao.close();
+        }
+        sessao = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria cri = sessao.createCriteria(FornecedorProduto.class);
+        Criterion _nomeFor = Restrictions.like("nomeFornecedor", nomeFornecedor, MatchMode.ANYWHERE);
+        cri.add(_nomeFor);
+        cri.addOrder(Order.asc("nomeFornecedor"));
+        Criteria cri2 = sessao.createCriteria(Produto.class);
+        Criterion _nomeProd = Restrictions.like("nomeProduto", nomeProduto, MatchMode.ANYWHERE);
+        cri.add(_nomeProd);
+        cri.addOrder(Order.asc("nomeProduto"));
+        this.lista2 = cri.list();
+        return this.lista2;
     }
 
     public void cadastrar(FornecedorProduto fp) {
