@@ -24,7 +24,7 @@ public class ControleVendaProduto {
         return this.listaVP;
     }
     
-    public void cadastrarVP(VendaProduto vp){
+    public void cadastrarVP(List<VendaProduto> vp){
         vendaProdutoDao.cadastrarVP(vp);
     }
     

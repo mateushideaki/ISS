@@ -5,6 +5,7 @@
  */
 package dao;
 import java.util.List;
+import java.util.ListIterator;
 import model.Venda;
 import model.VendaProduto;
 import org.hibernate.Criteria;
@@ -38,15 +39,22 @@ public class VendaProdutoDao {
         return this.listaVP;
     }
 
-    public void cadastrarVP(VendaProduto vp) {
+    public void cadastrarVP(List<VendaProduto> vp) {
         try {
             if (sessao.isConnected()) {
                 sessao.close();
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
-
-            sessao.save(vp);
+            
+            ListIterator it = vp.listIterator();
+            
+            while (it.hasNext()) {                      //remove o produto da lista
+                    VendaProduto vpIt = (VendaProduto) it.next();
+                    sessao.save(vpIt);
+                }
+            
+            
             trans.commit();
 
         } catch (Exception e) {
