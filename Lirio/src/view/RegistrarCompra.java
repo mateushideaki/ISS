@@ -11,6 +11,8 @@ import controller.ControleCompraProduto;
 import controller.ControleFornecedorProduto;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -19,7 +21,6 @@ import model.Fornecedor;
 import model.CompraProduto;
 import model.FornecedorProduto;
 import model.Produto;
-import sun.util.calendar.BaseCalendar.Date;
 import util.FornecedorTableModel;
 import util.CompraProdutoTableModel;
 import util.FornecedorProdutoTableModel;
@@ -354,8 +355,10 @@ public class RegistrarCompra extends javax.swing.JFrame {
         }else{
             compra.setFornecedor(this.fornecedor);
             compra.setTotal(total);
-            Calendar date = Calendar.getInstance();
-            compra.setDataCompra(date.getTime());
+            Date d = new Date();
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(d);
+            compra.setDataCompra(d);
             controleCompra.cadastrarCompra(compra);
             int i = 0;
             for(i = 0; i < listaCompra.size();i++){

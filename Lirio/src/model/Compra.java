@@ -26,10 +26,12 @@ public class Compra implements Serializable{
     private Date dataCompra;
     private float total;
     @ManyToOne
-    private Fornecedor fornecedor;public int getId() {
+    private Fornecedor fornecedor;
+
+    public int getId(){
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
