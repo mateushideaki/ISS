@@ -60,11 +60,10 @@ public class Compra implements Serializable{
         this.fornecedor = fornecedor;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
+        hash = 59 * hash + this.id;
         return hash;
     }
 
@@ -82,4 +81,8 @@ public class Compra implements Serializable{
         }
         return true;
     }
+
+
+    
+    
 }

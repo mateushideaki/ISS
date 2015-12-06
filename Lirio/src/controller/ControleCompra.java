@@ -43,11 +43,11 @@ public class ControleCompra {
     public void setCompra(Compra compra) {
         this.compra = compra;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.compra);
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.compra);
         return hash;
     }
 
@@ -65,4 +65,6 @@ public class ControleCompra {
         }
         return true;
     }
+    
+    
 }

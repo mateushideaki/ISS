@@ -73,7 +73,7 @@ public class CompraProduto implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.id;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
@@ -90,6 +90,8 @@ public class CompraProduto implements Serializable{
             return false;
         }
         return true;
-    } 
+    }
+
+    
     
 }

@@ -49,7 +49,7 @@ public class ControleCompraProduto {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.cp);
+        hash = 37 * hash + Objects.hashCode(this.cp);
         return hash;
     }
 
@@ -67,4 +67,6 @@ public class ControleCompraProduto {
         }
         return true;
     }
+
+    
 }
