@@ -5,11 +5,11 @@
  */
 package controller;
 
-
 import dao.CompraProdutoDao;
 import java.util.List;
 import java.util.Objects;
 import model.CompraProduto;
+
 /**
  *
  * @author lucas
@@ -24,20 +24,20 @@ public class ControleCompraProduto {
         return this.listaCP;
     }
     
-    public void cadastrarCP(CompraProduto cp){
+    public void cadastrarCP(List<CompraProduto> cp){
         compraProdutoDao.cadastrarCP(cp);
     }
+      
     
     public void excluirCP(CompraProduto cp){
         compraProdutoDao.excluirCP(cp);
     }
     
- 
     public void alterarCP(CompraProduto c){
         compraProdutoDao.alterarCP(c);
         
     }
-    
+
     public CompraProduto getCp() {
         return cp;
     }
@@ -48,8 +48,8 @@ public class ControleCompraProduto {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.cp);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.cp);
         return hash;
     }
 
@@ -67,6 +67,6 @@ public class ControleCompraProduto {
         }
         return true;
     }
-
+    
     
 }

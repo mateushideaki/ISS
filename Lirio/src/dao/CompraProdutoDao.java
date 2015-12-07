@@ -6,8 +6,11 @@
 package dao;
 
 import java.util.List;
-import model.CompraProduto;
+import java.util.ListIterator;
 import model.Compra;
+import model.CompraProduto;
+
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,41 +24,50 @@ import util.HibernateUtil;
  * @author lucas
  */
 public class CompraProdutoDao {
-
+    
     private Session sessao = HibernateUtil.getSessionFactory().openSession();
     private Transaction trans;
     private List<CompraProduto> listaCP;
     
-    public List<CompraProduto> listarCP(String codCompra) {
-        if (sessao.isConnected()) {
+    public List<CompraProduto> listarCP(String codCompra){
+        if(sessao.isConnected()){
             sessao.close();
         }
+        
         sessao = HibernateUtil.getSessionFactory().openSession();
-
+        
         Criteria cri = sessao.createCriteria(Compra.class);
         Criterion _codigo = Restrictions.like("compra", codCompra, MatchMode.ANYWHERE);
+        
         cri.add(_codigo);
         cri.addOrder(Order.asc("compra"));
         this.listaCP = cri.list();
         return this.listaCP;
+        
     }
-
-    public void cadastrarCP(CompraProduto cp) {
+    
+    public void cadastrarCP(List<CompraProduto> cp) {
         try {
             if (sessao.isConnected()) {
                 sessao.close();
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
-
-            sessao.save(cp);
+            
+            ListIterator it = cp.listIterator();
+            
+            while (it.hasNext()) {                      //remove o produto da lista
+                    CompraProduto cpIt = (CompraProduto) it.next();
+                    sessao.save(cpIt);
+                }
+            
             trans.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+            
     public void excluirCP(CompraProduto cp) {
         try {
             if (sessao.isConnected()) {
@@ -71,7 +83,8 @@ public class CompraProdutoDao {
             e.printStackTrace();
         }
     }
-    
+        
+        
     public void alterarCP(CompraProduto cp) {
         try {
             if (sessao.isConnected()) {
@@ -86,5 +99,5 @@ public class CompraProdutoDao {
             e.printStackTrace();
         }
     }
-    
+        
 }

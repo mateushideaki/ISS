@@ -11,13 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import view.GerenciarCompras;
-
 
 /**
  *
  * @author lucas
  */
+
 @Entity
 public class CompraProduto implements Serializable{
     @Id
@@ -37,11 +36,11 @@ public class CompraProduto implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public Compra getCompra() {
         return compra;
     }
-    
+
     public void setCompra(Compra compra) {
         this.compra = compra;
     }
@@ -73,7 +72,7 @@ public class CompraProduto implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.id;
+        hash = 79 * hash + this.id;
         return hash;
     }
 
@@ -91,7 +90,6 @@ public class CompraProduto implements Serializable{
         }
         return true;
     }
-
     
     
 }

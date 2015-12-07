@@ -9,7 +9,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Produto_ {
 
 	public static volatile SingularAttribute<Produto, Float> precoVenda;
-	public static volatile SingularAttribute<Produto, Float> precoCusto;
 	public static volatile SingularAttribute<Produto, String> categoria;
 	public static volatile SingularAttribute<Produto, Integer> qntAtual;
 	public static volatile SingularAttribute<Produto, String> nome;

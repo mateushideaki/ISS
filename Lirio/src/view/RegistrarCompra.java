@@ -38,16 +38,16 @@ public class RegistrarCompra extends javax.swing.JFrame {
     private FornecedorTableModel modelFornecedor = new FornecedorTableModel(listaFornecedor);
     private Fornecedor f = new Fornecedor();
     
-    private String produtoNome;
     private ControleFornecedorProduto controleFp = new ControleFornecedorProduto();
     private List<FornecedorProduto> listaProdutosF = controleFp.listarFP("");
     private List<FornecedorProduto> listaProdutosF2 = controleFp.listar2FP("","");
     private FornecedorProdutoTableModel modelFornecedorProduto = new FornecedorProdutoTableModel(listaProdutosF);
     
     private ArrayList<CompraProduto> listaCompra = new ArrayList<CompraProduto>();
-    private ControleCompra controleCompra = new ControleCompra();
     private ControleCompraProduto controleCP = new ControleCompraProduto();
     private CompraProdutoTableModel modelCP;
+    
+    private ControleCompra controleCompra = new ControleCompra();
     private Compra compra = new Compra();
     
     /**
@@ -346,24 +346,18 @@ public class RegistrarCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_RemoverProdActionPerformed
 
     private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
-        Compra compra = new Compra();
-        float total = this.compra.getTotal();
-        if (total <= 0){
+        if (this.compra.getTotal() <= 0){
             JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " não possui preço. Por isso não será cadastrada.", "Compra não cadastrada.", JOptionPane.INFORMATION_MESSAGE);
             new Compras().setVisible(true);
             this.dispose();
         }else{
-            compra.setFornecedor(this.fornecedor);
-            compra.setTotal(total);
             Date d = new Date();
             Calendar cal = new GregorianCalendar();
             cal.setTime(d);
-            compra.setDataCompra(d);
-            controleCompra.cadastrarCompra(compra);
-            int i = 0;
-            for(i = 0; i < listaCompra.size();i++){
-                controleCP.cadastrarCP(listaCompra.get(i));                
-            }
+            this.compra.setDataCompra(d);
+            this.controleCompra.cadastrarCompra(this.compra);
+                        
+            controleCP.cadastrarCP(listaCompra);
             new Compras().setVisible(true);
             this.dispose();
         }
@@ -387,7 +381,6 @@ public class RegistrarCompra extends javax.swing.JFrame {
                     cp.setCompra(this.compra);
                     cp.setQuantidade((int) qtdProduto.getValue());
                     cp.setCusto((int) qtdProduto.getValue() * produtof.getPreco());
-                    cp.setId(produtof.getProduto().getId());
                     while (listIt.hasNext()) {
                         posicao++;
                         CompraProduto cpIt = (CompraProduto) listIt.next();

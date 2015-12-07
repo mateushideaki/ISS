@@ -6,9 +6,10 @@
 package util;
 
 import java.util.ArrayList;
-import model.CompraProduto;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.CompraProduto;
+
 /**
  *
  * @author lucas
@@ -20,6 +21,7 @@ public class CompraProdutoTableModel extends AbstractTableModel{
     private static final int Custo = 3;
 
     private List<CompraProduto> lista;
+    
     
     public CompraProdutoTableModel(List<CompraProduto> lista) {
         this.lista = new ArrayList<CompraProduto>(lista);
@@ -49,13 +51,12 @@ public class CompraProdutoTableModel extends AbstractTableModel{
             return "Quantidade";
         }
         if (column == Custo) {
-            return "CustoCompra";
+            return "Custo";
         }
         return ""; //Nunca deve ocorrer  
-        
     }
-        
-        public Object getValueAt(int row, int column) {
+    
+    public Object getValueAt(int row, int column) {
         //Precisamos retornar o valor da coluna column e da linha row.  
         CompraProduto cp = lista.get(row);
         if (column == Cod) {
@@ -71,7 +72,7 @@ public class CompraProdutoTableModel extends AbstractTableModel{
         return ""; //Nunca deve ocorrer  
     }
     
-        public Class<?> getColumnClass(int columnIndex) {
+    public Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
 
@@ -83,4 +84,5 @@ public class CompraProdutoTableModel extends AbstractTableModel{
     public CompraProduto get(int row) {
         return lista.get(row);
     }
+    
 }

@@ -46,7 +46,7 @@ public class CompraDao {
             }
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
-
+            
             sessao.save(c);
             trans.commit();
 
