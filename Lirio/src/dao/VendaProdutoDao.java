@@ -25,16 +25,16 @@ public class VendaProdutoDao {
     private Transaction trans;
     private List<VendaProduto> listaVP;
 
-    public List<VendaProduto> listarVP(String codVenda) {
+    public List<VendaProduto> listarVP(Venda venda) {
         if (sessao.isConnected()) {
             sessao.close();
         }
         sessao = HibernateUtil.getSessionFactory().openSession();
 
-        Criteria cri = sessao.createCriteria(Venda.class);
-        Criterion _codigo = Restrictions.like("venda", codVenda, MatchMode.ANYWHERE);
+        Criteria cri = sessao.createCriteria(VendaProduto.class);
+        Criterion _codigo = Restrictions.like("venda", venda);
         cri.add(_codigo);
-        cri.addOrder(Order.asc("venda"));
+        cri.addOrder(Order.asc("produto"));
         this.listaVP = cri.list();
         return this.listaVP;
     }

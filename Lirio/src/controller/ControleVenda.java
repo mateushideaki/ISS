@@ -28,7 +28,7 @@ public class ControleVenda {
         vendaDao.cadastrarVenda(v);
     }
     
-    public void excluirVenda(Venda v){
+    public void excluirVenda(Venda v) throws Exception{
         vendaDao.excluirVenda(v);
     }
     

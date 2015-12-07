@@ -98,6 +98,7 @@ public class MenuInicial extends javax.swing.JFrame {
 
         Cadastros.setText("Cadastros");
 
+        CadCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         CadCliente.setText("Cliente");
         CadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class MenuInicial extends javax.swing.JFrame {
         });
         Cadastros.add(CadCliente);
 
+        CadFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         CadFornecedor.setText("Fornecedor");
         CadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +116,7 @@ public class MenuInicial extends javax.swing.JFrame {
         });
         Cadastros.add(CadFornecedor);
 
+        CadProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         CadProduto.setText("Produto");
         CadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +201,7 @@ public class MenuInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_ReservaActionPerformed
 
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-        new Vendas().setVisible(true);
+        new MenuVendas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VendaActionPerformed
 

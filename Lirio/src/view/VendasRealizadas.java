@@ -5,17 +5,42 @@
  */
 package view;
 
+import controller.ControleCliente;
+import controller.ControleVenda;
+import controller.ControleVendaProduto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
+import model.Cliente;
+import model.Venda;
+import model.VendaProduto;
+import util.ClienteTableModel;
+import util.VendaProdutoTableModel;
+import util.VendaTableModel;
+
 /**
  *
  * @author Mateus
  */
 public class VendasRealizadas extends javax.swing.JFrame {
-
+    
+    private String clienteNome;
+    private ControleVenda controleVenda = new ControleVenda();
+    private List<Venda> lista = controleVenda.listarVendas("");
+    private VendaTableModel modelVenda = new VendaTableModel(lista);
+    private Venda venda = new Venda();
+    
+    private ControleVendaProduto controleVP = new ControleVendaProduto();
+    private List<VendaProduto> listaVP;
+    private VendaProdutoTableModel modelVP;
+    private VendaProduto vendaProduto = new VendaProduto();
+    
     /**
      * Creates new form VendasRealizadas
      */
     public VendasRealizadas() {
         initComponents();
+        tabelaVenda.setModel(modelVenda);
     }
 
     /**
@@ -31,12 +56,12 @@ public class VendasRealizadas extends javax.swing.JFrame {
         buscaCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaVenda = new javax.swing.JTable();
         excluirBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        verItensBtn = new javax.swing.JButton();
         voltarBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaVendaProduto = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,10 +74,15 @@ public class VendasRealizadas extends javax.swing.JFrame {
                 buscaClienteActionPerformed(evt);
             }
         });
+        buscaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaClienteKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Pesquise um cliente:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -63,7 +93,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaVenda);
 
         excluirBtn.setText("EXCLUIR VENDA");
         excluirBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,10 +102,10 @@ public class VendasRealizadas extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("VER ITENS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        verItensBtn.setText("VER ITENS");
+        verItensBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                verItensBtnActionPerformed(evt);
             }
         });
 
@@ -86,7 +116,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVendaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -97,7 +127,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelaVendaProduto);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("ITENS DA VENDA:");
@@ -106,25 +136,6 @@ public class VendasRealizadas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(excluirBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,6 +145,23 @@ public class VendasRealizadas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(voltarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(286, 286, 286))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(excluirBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(verItensBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +178,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(excluirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(verItensBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -161,6 +189,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClienteActionPerformed
@@ -168,17 +197,53 @@ public class VendasRealizadas extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaClienteActionPerformed
 
     private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabelaVenda.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir a venda?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                try {
+                    this.venda = this.modelVenda.get(linhaSelecionada);
+                    controleVenda.excluirVenda(this.venda);
+                    JOptionPane.showMessageDialog(this, "Venda excluida com sucesso.", "Mensagem informativa.", JOptionPane.INFORMATION_MESSAGE);
+                } catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "Existem vinculos com a venda, exclua-os primeiro.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma venda.", "Erro: Nenhuma venda selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.lista = controleVenda.listarVendas("");
+        this.modelVenda = new VendaTableModel(this.lista);
+        tabelaVenda.setModel(this.modelVenda);
     }//GEN-LAST:event_excluirBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void verItensBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verItensBtnActionPerformed
+        int linhaSelecionada = tabelaVenda.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.venda = modelVenda.get(linhaSelecionada);
+            this.listaVP = controleVP.listarVP(this.venda);
+            this.modelVP = new VendaProdutoTableModel(listaVP);
+            tabelaVendaProduto.setModel(modelVP);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione uma venda.", "Erro: Nenhuma venda selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_verItensBtnActionPerformed
 
     private void voltarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarBtnActionPerformed
-        new MenuInicial().setVisible(true);
+        new MenuVendas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltarBtnActionPerformed
+
+    private void buscaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaClienteKeyReleased
+        this.clienteNome = buscaCliente.getText();
+        this.lista = controleVenda.listarVendas(this.clienteNome);
+        this.modelVenda = new VendaTableModel(lista);
+        tabelaVenda.setModel(this.modelVenda);
+    }//GEN-LAST:event_buscaClienteKeyReleased
 
     /**
      * @param args the command line arguments
@@ -218,14 +283,14 @@ public class VendasRealizadas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscaCliente;
     private javax.swing.JButton excluirBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabelaVenda;
+    private javax.swing.JTable tabelaVendaProduto;
+    private javax.swing.JButton verItensBtn;
     private javax.swing.JButton voltarBtn;
     // End of variables declaration//GEN-END:variables
 }

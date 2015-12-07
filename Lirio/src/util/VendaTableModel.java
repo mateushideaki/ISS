@@ -61,7 +61,7 @@ public class VendaTableModel extends AbstractTableModel{
         if (column == Cod) {
             return v.getId();
         } else if (column == Cliente) {
-            return v.getCliente().getNome();
+            return v.getClienteNome();
         } else if (column == Data) {
             return v.getDataVenda();
         } else if (column == Total) {

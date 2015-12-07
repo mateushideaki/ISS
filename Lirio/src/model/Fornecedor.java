@@ -6,11 +6,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,6 +30,8 @@ public class Fornecedor implements Serializable {
     private String tel;
     private String ender; //endereço
     private String email;
+    //@OneToMany(mappedBy = "fornecedor", cascade = CascadeType.REMOVE)
+    //private Collection<FornecedorProduto> lfp;
 
     public int getId() {
         return id;
@@ -59,14 +65,6 @@ public class Fornecedor implements Serializable {
         this.tel = tel;
     }
 
-    public String getEnd() {
-        return ender;
-    }
-
-    public void setEnd(String ender) {
-        this.ender = ender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -82,7 +80,9 @@ public class Fornecedor implements Serializable {
     public void setEnder(String ender) {
         this.ender = ender;
     }
-
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

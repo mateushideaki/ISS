@@ -7,11 +7,14 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,6 +29,9 @@ public class Venda implements Serializable{
     private float total;
     @ManyToOne
     private Cliente cliente;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE)
+    private List<VendaProduto> lvp;
+    private String clienteNome;
     
     public int getId() {
         return id;
@@ -57,8 +63,26 @@ public class Venda implements Serializable{
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+        setClienteNome(cliente.getNome());
     }
 
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
+    }
+
+    public List<VendaProduto> getLvp() {
+        return lvp;
+    }
+
+    public void setLvp(List<VendaProduto> lvp) {
+        this.lvp = lvp;
+    }
+    
+    
 
     @Override
     public int hashCode() {

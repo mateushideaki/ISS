@@ -383,6 +383,8 @@ public class Vendas extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
         }
+        
+        qtdProduto.setValue(0);
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnCadastrarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarCliActionPerformed
@@ -437,6 +439,7 @@ public class Vendas extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
         }
+        qtdRemover.setValue(0);
     }//GEN-LAST:event_btnRemoverProdActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -450,7 +453,7 @@ public class Vendas extends javax.swing.JFrame {
             this.controleProd.incdecProduto(prod);
         }
 
-        new MenuInicial().setVisible(true);
+        new MenuVendas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -458,14 +461,20 @@ public class Vendas extends javax.swing.JFrame {
         Calendar c = Calendar.getInstance();
         Date d = c.getTime();
 
-        if (this.cliente.getNome() != null) {
+        if (this.cliente != null) {
             if (this.venda.getTotal() > 0) {
                 this.venda.setDataVenda(d);
                 this.controleV.cadastrarVenda(this.venda);
                 this.controleVP.cadastrarVP(listaVenda);
-                new JanelaEscolhePagamentoVenda().setVisible(true);
+                new JanelaEscolhePagamentoVenda(venda.getTotal()).setVisible(true);
                 this.dispose();
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Para realizar a venda, e necessario adicionar itens.", "Erro: nenhum item adicionado.", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione um cliente e clique em confirmar.", "Erro.", JOptionPane.ERROR_MESSAGE);
         }
 
 

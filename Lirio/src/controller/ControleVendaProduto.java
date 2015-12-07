@@ -8,6 +8,7 @@ package controller;
 import dao.VendaProdutoDao;
 import java.util.List;
 import java.util.Objects;
+import model.Venda;
 import model.VendaProduto;
 
 /**
@@ -19,8 +20,8 @@ public class ControleVendaProduto {
     private VendaProdutoDao vendaProdutoDao = new VendaProdutoDao();
     private List<VendaProduto> listaVP;
     
-    public List<VendaProduto> listarVP(String busca){
-        this.listaVP = vendaProdutoDao.listarVP(busca);
+    public List<VendaProduto> listarVP(Venda venda){
+        this.listaVP = vendaProdutoDao.listarVP(venda);
         return this.listaVP;
     }
     

@@ -32,9 +32,9 @@ public class VendaDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(Venda.class);
-        Criterion _nome = Restrictions.like("nomeCliente", nomeCliente, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("clienteNome", nomeCliente, MatchMode.ANYWHERE);
         cri.add(_nome);
-        cri.addOrder(Order.asc("nomeCliente"));
+        cri.addOrder(Order.asc("id"));
         this.listaVendas = cri.list();
         return this.listaVendas;
     }
@@ -55,7 +55,7 @@ public class VendaDao {
         }
     }
 
-    public void excluirVenda(Venda v) {
+    public void excluirVenda(Venda v) throws Exception{
         try {
             if (sessao.isConnected()) {
                 sessao.close();
@@ -67,7 +67,7 @@ public class VendaDao {
             trans.commit();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw(e);
         }
     }
 

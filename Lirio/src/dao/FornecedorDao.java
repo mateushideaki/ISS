@@ -38,6 +38,7 @@ public class FornecedorDao {
         cri.addOrder(Order.asc("nome"));
         this.listaFornecedores = cri.list();
         return this.listaFornecedores;
+        
     }
 
     public void cadastrarFornecedor(Fornecedor f) {

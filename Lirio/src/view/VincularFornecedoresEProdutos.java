@@ -67,7 +67,7 @@ public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("VINCULAR PRODUTOS E FORNECEDORES");
+        jLabel1.setText("VINCULAR FORNECEDORES E PRODUTOS");
 
         tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -206,14 +206,18 @@ public class VincularFornecedoresEProdutos extends javax.swing.JFrame {
                 this.produto = this.modelProduto.get(linhaSelecionada2);
 
                 float preco = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o preco: "));
-                FornecedorProduto fp = new FornecedorProduto();
-                fp.setFornecedor(this.fornecedor);
-                fp.setProduto(this.produto);
-                fp.setPreco(preco);
-                cfp.cadastrarFP(fp);
-                JOptionPane.showMessageDialog(this, "Vinculo realizado com sucesso", "Vinculo fornecedor e produto", JOptionPane.INFORMATION_MESSAGE);
+                if (preco > 0) {
+                    FornecedorProduto fp = new FornecedorProduto();
+                    fp.setFornecedor(this.fornecedor);
+                    fp.setProduto(this.produto);
+                    fp.setPreco(preco);
+                    cfp.cadastrarFP(fp);
+                    JOptionPane.showMessageDialog(this, "Vinculo realizado com sucesso", "Vinculo fornecedor e produto", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "O Preco deve ser um numero positivo com ponto dividindo a parte decimal.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "O Preco deve ser um numero com ponto dividindo a parte decimal.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O Preco deve ser um numero positivo com ponto dividindo a parte decimal.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Erro: É necessario selecionar um fornecedor e um produto.", "Selecione um fornecedor e um produto.", JOptionPane.ERROR_MESSAGE);

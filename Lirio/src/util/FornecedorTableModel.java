@@ -20,6 +20,8 @@ public class FornecedorTableModel extends AbstractTableModel{
     private static final int Fornecedor = 1;
     private static final int Tel = 2;
     private static final int Endereço = 3;
+    private static final int Cnpj = 4;
+    private static final int Email = 5;
 
     private List<Fornecedor> lista;
 
@@ -37,13 +39,13 @@ public class FornecedorTableModel extends AbstractTableModel{
     }
 
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     public String getColumnName(int column) {
         //Qual é o nome das nossas colunas?  
         if (column == Cod) {
-            return "Codigo";
+            return "ID";
         }
         if (column == Fornecedor) {
             return "Fornecedor";
@@ -53,6 +55,12 @@ public class FornecedorTableModel extends AbstractTableModel{
         }
         if (column == Endereço) {
             return "Endereço";
+        }
+        if (column == Cnpj) {
+            return "CNPJ";
+        }
+        if (column == Email) {
+            return "Email";
         }
         return ""; //Nunca deve ocorrer  
     }
@@ -67,7 +75,12 @@ public class FornecedorTableModel extends AbstractTableModel{
         } else if (column == Tel) {
             return f.getTel();
         } else if (column == Endereço) {
-            return f.getEnd();
+            return f.getEnder();
+        } else if (column == Cnpj) {
+            return f.getCnpj();
+        }
+        else if (column == Email) {
+            return f.getEmail();
         }
         
         return ""; //Nunca deve ocorrer  
