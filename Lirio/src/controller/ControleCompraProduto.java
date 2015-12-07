@@ -8,6 +8,7 @@ package controller;
 import dao.CompraProdutoDao;
 import java.util.List;
 import java.util.Objects;
+import model.Compra;
 import model.CompraProduto;
 
 /**
@@ -19,8 +20,8 @@ public class ControleCompraProduto {
     private CompraProdutoDao compraProdutoDao = new CompraProdutoDao();
     private List<CompraProduto> listaCP;
     
-    public List<CompraProduto> listarCP(String busca){
-        this.listaCP = compraProdutoDao.listarCP(busca);
+    public List<CompraProduto> listarCP(Compra compra){
+        this.listaCP = compraProdutoDao.listarCP(compra);
         return this.listaCP;
     }
     

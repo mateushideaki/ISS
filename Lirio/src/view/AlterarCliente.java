@@ -310,7 +310,7 @@ public class AlterarCliente extends javax.swing.JFrame {
             String ano = dataNasc.getText().substring(6,10);
             int anoInt = Integer.valueOf(ano);
             Calendar c = Calendar.getInstance();
-            c.set(anoInt,(mesInt-1),diaInt);//estava somando 1 no mês
+            c.set(anoInt,(mesInt),diaInt);//estava somando 1 no mês
             Date data = c.getTime();
             this.cliente.setDataNasc(data);
             this.cliente.setNome(nomeCliente.getText());

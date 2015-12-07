@@ -278,7 +278,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             String ano = dataNasc.getText().substring(6,10);
             int anoInt = Integer.valueOf(ano);
             Calendar c = Calendar.getInstance();
-            c.set(anoInt,mesInt,diaInt);
+            c.set(anoInt,mesInt-1,diaInt);
             Date d = c.getTime();
             cliente.setDataNasc(d);
             cliente.setNome(nomeCliente.getText());

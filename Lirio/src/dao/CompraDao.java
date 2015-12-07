@@ -32,9 +32,9 @@ public class CompraDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(Compra.class);
-        Criterion _nome = Restrictions.like("nomeFornecedor", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("fornecedorNome", nomeFornecedor, MatchMode.ANYWHERE);
         cri.add(_nome);
-        cri.addOrder(Order.asc("nomeFornecedor"));
+        cri.addOrder(Order.asc("id"));
         this.listaCompras = cri.list();
         return this.listaCompras;
     }

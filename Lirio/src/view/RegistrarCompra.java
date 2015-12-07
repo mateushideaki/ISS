@@ -343,6 +343,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
         }
+        qtdRemover.setValue(0);
     }//GEN-LAST:event_RemoverProdActionPerformed
 
     private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
@@ -407,7 +408,8 @@ public class RegistrarCompra extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
-        }   
+        }
+        qtdProduto.setValue(0);
     }//GEN-LAST:event_AdicionarProdActionPerformed
 
     private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased

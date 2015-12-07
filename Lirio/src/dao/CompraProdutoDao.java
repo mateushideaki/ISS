@@ -29,18 +29,18 @@ public class CompraProdutoDao {
     private Transaction trans;
     private List<CompraProduto> listaCP;
     
-    public List<CompraProduto> listarCP(String codCompra){
+    public List<CompraProduto> listarCP(Compra compra){
         if(sessao.isConnected()){
             sessao.close();
         }
         
         sessao = HibernateUtil.getSessionFactory().openSession();
         
-        Criteria cri = sessao.createCriteria(Compra.class);
-        Criterion _codigo = Restrictions.like("compra", codCompra, MatchMode.ANYWHERE);
+        Criteria cri = sessao.createCriteria(CompraProduto.class);
+        Criterion _codigo = Restrictions.like("compra", compra);
         
         cri.add(_codigo);
-        cri.addOrder(Order.asc("compra"));
+        cri.addOrder(Order.asc("produto"));
         this.listaCP = cri.list();
         return this.listaCP;
         

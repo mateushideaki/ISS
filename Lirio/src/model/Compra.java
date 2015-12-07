@@ -8,11 +8,14 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +24,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="compra")
 public class Compra implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +33,9 @@ public class Compra implements Serializable{
     private float total;
     @ManyToOne
     private Fornecedor fornecedor;
-
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.REMOVE)
+    private List<CompraProduto> lcp;
+    private String fornecedorNome;
     
     public int getId(){
         return id;
@@ -63,12 +67,22 @@ public class Compra implements Serializable{
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+        setFornecedorNome(fornecedor.getNome());
+    }
+
+    public String getFornecedorNome() {
+        return fornecedorNome;
+    }
+
+    public void setFornecedorNome(String fornecedorNome) {
+        this.fornecedorNome = fornecedorNome;
+        
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.id;
+        hash = 53 * hash + this.id;
         return hash;
     }
 
@@ -86,6 +100,8 @@ public class Compra implements Serializable{
         }
         return true;
     }
+    
+    
 
 
     
