@@ -74,7 +74,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         buscaFornecedor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        RegistrarCompra = new javax.swing.JButton();
+        RegistrarPedido = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaProdutosF = new javax.swing.JTable();
@@ -92,7 +92,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("REGISTRAR COMPRA");
+        jLabel1.setText("REGISTRAR PEDIDO(COMPRA)");
 
         tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,10 +123,10 @@ public class RegistrarCompra extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("LISTA DE PRODUTOS DO FORNECEDOR:");
 
-        RegistrarCompra.setText("REGISTRAR COMPRA");
-        RegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
+        RegistrarPedido.setText("REGISTRAR PEDIDO");
+        RegistrarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarCompraActionPerformed(evt);
+                RegistrarPedidoActionPerformed(evt);
             }
         });
 
@@ -204,8 +204,8 @@ public class RegistrarCompra extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalTxt))
-                    .addComponent(RegistrarCompra))
-                .addContainerGap(549, Short.MAX_VALUE))
+                    .addComponent(RegistrarPedido))
+                .addContainerGap(553, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,20 +220,20 @@ public class RegistrarCompra extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                                            .addComponent(buscaFornecedor))))
+                                        .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(32, 32, 32)
                                 .addComponent(ConfirmarFor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7))
-                                        .addGap(207, 207, 207)))
-                                .addGap(0, 49, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel7))
+                                            .addGap(207, 207, 207)))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,7 +281,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
                     .addComponent(totalTxt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RegistrarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegistrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
@@ -346,7 +346,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         qtdRemover.setValue(0);
     }//GEN-LAST:event_RemoverProdActionPerformed
 
-    private void RegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarCompraActionPerformed
+    private void RegistrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPedidoActionPerformed
         if (this.compra.getTotal() <= 0){
             JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " não possui preço. Por isso não será cadastrada.", "Compra não cadastrada.", JOptionPane.INFORMATION_MESSAGE);
             new Compras().setVisible(true);
@@ -364,7 +364,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_RegistrarCompraActionPerformed
+    }//GEN-LAST:event_RegistrarPedidoActionPerformed
 
     private void AdicionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarProdActionPerformed
         int linhaSelecionada = tabelaProdutosF.getSelectedRow();
@@ -483,7 +483,7 @@ public class RegistrarCompra extends javax.swing.JFrame {
     private javax.swing.JButton AdicionarProd;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton ConfirmarFor;
-    private javax.swing.JButton RegistrarCompra;
+    private javax.swing.JButton RegistrarPedido;
     private javax.swing.JButton RemoverProd;
     private javax.swing.JTextField buscaFornecedor;
     private javax.swing.JLabel jLabel1;

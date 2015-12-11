@@ -40,8 +40,8 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="RegistrarCompra" max="32767" attributes="0"/>
-                                  <Component id="DeletarCompra" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="RegistrarPedido" max="32767" attributes="0"/>
+                                  <Component id="DeletarPedido" alignment="0" max="32767" attributes="0"/>
                                   <Component id="ProdutosCompra" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -85,12 +85,12 @@
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="RegistrarCompra" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="RegistrarPedido" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="137" pref="137" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="DeletarCompra" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="DeletarPedido" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="ProdutosCompra" min="-2" pref="54" max="-2" attributes="0"/>
                       </Group>
@@ -116,12 +116,12 @@
         <Property name="text" type="java.lang.String" value="LISTA DE PRODUTOS DA COMPRA:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="RegistrarCompra">
+    <Component class="javax.swing.JButton" name="RegistrarPedido">
       <Properties>
-        <Property name="text" type="java.lang.String" value="REGISTRAR COMPRA"/>
+        <Property name="text" type="java.lang.String" value="REGISTRAR PEDIDO"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrarCompraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrarPedidoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Cancelar">
@@ -183,12 +183,12 @@
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscaFornecedorKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="DeletarCompra">
+    <Component class="javax.swing.JButton" name="DeletarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="DELETAR COMPRA"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeletarCompraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeletarPedidoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ProdutosCompra">
