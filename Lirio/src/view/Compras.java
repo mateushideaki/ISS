@@ -222,13 +222,9 @@ public class Compras extends javax.swing.JFrame {
         if (linhaSelecionada >= 0) {
             int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir esta compra?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
             if (opcao == YES_OPTION) {
-                try {
-                    this.compra = this.modelCompra.get(linhaSelecionada);
-                    controleCompra.excluirCompra(this.compra);
-                    JOptionPane.showMessageDialog(this, "Compra excluida com sucesso.", "Mensagem informativa.", JOptionPane.INFORMATION_MESSAGE);
-                } catch(Exception e){
-                    JOptionPane.showMessageDialog(this, "Existem vinculos com a venda, exclua-os primeiro.", "Erro.", JOptionPane.ERROR_MESSAGE);
-                }
+                this.compra = this.modelCompra.get(linhaSelecionada);
+                controleCompra.excluirCompra(this.compra);
+                JOptionPane.showMessageDialog(this, "Compra excluida com sucesso.", "Mensagem informativa.", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);

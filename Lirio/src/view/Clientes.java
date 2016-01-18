@@ -8,6 +8,7 @@ package view;
 import controller.ControleCliente;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Cliente;
@@ -191,8 +192,12 @@ public class Clientes extends javax.swing.JFrame {
         int linhaSelecionada = tabelaCliente.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            this.c = this.modelCliente.get(linhaSelecionada);
-            controleCli.excluirCliente(this.c);
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir o cliente?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                this.c = this.modelCliente.get(linhaSelecionada);
+                controleCli.excluirCliente(this.c);
+                JOptionPane.showMessageDialog(this, "Cliente excluido com sucesso.", "Mensagem informativa", JOptionPane.INFORMATION_MESSAGE);     
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
         }

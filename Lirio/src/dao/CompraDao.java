@@ -63,7 +63,8 @@ public class CompraDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            sessao.delete(c);
+            c.setFlag(0);
+            sessao.update(c);
             trans.commit();
 
         } catch (Exception e) {

@@ -63,23 +63,24 @@ public class CadastroCliente extends javax.swing.JFrame {
         telCliente = new javax.swing.JFormattedTextField();
         tel2Cliente = new javax.swing.JFormattedTextField();
         dataNasc = new javax.swing.JFormattedTextField();
+        obrigatorio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("CADASTRO DE CLIENTE");
 
-        jLabel2.setText("Nome:");
+        jLabel2.setText("* Nome:");
 
-        jLabel3.setText("RG:");
+        jLabel3.setText("* RG:");
 
-        jLabel4.setText("CPF:");
+        jLabel4.setText("* CPF:");
 
-        jLabel5.setText("Endereço:");
+        jLabel5.setText("* Endereço:");
 
-        jLabel6.setText("Data de Nascimento:");
+        jLabel6.setText("* Data de Nascimento:");
 
-        jLabel7.setText("Telefone:");
+        jLabel7.setText("* Telefone:");
 
         jLabel8.setText("Telefone2:");
 
@@ -99,7 +100,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel9.setText("E-mail:");
 
-        jLabel10.setText("Sexo:");
+        jLabel10.setText("* Sexo:");
 
         Masc.setText("Masculino");
         Masc.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +156,8 @@ public class CadastroCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        obrigatorio.setText("(*) Campo Obrigatório");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,44 +166,49 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Cadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Cancelar))
+                        .addComponent(obrigatorio)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Masc)
-                                .addGap(54, 54, 54)
-                                .addComponent(Fem))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tel2Cliente)
-                                .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                .addComponent(enderecoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(telCliente))
-                            .addComponent(emailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
+                                .addComponent(Cadastrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Cancelar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Masc)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(Fem))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tel2Cliente)
+                                        .addComponent(nomeCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(rg, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                        .addComponent(enderecoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(telCliente))
+                                    .addComponent(emailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addGap(35, 35, 35))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +252,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(Masc)
                     .addComponent(Fem))
-                .addGap(39, 39, 39)
+                .addGap(14, 14, 14)
+                .addComponent(obrigatorio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar)
                     .addComponent(Cancelar))
@@ -268,37 +278,43 @@ public class CadastroCliente extends javax.swing.JFrame {
         ValidarCpf cpf2 = new ValidarCpf();
         boolean verificaCpf = cpf2.isCPF(cpf.getText());
         if(verificaCpf == true){
-            cliente.setRg(rg.getText());
-            cliente.setCpf(cpf.getText());
-            cliente.setEndereco(enderecoCliente.getText());
-            String dia = dataNasc.getText().substring(0,2);
-            int diaInt = Integer.valueOf(dia);
-            String mes = dataNasc.getText().substring(3,5);
-            int mesInt= Integer.valueOf(mes);
-            String ano = dataNasc.getText().substring(6,10);
-            int anoInt = Integer.valueOf(ano);
-            Calendar c = Calendar.getInstance();
-            c.set(anoInt,mesInt-1,diaInt);
-            Date d = c.getTime();
-            cliente.setDataNasc(d);
-            cliente.setNome(nomeCliente.getText());
-            cliente.setTel(telCliente.getText());
-            cliente.setTel2(tel2Cliente.getText());
-            if(Masc.isSelected()){
-                cliente.setSexo("M");
-                cliente.setEmail(emailCliente.getText());
-                controler.cadastrarCliente(cliente);
-                new Clientes().setVisible(true);
-                this.dispose();
-            }else if(Fem.isSelected()){
-                cliente.setSexo("F");
-                cliente.setEmail(emailCliente.getText());
-                controler.cadastrarCliente(cliente);
-                new Clientes().setVisible(true);
-                this.dispose();
+            if(rg.getText().endsWith(" ") || enderecoCliente.getText().endsWith(" ") || nomeCliente.getText().endsWith(" ") || telCliente.getText().endsWith(" ")){
+                            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser digitados.", "Erro.", JOptionPane.ERROR_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "Não foi selecionado nenhum sexo", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                cliente.setRg(rg.getText());
+                cliente.setCpf(cpf.getText());
+                cliente.setEndereco(enderecoCliente.getText());
+                String dia = dataNasc.getText().substring(0,2);
+                int diaInt = Integer.valueOf(dia);
+                String mes = dataNasc.getText().substring(3,5);
+                int mesInt= Integer.valueOf(mes);
+                String ano = dataNasc.getText().substring(6,10);
+                int anoInt = Integer.valueOf(ano);
+                Calendar c = Calendar.getInstance();
+                c.set(anoInt,mesInt-1,diaInt);
+                Date d = c.getTime();
+                cliente.setDataNasc(d);
+                cliente.setNome(nomeCliente.getText());
+                cliente.setTel(telCliente.getText());
+                cliente.setTel2(tel2Cliente.getText());
+                cliente.setFlag(1);
+                if(Masc.isSelected()){
+                    cliente.setSexo("M");
+                    cliente.setEmail(emailCliente.getText());
+                    controler.cadastrarCliente(cliente);
+                    new Clientes().setVisible(true);
+                    this.dispose();
+                }else if(Fem.isSelected()){
+                    cliente.setSexo("F");
+                    cliente.setEmail(emailCliente.getText());
+                    controler.cadastrarCliente(cliente);
+                    new Clientes().setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Não foi selecionado nenhum sexo", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                }
             }
+            
             
         }else{
             JOptionPane.showMessageDialog(null, "Digite um cpf válido no campo de cpf", "Erro de validação", JOptionPane.ERROR_MESSAGE);
@@ -381,6 +397,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nomeCliente;
+    private javax.swing.JLabel obrigatorio;
     private javax.swing.JFormattedTextField rg;
     private javax.swing.JFormattedTextField tel2Cliente;
     private javax.swing.JFormattedTextField telCliente;

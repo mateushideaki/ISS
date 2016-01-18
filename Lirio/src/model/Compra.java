@@ -36,6 +36,7 @@ public class Compra implements Serializable{
     @OneToMany(mappedBy = "compra", cascade = CascadeType.REMOVE)
     private List<CompraProduto> lcp;
     private String fornecedorNome;
+    private int flag;
     
     public int getId(){
         return id;
@@ -77,6 +78,14 @@ public class Compra implements Serializable{
     public void setFornecedorNome(String fornecedorNome) {
         this.fornecedorNome = fornecedorNome;
         
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     @Override
