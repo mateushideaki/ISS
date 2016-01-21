@@ -12,8 +12,8 @@ package model;
 public abstract class Pagamento {
     private int parcelasPagas;
     private int parcelasNaoPagas;
-    private double valorParcela;
-    private double valorRestante;
+    private float valorParcela;
+    private float valorRestante;
     private int diaVencimento;
     
     public Pagamento(){
@@ -47,19 +47,19 @@ public abstract class Pagamento {
         this.parcelasNaoPagas = parcelasNaoPagas;
     }
 
-    public double getValorParcela() {
+    public float getValorParcela() {
         return valorParcela;
     }
 
-    public void setValorParcela(double valorParcela) {
+    public void setValorParcela(float valorParcela) {
         this.valorParcela = valorParcela;
     }
 
-    public double getValorRestante() {
+    public float getValorRestante() {
         return valorRestante;
     }
 
-    public void setValorRestante(double valorRestante) {
+    public void setValorRestante(float valorRestante) {
         this.valorRestante = valorRestante;
     }
 
