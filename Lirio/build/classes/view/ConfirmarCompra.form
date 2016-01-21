@@ -34,7 +34,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="460" max="-2" attributes="0"/>
-                              <Component id="ConfirmarCompra" min="-2" pref="159" max="-2" attributes="0"/>
+                              <Component id="ConfirmarCompraB" min="-2" pref="159" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -42,7 +42,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="totalTxt" min="-2" max="-2" attributes="0"/>
+                                      <Component id="totalConfirmado" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                      <Component id="totalTxt1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="totalPedido" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="LabelFornecedor" min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
@@ -96,7 +96,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="totalTxt1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="totalPedido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="16" max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="totalTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalConfirmado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -124,11 +124,10 @@
                           <Component id="qtdRemover" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnRemoverProd" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="151" pref="151" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="ConfirmarCompra" min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="ConfirmarCompraB" min="-2" pref="52" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -151,7 +150,7 @@
         <Property name="text" type="java.lang.String" value="LISTA DE PRODUTOS DA COMPRA:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="ConfirmarCompra">
+    <Component class="javax.swing.JButton" name="ConfirmarCompraB">
       <Properties>
         <Property name="text" type="java.lang.String" value="CONFIRMAR COMPRA"/>
       </Properties>
@@ -180,7 +179,7 @@
         <Property name="text" type="java.lang.String" value="TOTAL RECEBIDO:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="totalTxt">
+    <Component class="javax.swing.JLabel" name="totalConfirmado">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="1"/>
@@ -256,7 +255,7 @@
         <Property name="text" type="java.lang.String" value="TOTAL PEDIDO:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="totalTxt1">
+    <Component class="javax.swing.JLabel" name="totalPedido">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="1"/>

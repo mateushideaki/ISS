@@ -137,6 +137,11 @@ public class Compras extends javax.swing.JFrame {
         });
 
         ConfirmarCompra.setText("CONFIRMAR COMPRA");
+        ConfirmarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,6 +265,19 @@ public class Compras extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_ProdutosCompraActionPerformed
+
+    private void ConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCompraActionPerformed
+        int linhaSelecionada = TabelaDeCompras.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.compra = this.modelCompra.get(linhaSelecionada);
+            new ConfirmarCompra(this.compra).setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ConfirmarCompraActionPerformed
 
     /**
      * @param args the command line arguments
