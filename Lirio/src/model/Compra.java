@@ -36,7 +36,19 @@ public class Compra implements Serializable{
     @OneToMany(mappedBy = "compra", cascade = CascadeType.REMOVE)
     private List<CompraProduto> lcp;
     private String fornecedorNome;
-    private int flag;
+    @Column(name = "data_recebimento")
+    private Date dataRecebimento;
+    private String flag;
+    
+    
+    
+    public Date getDataRecebimento() {
+        return dataRecebimento;
+    }
+
+    public void setDataRecebimento(Date dataRecebimento) {
+        this.dataRecebimento = dataRecebimento;
+    }
     
     public int getId(){
         return id;
@@ -80,14 +92,13 @@ public class Compra implements Serializable{
         
     }
 
-    public int getFlag() {
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -109,10 +120,5 @@ public class Compra implements Serializable{
         }
         return true;
     }
-    
-    
 
-
-    
-    
 }

@@ -34,7 +34,7 @@ public class Cliente implements Serializable {
     private String tel2;
     private String email;
     private String sexo;
-    private int flag;
+    private String flag;
     
     public int getId() {
         return id;
@@ -116,11 +116,11 @@ public class Cliente implements Serializable {
         this.email = email;
     }
     
-    public int getFlag() {
-        return id;
+    public String getFlag() {
+        return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 

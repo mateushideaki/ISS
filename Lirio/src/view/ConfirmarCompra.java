@@ -7,6 +7,7 @@ package view;
 
 import controller.ControleCompraProduto;
 import controller.ControleProduto;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -15,7 +16,6 @@ import model.CompraProduto;
 import model.Fornecedor;
 import model.Produto;
 import util.CompraProdutoTableModel;
-import util.ConfirmarCompraTableModel;
 import util.ProdutoTableModel;
 
 /**
@@ -24,31 +24,31 @@ import util.ProdutoTableModel;
  */
 public class ConfirmarCompra extends javax.swing.JFrame {
 
-    private Compra compra;
+    private Compra compra = new Compra();
     //private Fornecedor fornecedor;
     //private String fornecedorNome;
     private float total = 0;
     private ControleCompraProduto controleCp = new ControleCompraProduto();
     private List<CompraProduto> listaCompraP;
-    private CompraProdutoTableModel modelCompraP = new CompraProdutoTableModel(listaCompraP);
-    private CompraProduto compraP = new CompraProduto();
+    private CompraProdutoTableModel modelCompraP;
     
-    private List<CompraProduto> listaConfirmado;
-    private CompraProdutoTableModel modelConfirmado = new CompraProdutoTableModel(listaConfirmado);
-    private CompraProduto compraConfirmada = new CompraProduto();
-    
-    //private List<ConfirmarCompra> listaConfirmarCompra;
-    //private ConfirmarCompraTableModel modelConfirmarCompra = new ConfirmarCompraTableModel(listaConfirmarCompra);
     private ControleProduto controleProd = new ControleProduto();
-    private List<Produto> listaProdutos = controleProd.listarProdutos("");
-    private ProdutoTableModel modelProduto = new ProdutoTableModel(listaProdutos);
+    
+    private ControleCompraProduto controleConfirmado = new ControleCompraProduto();
+    private ArrayList<CompraProduto> listaConfirmado = new ArrayList<CompraProduto>();
+    private CompraProdutoTableModel modelConfirmado;
+    //private CompraProduto compraConfirmado = new CompraProduto();
+    
     /**
      * Creates new form ConfirmarCompra
      */
     public ConfirmarCompra(Compra comp) {
         initComponents();
-        TabelaCompraProduto.setModel(modelCompraP);
         this.compra = comp;
+        this.listaCompraP = controleCp.listarCP(comp);
+        this.modelCompraP = new CompraProdutoTableModel(listaCompraP);
+        TabelaCompraProduto.setModel(modelCompraP);
+        
         LabelFornecedor.setText(comp.getFornecedorNome());
         totalPedido.setText("" + comp.getTotal());
         
@@ -83,6 +83,7 @@ public class ConfirmarCompra extends javax.swing.JFrame {
         TabelaCompraProdutoConferidos = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         totalPedido = new javax.swing.JLabel();
+        Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +156,13 @@ public class ConfirmarCompra extends javax.swing.JFrame {
         totalPedido.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         totalPedido.setText("R$ 0,00");
 
+        Cancelar.setText("CANCELAR");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,40 +175,44 @@ public class ConfirmarCompra extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(460, 460, 460)
-                                .addComponent(ConfirmarCompraB, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(totalConfirmado)))
-                                .addGap(84, 84, 84)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(qtdRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnRemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel3))
-                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(totalPedido))
-                                    .addComponent(LabelFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                                        .addGap(19, 19, 19)
+                                        .addComponent(LabelFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(totalPedido))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(totalConfirmado)))
+                                        .addGap(155, 155, 155))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(qtdRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ConfirmarCompraB, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(btnRemoverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,18 +250,22 @@ public class ConfirmarCompra extends javax.swing.JFrame {
                             .addComponent(qtdRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(ConfirmarCompraB, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmarCompraB, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
         int linhaSelecionada = TabelaCompraProduto.getSelectedRow();
         CompraProduto cp = new CompraProduto();
+        CompraProduto confirmado = new CompraProduto();
         Produto produto = new Produto();
-        ListIterator listIt = this.listaCompraP.listIterator();
+        ListIterator listIt = this.listaConfirmado.listIterator();
         int posicao = 0;
         float valor = 0;
 
@@ -257,32 +273,32 @@ public class ConfirmarCompra extends javax.swing.JFrame {
             if ((int) qtdProduto.getValue() > 0) {                              //verifica se a quantidade e positiva
                 cp = this.modelCompraP.get(linhaSelecionada);
                 produto = cp.getProduto();
-                if ((int) qtdProduto.getValue() <= cp.getQuantidade()) {     //verifica se tem no estoque
-                    valor = cp.getCusto()/cp.getQuantidade();
-                    cp.setProduto(produto);
-                    cp.setQuantidade(cp.getQuantidade() - (int) qtdProduto.getValue());
-                    cp.setCusto(cp.getCusto() - (int) qtdProduto.getValue() * valor);
-                    this.total = this.total + (int)qtdProduto.getValue()*valor;
+                if ((int) qtdProduto.getValue() <= cp.getQuantidade()) {     //verifica quantidade
+                    valor = (float) (cp.getCusto()/cp.getQuantidade());
+                    confirmado.setProduto(produto);
+                    confirmado.setQuantidade((int)qtdProduto.getValue());
+                    confirmado.setCusto((int) qtdProduto.getValue() * valor);
                     while (listIt.hasNext()) {
                         posicao++;
                         CompraProduto cpIt = (CompraProduto) listIt.next();
                         if (cpIt.getProduto().getId() == produto.getId()) {
                             posicao--;
-                            cp.setQuantidade(cp.getQuantidade() - cpIt.getQuantidade());
-                            cp.setCusto(cp.getCusto() - cpIt.getCusto());
+                            confirmado.setQuantidade(confirmado.getQuantidade() + cpIt.getQuantidade());
+                            confirmado.setCusto(confirmado.getCusto() + cpIt.getCusto());
+                            this.total = this.total - cpIt.getCusto();
                             listIt.remove();
                             break;
                         }
                     }
 
-                    produto.setQntAtual(produto.getQntAtual() + (int) qtdProduto.getValue());    //decrementa no estoque
+                    produto.setQntAtual(produto.getQntAtual() + (int) qtdProduto.getValue());    //incrementa no estoque
                     controleProd.alterarProduto(produto);
 
-                    this.listaCompraP.add(posicao, cp);                                //add na lista
+                    this.listaConfirmado.add(posicao, cp);                                //add na lista
 
-                    this.modelCompraP = new CompraProdutoTableModel(this.listaCompraP);  //atualiza a tabela
-                    TabelaCompraProdutoConferidos.setModel(this.modelCompraP);
-                    totalConfirmado.setText("" + this.total);
+                    this.modelConfirmado = new CompraProdutoTableModel(this.listaConfirmado);  //atualiza a tabela
+                    TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
+                    totalConfirmado.setText("" + total + cp.getCusto());
 
                 } else {
                     JOptionPane.showMessageDialog(this, "So existem " + cp.getQuantidade() + " unidades disponiveis na compra.", "Erro.", JOptionPane.ERROR_MESSAGE);
@@ -350,6 +366,11 @@ public class ConfirmarCompra extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_btnRemoverProdActionPerformed
 
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        new Compras().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,6 +406,7 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancelar;
     private javax.swing.JButton ConfirmarCompraB;
     private javax.swing.JLabel LabelFornecedor;
     private javax.swing.JTable TabelaCompraProduto;

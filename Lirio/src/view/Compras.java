@@ -47,8 +47,8 @@ public class Compras extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
         RegistrarPedido = new javax.swing.JButton();
+        ConfirmarCompra = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaCompraProduto = new javax.swing.JTable();
@@ -58,18 +58,22 @@ public class Compras extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         buscaFornecedor = new javax.swing.JTextField();
         DeletarPedido = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         ProdutosCompra = new javax.swing.JButton();
-        ConfirmarCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("LISTA DE PRODUTOS DA COMPRA:");
 
         RegistrarPedido.setText("REGISTRAR PEDIDO");
         RegistrarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrarPedidoActionPerformed(evt);
+            }
+        });
+
+        ConfirmarCompra.setText("CONFIRMAR COMPRA");
+        ConfirmarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCompraActionPerformed(evt);
             }
         });
 
@@ -129,17 +133,13 @@ public class Compras extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("LISTA DE PRODUTOS DA COMPRA:");
+
         ProdutosCompra.setText("VER PRODUTOS");
         ProdutosCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProdutosCompraActionPerformed(evt);
-            }
-        });
-
-        ConfirmarCompra.setText("CONFIRMAR COMPRA");
-        ConfirmarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmarCompraActionPerformed(evt);
             }
         });
 
@@ -151,61 +151,58 @@ public class Compras extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscaFornecedor)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RegistrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ProdutosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(DeletarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addGap(0, 81, Short.MAX_VALUE)
+                                        .addComponent(jLabel1)
+                                        .addGap(81, 81, 81))))
+                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RegistrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DeletarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProdutosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
+                        .addGap(324, 324, 324)
                         .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel4)
+                    .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RegistrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DeletarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 35, Short.MAX_VALUE)
+                        .addComponent(DeletarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ProdutosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -217,10 +214,34 @@ public class Compras extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_RegistrarPedidoActionPerformed
 
+    private void ConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCompraActionPerformed
+        int linhaSelecionada = TabelaDeCompras.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.compra = this.modelCompra.get(linhaSelecionada);
+            new ConfirmarCompra(this.compra).setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ConfirmarCompraActionPerformed
+
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         new GerenciarCompras().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void buscaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaFornecedorActionPerformed
+
+    private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
+        this.fornecedorNome = buscaFornecedor.getText();
+        this.listaCompra = controleCompra.listarCompras(this.fornecedorNome);
+        this.modelCompra = new CompraTableModel(listaCompra);
+        TabelaDeCompras.setModel(this.modelCompra);
+    }//GEN-LAST:event_buscaFornecedorKeyReleased
 
     private void DeletarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarPedidoActionPerformed
         int linhaSelecionada = TabelaDeCompras.getSelectedRow();
@@ -241,17 +262,6 @@ public class Compras extends javax.swing.JFrame {
         TabelaDeCompras.setModel(this.modelCompra);
     }//GEN-LAST:event_DeletarPedidoActionPerformed
 
-    private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
-        this.fornecedorNome = buscaFornecedor.getText();
-        this.listaCompra = controleCompra.listarCompras(this.fornecedorNome);
-        this.modelCompra = new CompraTableModel(listaCompra);        
-        TabelaDeCompras.setModel(this.modelCompra);
-    }//GEN-LAST:event_buscaFornecedorKeyReleased
-
-    private void buscaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaFornecedorActionPerformed
-
     private void ProdutosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosCompraActionPerformed
         int linhaSelecionada = TabelaDeCompras.getSelectedRow();
 
@@ -265,19 +275,6 @@ public class Compras extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_ProdutosCompraActionPerformed
-
-    private void ConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCompraActionPerformed
-        int linhaSelecionada = TabelaDeCompras.getSelectedRow();
-
-        if (linhaSelecionada >= 0) {
-            this.compra = this.modelCompra.get(linhaSelecionada);
-            new ConfirmarCompra(this.compra).setVisible(true);
-            this.dispose();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_ConfirmarCompraActionPerformed
 
     /**
      * @param args the command line arguments

@@ -33,7 +33,9 @@ public class ClienteDao {
 
         Criteria cri = sessao.createCriteria(Cliente.class);
         Criterion _nome = Restrictions.like("nome", nomeCliente, MatchMode.ANYWHERE);
+        Criterion _flag = Restrictions.like("flag", "1" ,MatchMode.ANYWHERE);
         cri.add(_nome);
+        cri.add(_flag);
         cri.addOrder(Order.asc("nome"));
         this.listaClientes = cri.list();
         return this.listaClientes;
@@ -63,7 +65,7 @@ public class ClienteDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            c.setFlag(0);
+            c.setFlag("0");
             sessao.update(c);
             trans.commit();
 

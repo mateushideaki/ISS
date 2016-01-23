@@ -297,7 +297,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 cliente.setNome(nomeCliente.getText());
                 cliente.setTel(telCliente.getText());
                 cliente.setTel2(tel2Cliente.getText());
-                cliente.setFlag(1);
+                cliente.setFlag("1");
                 if(Masc.isSelected()){
                     cliente.setSexo("M");
                     cliente.setEmail(emailCliente.getText());

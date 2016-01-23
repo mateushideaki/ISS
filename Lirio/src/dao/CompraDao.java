@@ -33,7 +33,9 @@ public class CompraDao {
 
         Criteria cri = sessao.createCriteria(Compra.class);
         Criterion _nome = Restrictions.like("fornecedorNome", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _flag = Restrictions.like("flag", "1" ,MatchMode.ANYWHERE);
         cri.add(_nome);
+        cri.add(_flag);
         cri.addOrder(Order.asc("id"));
         this.listaCompras = cri.list();
         return this.listaCompras;
@@ -63,7 +65,7 @@ public class CompraDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            c.setFlag(0);
+            c.setFlag("0");
             sessao.update(c);
             trans.commit();
 
