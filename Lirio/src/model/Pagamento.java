@@ -12,18 +12,31 @@ package model;
 public abstract class Pagamento {
     private int parcelasPagas;
     private int parcelasNaoPagas;
+    private float valorTotal;
     private float valorParcela;
     private float valorRestante;
     private int diaVencimento;
     
+    
     public Pagamento(){
         this.parcelasPagas = 0;
     }
+
+    public float getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
+    
     
     public String pagarParcela(){
         if(parcelasNaoPagas > 0){
             this.parcelasPagas++;
             this.parcelasNaoPagas--;
+            this.valorRestante = this.valorRestante - this.valorParcela;
             return "sucesso";
         }
         else{

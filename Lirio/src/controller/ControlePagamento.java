@@ -10,6 +10,9 @@ import dao.ParcelaDao;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import model.Cliente;
+import model.FactoryPagamento;
+import model.Fornecedor;
 import model.Pagamento;
 import model.PagamentoCliente;
 import model.PagamentoFornecedor;
@@ -26,18 +29,71 @@ public class ControlePagamento {
     private ParcelaDao parcelaDao = new ParcelaDao();
     private List<PagamentoCliente> listaPagCli;
     private List<PagamentoFornecedor> listaPagFor;
+    private List<ParcelaVenda> listaParcelaVenda;
+    private List<ParcelaCompra> listaParcelaCompra;
 
     public List<PagamentoCliente> listarPagamentoCli(String busca) {
         this.listaPagCli = pagamentoDao.listarPagamentosCliente(busca);
         return this.listaPagCli;
     }
-
+   
     public List<PagamentoFornecedor> listarPagamentoFor(String busca) {
         this.listaPagFor = pagamentoDao.listarPagamentosFornecedor(busca);
         return this.listaPagFor;
     }
-
-    public void cadastrarPagamento(PagamentoFornecedor pag) {
+    
+    public List<ParcelaVenda> listarParcelaVenda(String busca) {
+        this.listaParcelaVenda = parcelaDao.listarParcelasCliente(busca);
+        return this.listaParcelaVenda;
+    }
+    
+    public List<ParcelaCompra> listarParcelaCompra(String busca) {
+        this.listaParcelaCompra = parcelaDao.listarParcelasFornecedor(busca);
+        return this.listaParcelaCompra;
+    }
+    
+    public String pagarParcela(ParcelaVenda parcela){
+        if(parcela.pagarParcela().equals("sucesso")){
+            return parcela.getPagVenda().pagarParcela();
+        } else {
+            return "parcelaPaga";
+        }
+    }
+    
+    public void pagamentoAVista(Cliente cli, float valorTotal){
+        PagamentoCliente pag = new PagamentoCliente();
+        pag.setCliente(cli);
+        pag.setNomeCliente();
+        pag.setDiaVencimento(0);
+        pag.setParcelasNaoPagas(0);
+        pag.setParcelasPagas(1);
+        pag.setValorTotal(valorTotal);
+        pag.setValorRestante(0);
+        pag.setValorParcela(valorTotal);
+        pagamentoDao.cadastrarPagamentoCliente(pag);
+    }
+    
+    public void pagamentoAVista(Fornecedor forn, float valorTotal){
+        PagamentoFornecedor pag = new PagamentoFornecedor();
+        pag.setFornecedor(forn);
+        pag.setNomeFornecedor();
+        pag.setDiaVencimento(0);
+        pag.setParcelasNaoPagas(0);
+        pag.setParcelasPagas(1);
+        pag.setValorTotal(valorTotal);
+        pag.setValorRestante(0);
+        pag.setValorParcela(valorTotal);
+        pagamentoDao.cadastrarPagamentoFornecedor(pag);
+    }
+    
+    public void cadastrarPagamento(Fornecedor fornecedor, int diaV, int numP, float valorP, float valorT) {
+        FactoryPagamento facPag = new FactoryPagamento();
+        PagamentoFornecedor pag = facPag.criarPagamento(fornecedor);
+        pag.setDiaVencimento(diaV);
+        pag.setParcelasNaoPagas(numP);
+        pag.setValorParcela(valorP);
+        pag.setValorTotal(valorT);
+        pag.setValorRestante(valorT);
         pagamentoDao.cadastrarPagamentoFornecedor(pag);
         Calendar c, auxC;
         Date d, auxD;
@@ -80,7 +136,14 @@ public class ControlePagamento {
     
     
 
-    public void cadastrarPagamento(PagamentoCliente pag) {
+    public void cadastrarPagamento(Cliente cliente, int diaV, int numP, float valorP, float valorT) {
+        FactoryPagamento facPag = new FactoryPagamento();
+        PagamentoCliente pag = facPag.criarPagamento(cliente);
+        pag.setDiaVencimento(diaV);
+        pag.setParcelasNaoPagas(numP);
+        pag.setValorParcela(valorP);
+        pag.setValorTotal(valorT);
+        pag.setValorRestante(valorT);
         pagamentoDao.cadastrarPagamentoCliente(pag);
         Calendar c, auxC;
         Date d, auxD;
@@ -136,4 +199,5 @@ public class ControlePagamento {
     public void alterarPagamento(PagamentoFornecedor pag) {
         pagamentoDao.alterarPagamentoFornecedor(pag);
     }
+    
 }

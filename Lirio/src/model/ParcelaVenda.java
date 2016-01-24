@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,11 @@ public class ParcelaVenda implements Serializable{
     private String status;
     @ManyToOne
     private PagamentoCliente pagVenda;
-
+    
+    public ParcelaVenda(){
+        this.status = "Pendente";
+    }
+    
     public PagamentoCliente getPagVenda() {
         return pagVenda;
     }
@@ -46,17 +51,19 @@ public class ParcelaVenda implements Serializable{
         this.dataPagamento = dataPagamento;
     }
     
-    
-    public ParcelaVenda(){
-        this.status = "Pendente";
-    }
-    
     public String getStatus() {
         return status;
     }
 
-    public void pagarParcela() {
-        this.status = "Pago";
+    public String pagarParcela() {
+        if(this.status.equals("Pendente")){
+            Calendar c = Calendar.getInstance();
+            this.dataPagamento = c.getTime();
+            this.dataPagamento.setTime(id);
+            this.status = "Pago";
+            return "sucesso";
+        }
+        return "falha";
     }
     
     public String getNome() {

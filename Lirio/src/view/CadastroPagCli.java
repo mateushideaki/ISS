@@ -32,15 +32,15 @@ public class CadastroPagCli extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Vparcela = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        Vparcela2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        diaPag = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CadastraPag = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        nomeClienteTxt = new javax.swing.JLabel();
+        valorTotal = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jurosTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,13 +52,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
 
         jLabel3.setText("Numero de parcelas:");
 
-        jLabel5.setText("Data de Pagamento:");
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("R$0.00");
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("VALOR PARCELAS:");
+        jLabel5.setText("Dia de Pagamento:");
 
         CadastraPag.setText("CADASTRAR PAGAMENTO");
         CadastraPag.addActionListener(new java.awt.event.ActionListener() {
@@ -74,14 +68,22 @@ public class CadastroPagCli extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setText("ExemploCliente1");
+        nomeClienteTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nomeClienteTxt.setText("ExemploCliente1");
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel10.setText("R$0.00");
+        valorTotal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        valorTotal.setText("R$0.00");
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("VALOR TOTAL:");
+
+        jLabel4.setText("Juros(%):");
+
+        jurosTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jurosTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,27 +106,24 @@ public class CadastroPagCli extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel6)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(Vparcela2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(Vparcela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jLabel1))))
+                                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Vparcela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(valorTotal)
+                                            .addComponent(diaPag, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                            .addComponent(jurosTxt)))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel11))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +134,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel9))
+                    .addComponent(nomeClienteTxt))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -143,16 +142,16 @@ public class CadastroPagCli extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(Vparcela2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(diaPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel4)
+                    .addComponent(jurosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(valorTotal))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CadastraPag, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,6 +173,10 @@ public class CadastroPagCli extends javax.swing.JFrame {
         new MenuInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CadastraPagActionPerformed
+
+    private void jurosTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jurosTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jurosTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,16 +217,16 @@ public class CadastroPagCli extends javax.swing.JFrame {
     private javax.swing.JButton CadastraPag;
     private javax.swing.JButton Cancelar;
     private javax.swing.JTextField Vparcela;
-    private javax.swing.JTextField Vparcela2;
+    private javax.swing.JTextField diaPag;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jurosTxt;
+    private javax.swing.JLabel nomeClienteTxt;
+    private javax.swing.JLabel valorTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,6 +26,16 @@ public class PagamentoFornecedor extends Pagamento implements Serializable {
     private Fornecedor fornecedor;
     private String nomeFornecedor;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
+    
     public String getNomeFornecedor() {
         return nomeFornecedor;
     }

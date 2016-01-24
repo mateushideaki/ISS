@@ -24,6 +24,14 @@ public class PagamentoCliente extends Pagamento implements Serializable{
     private Cliente cliente;
     private String nomeCliente;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }
