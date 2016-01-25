@@ -5,17 +5,23 @@
  */
 package view;
 
+import controller.ControlePagamento;
+import controller.ControleVenda;
+import model.Venda;
+
 /**
  *
  * @author lucas
  */
 public class CadastroPagCli extends javax.swing.JFrame {
-
+    Venda venda;
+    ControlePagamento controler = new ControlePagamento();
     /**
      * Creates new form CadastroPagCli
      */
-    public CadastroPagCli() {
+    public CadastroPagCli(Venda v) {
         initComponents();
+        this.venda = v;
     }
 
     /**
@@ -30,7 +36,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Vparcela = new javax.swing.JTextField();
+        numP = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         diaPag = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -40,7 +46,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
         valorTotal = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jurosTxt = new javax.swing.JTextField();
+        juros = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,9 +85,9 @@ public class CadastroPagCli extends javax.swing.JFrame {
 
         jLabel4.setText("Juros(%):");
 
-        jurosTxt.addActionListener(new java.awt.event.ActionListener() {
+        juros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jurosTxtActionPerformed(evt);
+                jurosActionPerformed(evt);
             }
         });
 
@@ -115,13 +121,13 @@ public class CadastroPagCli extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(nomeClienteTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(Vparcela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(numP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(43, 43, 43)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(valorTotal)
                                             .addComponent(diaPag, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                                            .addComponent(jurosTxt)))))
+                                            .addComponent(juros)))))
                             .addComponent(jLabel1)
                             .addComponent(jLabel11))))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -138,7 +144,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(Vparcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -146,7 +152,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jurosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(juros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -170,13 +176,23 @@ public class CadastroPagCli extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void CadastraPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastraPagActionPerformed
+        PagamentoCliente pag = new PagamentoCliente();
+        int numParcelas = Integer.parseInt(this.numP.getText());
+        float vAdicional = Integer.parseInt(this.juros.getText());
+        float valorFinal = this.venda.getTotal() * (1+(vAdicional/100));
+        if(valorFinal != this.venda.getTotal()){
+            this.venda.setTotal(valorFinal);
+            ControleVenda cv = new ControleVenda();
+            cv.alterarVenda(venda);
+        }
+        controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal()/numParcelas, this.venda.getTotal());
         new MenuInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CadastraPagActionPerformed
 
-    private void jurosTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jurosTxtActionPerformed
+    private void jurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jurosTxtActionPerformed
+    }//GEN-LAST:event_jurosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +224,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroPagCli().setVisible(true);
+                new CadastroPagCli(null).setVisible(true);
             }
         });
     }
@@ -216,7 +232,6 @@ public class CadastroPagCli extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CadastraPag;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JTextField Vparcela;
     private javax.swing.JTextField diaPag;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -225,8 +240,9 @@ public class CadastroPagCli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jurosTxt;
+    private javax.swing.JTextField juros;
     private javax.swing.JLabel nomeClienteTxt;
+    private javax.swing.JTextField numP;
     private javax.swing.JLabel valorTotal;
     // End of variables declaration//GEN-END:variables
 }

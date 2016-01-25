@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import model.Cliente;
+import model.Compra;
 import model.FactoryPagamento;
 import model.Fornecedor;
 import model.Pagamento;
@@ -18,6 +19,7 @@ import model.PagamentoCliente;
 import model.PagamentoFornecedor;
 import model.ParcelaCompra;
 import model.ParcelaVenda;
+import model.Venda;
 
 /**
  *
@@ -60,8 +62,9 @@ public class ControlePagamento {
         }
     }
     
-    public void pagamentoAVista(Cliente cli, float valorTotal){
+    public void pagamentoAVista(Venda venda, Cliente cli, float valorTotal){
         PagamentoCliente pag = new PagamentoCliente();
+        pag.setVenda(venda);
         pag.setCliente(cli);
         pag.setNomeCliente();
         pag.setDiaVencimento(0);
@@ -73,8 +76,9 @@ public class ControlePagamento {
         pagamentoDao.cadastrarPagamentoCliente(pag);
     }
     
-    public void pagamentoAVista(Fornecedor forn, float valorTotal){
+    public void pagamentoAVista(Compra compra, Fornecedor forn, float valorTotal){
         PagamentoFornecedor pag = new PagamentoFornecedor();
+        pag.setCompra(compra); 
         pag.setFornecedor(forn);
         pag.setNomeFornecedor();
         pag.setDiaVencimento(0);
@@ -86,9 +90,10 @@ public class ControlePagamento {
         pagamentoDao.cadastrarPagamentoFornecedor(pag);
     }
     
-    public void cadastrarPagamento(Fornecedor fornecedor, int diaV, int numP, float valorP, float valorT) {
+    public void cadastrarPagamento(Compra compra, Fornecedor fornecedor, int diaV, int numP, float valorP, float valorT) {
         FactoryPagamento facPag = new FactoryPagamento();
         PagamentoFornecedor pag = facPag.criarPagamento(fornecedor);
+        pag.setCompra(compra);
         pag.setDiaVencimento(diaV);
         pag.setParcelasNaoPagas(numP);
         pag.setValorParcela(valorP);
@@ -136,9 +141,10 @@ public class ControlePagamento {
     
     
 
-    public void cadastrarPagamento(Cliente cliente, int diaV, int numP, float valorP, float valorT) {
+    public void cadastrarPagamento(Venda venda, Cliente cliente, int diaV, int numP, float valorP, float valorT) {
         FactoryPagamento facPag = new FactoryPagamento();
         PagamentoCliente pag = facPag.criarPagamento(cliente);
+        pag.setVenda(venda);
         pag.setDiaVencimento(diaV);
         pag.setParcelasNaoPagas(numP);
         pag.setValorParcela(valorP);
@@ -153,6 +159,7 @@ public class ControlePagamento {
         auxC = Calendar.getInstance();
         c = Calendar.getInstance();
         auxD = auxC.getTime();
+        System.out.println(auxD.getYear());
         dia = pag.getDiaVencimento();
         if (dia < auxD.getDay()) {
             mes = auxD.getMonth();

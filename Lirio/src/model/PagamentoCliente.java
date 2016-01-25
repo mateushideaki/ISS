@@ -11,18 +11,98 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Mateus
  */
 @Entity
-public class PagamentoCliente extends Pagamento implements Serializable{
+public class PagamentoCliente implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Cliente cliente;
+    private int parcelasPagas;
+    private int parcelasNaoPagas;
+    private float valorTotal;
+    private float valorParcela;
+    private float valorRestante;
+    private int diaVencimento;
     private String nomeCliente;
+    @ManyToOne
+    private Cliente cliente;
+    @OneToOne
+    private Venda venda;
+
+    public float getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
+    public String pagarParcela(){
+        if(parcelasNaoPagas > 0){
+            this.parcelasPagas++;
+            this.parcelasNaoPagas--;
+            this.valorRestante = this.valorRestante - this.valorParcela;
+            return "sucesso";
+        }
+        else{
+            return "falha";
+        }
+    }
+
+    public int getParcelasPagas() {
+        return parcelasPagas;
+    }
+
+    public void setParcelasPagas(int parcelasPagas) {
+        this.parcelasPagas = parcelasPagas;
+    }
+
+    public int getParcelasNaoPagas() {
+        return parcelasNaoPagas;
+    }
+
+    public void setParcelasNaoPagas(int parcelasNaoPagas) {
+        this.parcelasNaoPagas = parcelasNaoPagas;
+    }
+
+    public float getValorParcela() {
+        return valorParcela;
+    }
+
+    public void setValorParcela(float valorParcela) {
+        this.valorParcela = valorParcela;
+    }
+
+    public float getValorRestante() {
+        return valorRestante;
+    }
+
+    public void setValorRestante(float valorRestante) {
+        this.valorRestante = valorRestante;
+    }
+
+    public int getDiaVencimento() {
+        return diaVencimento;
+    }
+
+    public void setDiaVencimento(int diaVencimento) {
+        this.diaVencimento = diaVencimento;
+    }
+    
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
 
     public int getId() {
         return id;
@@ -51,8 +131,8 @@ public class PagamentoCliente extends Pagamento implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.cliente);
+        int hash = 5;
+        hash = 89 * hash + this.id;
         return hash;
     }
 
@@ -65,11 +145,13 @@ public class PagamentoCliente extends Pagamento implements Serializable{
             return false;
         }
         final PagamentoCliente other = (PagamentoCliente) obj;
-        if (!Objects.equals(this.cliente, other.cliente)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
+
+    
     
     
 }

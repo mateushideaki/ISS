@@ -5,17 +5,28 @@
  */
 package view;
 
+import controller.ControlePagamento;
+import model.Venda;
+import model.Cliente;
+
 /**
  *
  * @author lucas
  */
 public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
-
+    ControlePagamento cp = new ControlePagamento();
+    Venda venda;
+    Cliente c;
+    float tot;
+    
     /**
      * Creates new form JanelaEscolhePagamentoVenda
      */
-    public JanelaEscolhePagamentoVenda(float t) {
+    public JanelaEscolhePagamentoVenda(float t, Venda v) {
         initComponents();
+        this.venda = v;
+        this.c = venda.getCliente();
+        this.tot = t;
         totalTxt.setText(""+t);
     }
 
@@ -102,11 +113,12 @@ public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AprazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprazoActionPerformed
-        new CadastroPagCli().setVisible(true);
+        new CadastroPagCli(this.venda).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AprazoActionPerformed
 
     private void AvistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvistaActionPerformed
+        cp.pagamentoAVista(venda, c, tot);
         new VendasRealizadas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AvistaActionPerformed
@@ -141,7 +153,7 @@ public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JanelaEscolhePagamentoVenda(0).setVisible(true);
+                new JanelaEscolhePagamentoVenda(0, null).setVisible(true);
             }
         });
     }

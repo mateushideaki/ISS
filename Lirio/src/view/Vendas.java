@@ -466,7 +466,7 @@ public class Vendas extends javax.swing.JFrame {
                 this.venda.setDataVenda(d);
                 this.controleV.cadastrarVenda(this.venda);
                 this.controleVP.cadastrarVP(listaVenda);
-                new JanelaEscolhePagamentoVenda(venda.getTotal()).setVisible(true);
+                new JanelaEscolhePagamentoVenda(venda.getTotal(), this.venda).setVisible(true);
                 this.dispose();
             }
             else{
