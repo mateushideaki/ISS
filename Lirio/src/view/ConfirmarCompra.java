@@ -16,7 +16,7 @@ import model.CompraProduto;
 import model.Fornecedor;
 import model.Produto;
 import util.CompraProdutoTableModel;
-import util.ProdutoTableModel;
+import util.ProdutosConfirmadosTableModel;
 
 /**
  *
@@ -35,8 +35,8 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     private ControleProduto controleProd = new ControleProduto();
     
     private ControleCompraProduto controleConfirmado = new ControleCompraProduto();
-    private ArrayList<CompraProduto> listaConfirmado = new ArrayList<CompraProduto>();
-    private CompraProdutoTableModel modelConfirmado;
+    private ArrayList<Produto> listaConfirmado = new ArrayList<Produto>();
+    private ProdutosConfirmadosTableModel modelConfirmado;
     //private CompraProduto compraConfirmado = new CompraProduto();
     
     /**
@@ -45,13 +45,11 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     public ConfirmarCompra(Compra comp) {
         initComponents();
         this.compra = comp;
-        this.listaCompraP = controleCp.listarCP(comp);
+        this.listaCompraP = controleCp.listarCP(this.compra);
         this.modelCompraP = new CompraProdutoTableModel(listaCompraP);
         TabelaCompraProduto.setModel(modelCompraP);
-        
         LabelFornecedor.setText(comp.getFornecedorNome());
         totalPedido.setText("" + comp.getTotal());
-        
     }
 
     
@@ -272,37 +270,54 @@ public class ConfirmarCompra extends javax.swing.JFrame {
         if (linhaSelecionada >= 0) {                                            //verifica se algum produto foi selecionado
             if ((int) qtdProduto.getValue() > 0) {                              //verifica se a quantidade e positiva
                 cp = this.modelCompraP.get(linhaSelecionada);
-                produto = cp.getProduto();
-                if ((int) qtdProduto.getValue() <= cp.getQuantidade()) {     //verifica quantidade
-                    valor = (float) (cp.getCusto()/cp.getQuantidade());
-                    confirmado.setProduto(produto);
-                    confirmado.setQuantidade((int)qtdProduto.getValue());
-                    confirmado.setCusto((int) qtdProduto.getValue() * valor);
-                    while (listIt.hasNext()) {
-                        posicao++;
-                        CompraProduto cpIt = (CompraProduto) listIt.next();
-                        if (cpIt.getProduto().getId() == produto.getId()) {
-                            posicao--;
-                            confirmado.setQuantidade(confirmado.getQuantidade() + cpIt.getQuantidade());
-                            confirmado.setCusto(confirmado.getCusto() + cpIt.getCusto());
-                            this.total = this.total - cpIt.getCusto();
-                            listIt.remove();
-                            break;
-                        }
-                    }
-
-                    produto.setQntAtual(produto.getQntAtual() + (int) qtdProduto.getValue());    //incrementa no estoque
-                    controleProd.alterarProduto(produto);
-
-                    this.listaConfirmado.add(posicao, cp);                                //add na lista
-
-                    this.modelConfirmado = new CompraProdutoTableModel(this.listaConfirmado);  //atualiza a tabela
-                    TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
-                    totalConfirmado.setText("" + total + cp.getCusto());
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "So existem " + cp.getQuantidade() + " unidades disponiveis na compra.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                int i = 0;
+                while(i <= this.listaConfirmado.size() && cp.getProduto().getId() != this.listaConfirmado.get(i).getId()){
+                    i++;
                 }
+                if(i != listaConfirmado.size()){
+                    produto = cp.getProduto();
+                    if ((int) qtdProduto.getValue() <= cp.getQuantidade()) {     //verifica quantidade
+                        valor = (float) (cp.getCusto()/cp.getQuantidade());
+                        confirmado.setCompra(this.compra);
+                        confirmado.setProduto(produto);
+                        confirmado.setQuantidade((int)qtdProduto.getValue());
+                        confirmado.setCusto((int) qtdProduto.getValue() * valor);
+                        while (listIt.hasNext()) {
+                            posicao++;
+                            CompraProduto cpIt = (CompraProduto) listIt.next();
+                            if (cpIt.getId() == produto.getId()) {
+                                posicao--;
+                                confirmado.setQuantidade(confirmado.getQuantidade() + cpIt.getQuantidade());
+                                confirmado.setCusto(confirmado.getCusto() + cpIt.getCusto());
+                                this.total = this.total - cpIt.getCusto();
+                                listIt.remove();
+                                break;
+                            }
+                        }
+
+                        produto.setQntAtual(produto.getQntAtual() + (int) qtdProduto.getValue());    //incrementa no estoque
+                        controleProd.alterarProduto(produto);
+
+                        controleCp.alterarCP(cp);
+
+                        this.modelCompraP = new CompraProdutoTableModel(controleCp.listarCP(compra));
+
+
+                        TabelaCompraProduto.setModel(modelCompraP);
+
+                        this.listaConfirmado.add(posicao, produto);                                //add na lista
+
+                        this.modelConfirmado = new ProdutosConfirmadosTableModel(this.listaConfirmado);  //atualiza a tabela
+                        TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
+                        totalConfirmado.setText("" + this.total);
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "So existem " + cp.getQuantidade() + " unidades disponiveis na compra.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(this, "A quantidade do produto deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
             }
