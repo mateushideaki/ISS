@@ -245,8 +245,7 @@ public class CadastroReserva extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -257,11 +256,12 @@ public class CadastroReserva extends javax.swing.JFrame {
                             .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RegistrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(totalTxt)
-                            .addComponent(jLabel2))
-                        .addGap(30, 30, 30))))
+                            .addComponent(jLabel2))))
+                .addGap(30, 30, 30))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarForActionPerformed

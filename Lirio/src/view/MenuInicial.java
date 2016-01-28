@@ -196,7 +196,7 @@ public class MenuInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservaActionPerformed
-        new ReservaDeProduto().setVisible(true);
+        new Reserva().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ReservaActionPerformed
 

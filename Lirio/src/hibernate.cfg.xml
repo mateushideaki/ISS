@@ -20,5 +20,7 @@
     <mapping class="model.PagamentoFornecedor"/>
     <mapping class="model.ParcelaVenda"/>
     <mapping class="model.ParcelaCompra"/>
+    <mapping class="model.Reserva"/>
+    <mapping class="model.ReservaProduto"/>
   </session-factory>
 </hibernate-configuration>
