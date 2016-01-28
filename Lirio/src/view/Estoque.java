@@ -8,8 +8,6 @@ package view;
 import controller.ControleProduto;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import model.Produto;
 import util.ProdutoTableModel;
 /**

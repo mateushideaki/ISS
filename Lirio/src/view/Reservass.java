@@ -9,12 +9,12 @@ package view;
  *
  * @author usuario
  */
-public class Reserva extends javax.swing.JFrame {
+public class Reservass extends javax.swing.JFrame {
 
     /**
-     * Creates new form Reserva
+     * Creates new form Reservass
      */
-    public Reserva() {
+    public Reservass() {
         initComponents();
     }
 
@@ -27,8 +27,12 @@ public class Reserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TabelaDeReservas = new javax.swing.JTable();
         buscaCliente = new javax.swing.JTextField();
         ExcluirReserva = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         CadastrarReserva = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         RealizarVenda = new javax.swing.JButton();
@@ -36,12 +40,24 @@ public class Reserva extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaReservaProduto = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TabelaDeReservas = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("RESERVAS");
+
+        TabelaDeReservas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(TabelaDeReservas);
 
         buscaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +76,8 @@ public class Reserva extends javax.swing.JFrame {
                 ExcluirReservaActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Clinte:");
 
         CadastrarReserva.setText("CADASTRAR RESERVA");
         CadastrarReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -104,24 +122,6 @@ public class Reserva extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(TabelaReservaProduto);
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("RESERVAS");
-
-        TabelaDeReservas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(TabelaDeReservas);
-
-        jLabel4.setText("Clinte:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +185,6 @@ public class Reserva extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClienteActionPerformed
@@ -201,7 +200,8 @@ public class Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_ExcluirReservaActionPerformed
 
     private void CadastrarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarReservaActionPerformed
-
+        new CadastroReserva().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CadastrarReservaActionPerformed
 
     private void RealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarVendaActionPerformed
@@ -234,20 +234,20 @@ public class Reserva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reserva().setVisible(true);
+                new Reservass().setVisible(true);
             }
         });
     }

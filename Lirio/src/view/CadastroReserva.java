@@ -6,25 +6,53 @@
 package view;
 
 import controller.ControleCliente;
+import controller.ControleReserva;
 import controller.ControleReservaProduto;
+import controller.ControleProduto;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.ListIterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
 import model.Cliente;
+import model.Produto;
+import model.Reserva;
+import model.ReservaProduto;
 import util.ClienteTableModel;
+import util.ReservaProdutoTableModel;
+import util.ProdutoTableModel;
 /**
  *
  * @author Danilo
  */
 public class CadastroReserva extends javax.swing.JFrame {
+    
+    private Cliente cliente;
     private String clienteNome;
     private ControleCliente controleCli = new ControleCliente();
-    private List<Cliente> lista = controleCli.listarClientes("");
-    private ClienteTableModel modelCliente = new ClienteTableModel(lista);
+    private List<Cliente> listaCli = controleCli.listarClientes("");
+    private ClienteTableModel modelCliente = new ClienteTableModel(listaCli);
     private Cliente c = new Cliente();
+    
+    private String produtoNome;
+    private ControleProduto controleProd = new ControleProduto();
+    private List<Produto> listaProd = controleProd.listarProdutos("");
+    private ProdutoTableModel modelProduto = new ProdutoTableModel(listaProd);
+    private Produto p = new Produto();
+    
+    private ArrayList<ReservaProduto> listaReserva = new ArrayList<ReservaProduto>();
+    private ControleReservaProduto controleRP = new ControleReservaProduto();
+    private ReservaProdutoTableModel modelRP;
+    
+    private ControleReserva controleReserva = new ControleReserva();
+    private Reserva reserva = new Reserva();
     
     public CadastroReserva() {
         initComponents();
+        tabelaCliente.setModel(modelCliente);
     }
 
     /**
@@ -37,14 +65,12 @@ public class CadastroReserva extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        ConfirmarFor = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         buscaCliente = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutosF = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        tabelaProduto = new javax.swing.JTable();
         AdicionarProd = new javax.swing.JButton();
         qtdProduto = new javax.swing.JSpinner();
         Cancelar = new javax.swing.JButton();
@@ -52,22 +78,18 @@ public class CadastroReserva extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         qtdRemover = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaProdutosComprados = new javax.swing.JTable();
+        tabelaProdutosReservados = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         RemoverProd = new javax.swing.JButton();
         RegistrarPedido = new javax.swing.JButton();
+        buscaProduto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        ConfirmarCli = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("CADASTRAR RESERVA");
-
-        ConfirmarFor.setText("CONFIRMAR CLIENTE");
-        ConfirmarFor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmarForActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Cliente:");
 
@@ -95,7 +117,7 @@ public class CadastroReserva extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabelaCliente);
 
-        tabelaProdutosF.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -106,10 +128,7 @@ public class CadastroReserva extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tabelaProdutosF);
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("LISTA DE PRODUTOS:");
+        jScrollPane1.setViewportView(tabelaProduto);
 
         AdicionarProd.setText("ADICIONAR PRODUTO");
         AdicionarProd.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +148,9 @@ public class CadastroReserva extends javax.swing.JFrame {
         totalTxt.setText("R$ 0,00");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("LISTA DE PRODUTOS DA COMPRA");
+        jLabel7.setText("LISTA DE PRODUTOS DA RESERVA");
 
-        tabelaProdutosComprados.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProdutosReservados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -142,7 +161,7 @@ public class CadastroReserva extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tabelaProdutosComprados);
+        jScrollPane2.setViewportView(tabelaProdutosReservados);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("TOTAL:");
@@ -161,6 +180,26 @@ public class CadastroReserva extends javax.swing.JFrame {
             }
         });
 
+        buscaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaProdutoActionPerformed(evt);
+            }
+        });
+        buscaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaProdutoKeyReleased(evt);
+            }
+        });
+
+        jLabel6.setText("Produto:");
+
+        ConfirmarCli.setText("CONFIRMAR CLIENTE");
+        ConfirmarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,9 +211,6 @@ public class CadastroReserva extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 671, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -182,25 +218,31 @@ public class CadastroReserva extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(buscaCliente))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(ConfirmarFor, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscaProduto))
+                            .addComponent(jScrollPane1))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(qtdRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(RemoverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(RemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(AdicionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ConfirmarCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(AdicionarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))))))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -225,21 +267,25 @@ public class CadastroReserva extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(ConfirmarCli)))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ConfirmarFor)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AdicionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(AdicionarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -264,27 +310,64 @@ public class CadastroReserva extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConfirmarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarForActionPerformed
-
-    }//GEN-LAST:event_ConfirmarForActionPerformed
-
     private void buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaClienteActionPerformed
 
     private void buscaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaClienteKeyReleased
         this.clienteNome = buscaCliente.getText();
-        this.lista = controleCli.listarClientes(this.clienteNome);
-        this.modelCliente = new ClienteTableModel(this.lista);
+        this.listaCli = controleCli.listarClientes(this.clienteNome);
+        this.modelCliente = new ClienteTableModel(this.listaCli);
         tabelaCliente.setModel(this.modelCliente);
     }//GEN-LAST:event_buscaClienteKeyReleased
 
     private void AdicionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarProdActionPerformed
+        int linhaSelecionada = tabelaProduto.getSelectedRow();
+        ReservaProduto rp = new ReservaProduto();
+        Produto produto = new Produto();
+        ListIterator listIt = this.listaReserva.listIterator();
+        int posicao = 0;
 
+        if (linhaSelecionada >= 0) {
+            if (((int) qtdProduto.getValue() > 0)){   //´PAREI AQUI TA BUGANDO, TEM QUE PEGAR A QUANTIDADE E COMPARAR
+                //if((Integer.parseInt(qtdProduto.getText())) <= linhaSelecionada.getQntAtual())
+                produto = this.modelProduto.get(linhaSelecionada);
+                rp.setProduto(produto);
+                rp.setReserva(this.reserva);
+                rp.setQuantidade((int) qtdProduto.getValue());
+                rp.setPreco((int) qtdProduto.getValue() * produto.getPrecoVenda());
+                while (listIt.hasNext()) {
+                    posicao++;
+                    ReservaProduto rpIt = (ReservaProduto) listIt.next();
+                    if (rpIt.getProduto().getId() == produto.getId()) {
+                        posicao--;
+                        rp.setQuantidade(rp.getQuantidade() + rpIt.getQuantidade());
+                        rp.setPreco(rp.getPreco() + rpIt.getPreco());
+                        reserva.setPreco(reserva.getPreco() - rpIt.getPreco());
+                        listIt.remove();
+                        break;
+                    }
+                }
+
+                this.listaReserva.add(posicao, rp);
+
+                this.modelRP = new ReservaProdutoTableModel(this.listaReserva);
+                tabelaProdutosReservados.setModel(this.modelRP);
+                this.reserva.setPreco(this.reserva.getPreco() + rp.getPreco());
+                totalTxt.setText("" + this.reserva.getPreco());
+
+            } else {
+                JOptionPane.showMessageDialog(this, "A quantidade do produto deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+        qtdProduto.setValue(0);
     }//GEN-LAST:event_AdicionarProdActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-
+        new Reservass().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void RemoverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdActionPerformed
@@ -294,6 +377,33 @@ public class CadastroReserva extends javax.swing.JFrame {
     private void RegistrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPedidoActionPerformed
 
     }//GEN-LAST:event_RegistrarPedidoActionPerformed
+
+    private void buscaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaProdutoActionPerformed
+
+    private void buscaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoKeyReleased
+        this.produtoNome = buscaProduto.getText();
+        this.listaProd = controleProd.listarProdutos(this.produtoNome);
+        this.modelProduto = new ProdutoTableModel(this.listaProd);
+        tabelaProduto.setModel(this.modelProduto);
+    }//GEN-LAST:event_buscaProdutoKeyReleased
+
+    private void ConfirmarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCliActionPerformed
+        int linhaSelecionada = tabelaCliente.getSelectedRow();
+        Cliente cliente = new Cliente();
+
+        if (linhaSelecionada >= 0) {
+            String nome = (String) tabelaCliente.getValueAt(linhaSelecionada, 1);
+            this.clienteNome = nome;
+            this.cliente = this.modelCliente.get(linhaSelecionada);
+            this.reserva.setCliente(this.cliente);
+            tabelaProduto.setModel(modelProduto);
+            JOptionPane.showMessageDialog(this, "Cliente " + this.cliente.getNome() + " selecionado.", "Cliente selecionado.", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um Cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_ConfirmarCliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,14 +443,15 @@ public class CadastroReserva extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdicionarProd;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JButton ConfirmarFor;
+    private javax.swing.JButton ConfirmarCli;
     private javax.swing.JButton RegistrarPedido;
     private javax.swing.JButton RemoverProd;
     private javax.swing.JTextField buscaCliente;
+    private javax.swing.JTextField buscaProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -348,8 +459,8 @@ public class CadastroReserva extends javax.swing.JFrame {
     private javax.swing.JSpinner qtdProduto;
     private javax.swing.JSpinner qtdRemover;
     private javax.swing.JTable tabelaCliente;
-    private javax.swing.JTable tabelaProdutosComprados;
-    private javax.swing.JTable tabelaProdutosF;
+    private javax.swing.JTable tabelaProduto;
+    private javax.swing.JTable tabelaProdutosReservados;
     private javax.swing.JLabel totalTxt;
     // End of variables declaration//GEN-END:variables
 }
