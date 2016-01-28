@@ -55,16 +55,13 @@ public class ParcelaVenda implements Serializable{
         return status;
     }
 
-    public String pagarParcela() {
-        if(this.status.equals("Pendente")){
-            Calendar c = Calendar.getInstance();
-            this.dataPagamento = c.getTime();
-            this.dataPagamento.setTime(id);
-            this.status = "Pago";
-            return "sucesso";
-        }
-        return "falha";
+
+
+    public void setStatus(String status) {
+        this.status = status;
     }
+    
+    
     
     public String getNome() {
         return nome;

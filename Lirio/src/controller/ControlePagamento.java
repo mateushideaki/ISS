@@ -55,12 +55,21 @@ public class ControlePagamento {
     }
     
     public String pagarParcela(ParcelaVenda parcela){
-        if(parcela.pagarParcela().equals("sucesso")){
-            return parcela.getPagVenda().pagarParcela();
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        if(!parcela.getStatus().equals("Pago")){
+            parcela.setStatus("Pago");
+            parcela.setDataPagamento(d);
+            parcela.getPagVenda().setParcelasNaoPagas(parcela.getPagVenda().getParcelasNaoPagas() -1);
+            parcela.getPagVenda().setParcelasPagas(parcela.getPagVenda().getParcelasPagas() +1);
+            parcela.getPagVenda().setValorRestante(parcela.getPagVenda().getValorRestante() - parcela.getPreco());
+            return "sucesso";
         } else {
             return "parcelaPaga";
         }
     }
+    
+    
     
     public void pagamentoAVista(Venda venda, Cliente cli, float valorTotal){
         PagamentoCliente pag = new PagamentoCliente();
@@ -73,8 +82,20 @@ public class ControlePagamento {
         pag.setValorTotal(valorTotal);
         pag.setValorRestante(0);
         pag.setValorParcela(valorTotal);
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        ParcelaVenda p = new ParcelaVenda();
+        p.setDataVencimento(d);
+        p.setDataPagamento(d);
+        p.setNome(pag.getNomeCliente());
+        p.setPagVenda(pag);
+        p.setPreco(pag.getValorParcela());
+        p.setStatus("Pago");
         pagamentoDao.cadastrarPagamentoCliente(pag);
+        parcelaDao.cadastrarParcela(p);
     }
+    
+    
     
     public void pagamentoAVista(Compra compra, Fornecedor forn, float valorTotal){
         PagamentoFornecedor pag = new PagamentoFornecedor();
@@ -87,7 +108,16 @@ public class ControlePagamento {
         pag.setValorTotal(valorTotal);
         pag.setValorRestante(0);
         pag.setValorParcela(valorTotal);
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        ParcelaCompra p = new ParcelaCompra();
+        p.setDataVencimento(d);
+        p.setNome(pag.getNomeFornecedor());
+        p.setPagCompra(pag);
+        p.setPreco(pag.getValorParcela());
+        p.setStatus("Pago");
         pagamentoDao.cadastrarPagamentoFornecedor(pag);
+        parcelaDao.cadastrarParcela(p);
     }
     
     public void cadastrarPagamento(Compra compra, Fornecedor fornecedor, int diaV, int numP, float valorP, float valorT) {
@@ -100,28 +130,27 @@ public class ControlePagamento {
         pag.setValorTotal(valorT);
         pag.setValorRestante(valorT);
         pagamentoDao.cadastrarPagamentoFornecedor(pag);
-        Calendar c, auxC;
+        Calendar c = Calendar.getInstance();
         Date d, auxD;
         ParcelaCompra parcela;
         int dia, mes, ano;
 
-        auxC = Calendar.getInstance();
-        c = Calendar.getInstance();
-        auxD = auxC.getTime();
+        auxD = c.getTime();
         dia = pag.getDiaVencimento();
         if (dia < auxD.getDay()) {
             mes = auxD.getMonth();
             ano = auxD.getYear();
         } else if (auxD.getMonth() < 12) {
-            mes = auxD.getMonth() + 1;
-            ano = auxD.getYear();
+            mes = auxD.getMonth()+ 1900 + 1;
+            ano = auxD.getYear() + 1900;
         } else {
             mes = 1;
-            ano = auxD.getYear() + 1;
+            ano = auxD.getYear()+ 1900 + 1;
         }
 
         for (int i = 1; i <= pag.getParcelasNaoPagas(); i++) {
             parcela = new ParcelaCompra();
+            d = c.getTime();
             c.set(ano, mes, dia);
             d = c.getTime();
             parcela.setDataVencimento(d);
@@ -131,10 +160,10 @@ public class ControlePagamento {
             parcelaDao.cadastrarParcela(parcela);
             if (d.getMonth() < 12) {
                 mes = d.getMonth() + 1;
-                ano = d.getYear();
+                ano = d.getYear() + 1900;
             } else {
                 mes = 1;
-                ano = d.getYear() + 1;
+                ano = d.getYear()+ 1900 + 1;
             }
         }
     }
@@ -151,25 +180,22 @@ public class ControlePagamento {
         pag.setValorTotal(valorT);
         pag.setValorRestante(valorT);
         pagamentoDao.cadastrarPagamentoCliente(pag);
-        Calendar c, auxC;
+        Calendar c = Calendar.getInstance();
         Date d, auxD;
         ParcelaVenda parcela;
         int dia, mes, ano;
 
-        auxC = Calendar.getInstance();
-        c = Calendar.getInstance();
-        auxD = auxC.getTime();
-        System.out.println(auxD.getYear());
+        auxD = c.getTime();
         dia = pag.getDiaVencimento();
         if (dia < auxD.getDay()) {
             mes = auxD.getMonth();
             ano = auxD.getYear();
         } else if (auxD.getMonth() < 12) {
             mes = auxD.getMonth() + 1;
-            ano = auxD.getYear();
+            ano = auxD.getYear() + 1900;
         } else {
             mes = 1;
-            ano = auxD.getYear() + 1;
+            ano = auxD.getYear()+ 1900 + 1;
         }
 
         for (int i = 1; i <= pag.getParcelasNaoPagas(); i++) {
@@ -183,10 +209,10 @@ public class ControlePagamento {
             parcelaDao.cadastrarParcela(parcela);
             if (d.getMonth() < 12) {
                 mes = d.getMonth() + 1;
-                ano = d.getYear();
+                ano = d.getYear() + 1900;
             } else {
                 mes = 1;
-                ano = d.getYear() + 1;
+                ano = d.getYear()+ 1900 + 1;
             }
         }
     }

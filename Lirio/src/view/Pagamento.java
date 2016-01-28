@@ -30,7 +30,6 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         PagamentoCliente = new javax.swing.JButton();
         PagamentoFornecedor = new javax.swing.JButton();
-        RelatorioMensal = new javax.swing.JButton();
         MenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,13 +51,6 @@ public class Pagamento extends javax.swing.JFrame {
             }
         });
 
-        RelatorioMensal.setText("RELATORIO MENSAL");
-        RelatorioMensal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RelatorioMensalActionPerformed(evt);
-            }
-        });
-
         MenuPrincipal.setText("MENU PRINCIPAL");
         MenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,9 +64,7 @@ public class Pagamento extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RelatorioMensal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PagamentoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                .addComponent(PagamentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PagamentoFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
@@ -95,9 +85,7 @@ public class Pagamento extends javax.swing.JFrame {
                     .addComponent(PagamentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PagamentoFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RelatorioMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -109,10 +97,6 @@ public class Pagamento extends javax.swing.JFrame {
         new MenuInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MenuPrincipalActionPerformed
-
-    private void RelatorioMensalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioMensalActionPerformed
-        new RelatorioPagamento().setVisible(true);
-    }//GEN-LAST:event_RelatorioMensalActionPerformed
 
     private void PagamentoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagamentoFornecedorActionPerformed
         new PagamentoFornecedor().setVisible(true);
@@ -161,7 +145,6 @@ public class Pagamento extends javax.swing.JFrame {
     private javax.swing.JButton MenuPrincipal;
     private javax.swing.JButton PagamentoCliente;
     private javax.swing.JButton PagamentoFornecedor;
-    private javax.swing.JButton RelatorioMensal;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

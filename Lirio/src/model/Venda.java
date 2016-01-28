@@ -31,7 +31,20 @@ public class Venda implements Serializable{
     private Cliente cliente;
     @OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE)
     private List<VendaProduto> lvp;
+    
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE)
+    private List<PagamentoCliente> lpc;
+    
     private String clienteNome;
+
+    public List<PagamentoCliente> getLpc() {
+        return lpc;
+    }
+
+    public void setLpc(List<PagamentoCliente> lpc) {
+        this.lpc = lpc;
+    }
+
     
     public int getId() {
         return id;

@@ -7,6 +7,8 @@ package view;
 
 import controller.ControlePagamento;
 import controller.ControleVenda;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Venda;
 
 /**
@@ -14,14 +16,19 @@ import model.Venda;
  * @author lucas
  */
 public class CadastroPagCli extends javax.swing.JFrame {
+
     Venda venda;
     ControlePagamento controler = new ControlePagamento();
+    ControleVenda cv = new ControleVenda();
+
     /**
      * Creates new form CadastroPagCli
      */
     public CadastroPagCli(Venda v) {
         initComponents();
         this.venda = v;
+        nomeClienteTxt.setText(this.venda.getClienteNome());
+        totalTxt.setText("" + this.venda.getTotal());
     }
 
     /**
@@ -41,9 +48,8 @@ public class CadastroPagCli extends javax.swing.JFrame {
         diaPag = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CadastraPag = new javax.swing.JButton();
-        Cancelar = new javax.swing.JButton();
         nomeClienteTxt = new javax.swing.JLabel();
-        valorTotal = new javax.swing.JLabel();
+        totalTxt = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         juros = new javax.swing.JTextField();
@@ -67,18 +73,11 @@ public class CadastroPagCli extends javax.swing.JFrame {
             }
         });
 
-        Cancelar.setText("CANCELAR");
-        Cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarActionPerformed(evt);
-            }
-        });
-
         nomeClienteTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        nomeClienteTxt.setText("ExemploCliente1");
+        nomeClienteTxt.setText("ExemploCliente");
 
-        valorTotal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        valorTotal.setText("R$0.00");
+        totalTxt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        totalTxt.setText("R$0.00");
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("VALOR TOTAL:");
@@ -103,10 +102,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(341, 341, 341)
                                 .addComponent(jLabel8))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(CadastraPag)
-                                .addGap(46, 46, 46)
-                                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(CadastraPag)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,17 +116,17 @@ public class CadastroPagCli extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(numP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(numP, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nomeClienteTxt)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(43, 43, 43)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(valorTotal)
+                                            .addComponent(totalTxt)
                                             .addComponent(diaPag, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                             .addComponent(juros)))))
                             .addComponent(jLabel1)
                             .addComponent(jLabel11))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,11 +152,9 @@ public class CadastroPagCli extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(valorTotal))
+                    .addComponent(totalTxt))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CadastraPag, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(CadastraPag, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -170,22 +164,16 @@ public class CadastroPagCli extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        new Vendas().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_CancelarActionPerformed
-
     private void CadastraPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastraPagActionPerformed
         PagamentoCliente pag = new PagamentoCliente();
         int numParcelas = Integer.parseInt(this.numP.getText());
         float vAdicional = Integer.parseInt(this.juros.getText());
-        float valorFinal = this.venda.getTotal() * (1+(vAdicional/100));
-        if(valorFinal != this.venda.getTotal()){
+        float valorFinal = this.venda.getTotal() * (1 + (vAdicional / 100));
+        if (valorFinal != this.venda.getTotal()) {
             this.venda.setTotal(valorFinal);
-            ControleVenda cv = new ControleVenda();
             cv.alterarVenda(venda);
         }
-        controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal()/numParcelas, this.venda.getTotal());
+        controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal() / numParcelas, this.venda.getTotal());
         new MenuInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CadastraPagActionPerformed
@@ -231,7 +219,6 @@ public class CadastroPagCli extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CadastraPag;
-    private javax.swing.JButton Cancelar;
     private javax.swing.JTextField diaPag;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -243,6 +230,6 @@ public class CadastroPagCli extends javax.swing.JFrame {
     private javax.swing.JTextField juros;
     private javax.swing.JLabel nomeClienteTxt;
     private javax.swing.JTextField numP;
-    private javax.swing.JLabel valorTotal;
+    private javax.swing.JLabel totalTxt;
     // End of variables declaration//GEN-END:variables
 }

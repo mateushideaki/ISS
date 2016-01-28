@@ -65,7 +65,7 @@ public class PagamentoCliente extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        Atualiza.setText("ATUALIZAR PARCELA");
+        Atualiza.setText("VER PARCELAS");
 
         Voltar.setText("VOLTAR");
         Voltar.addActionListener(new java.awt.event.ActionListener() {

@@ -57,7 +57,6 @@ public class VendasRealizadas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVenda = new javax.swing.JTable();
-        excluirBtn = new javax.swing.JButton();
         verItensBtn = new javax.swing.JButton();
         voltarBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -94,13 +93,6 @@ public class VendasRealizadas extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tabelaVenda);
-
-        excluirBtn.setText("EXCLUIR VENDA");
-        excluirBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirBtnActionPerformed(evt);
-            }
-        });
 
         verItensBtn.setText("VER ITENS");
         verItensBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -158,9 +150,7 @@ public class VendasRealizadas extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(excluirBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(verItensBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(verItensBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -173,12 +163,9 @@ public class VendasRealizadas extends javax.swing.JFrame {
                     .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(excluirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(verItensBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(verItensBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,29 +182,6 @@ public class VendasRealizadas extends javax.swing.JFrame {
     private void buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaClienteActionPerformed
-
-    private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
-        int linhaSelecionada = tabelaVenda.getSelectedRow();
-
-        if (linhaSelecionada >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir a venda?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
-            if (opcao == YES_OPTION) {
-                try {
-                    this.venda = this.modelVenda.get(linhaSelecionada);
-                    controleVenda.excluirVenda(this.venda);
-                    JOptionPane.showMessageDialog(this, "Venda excluida com sucesso.", "Mensagem informativa.", JOptionPane.INFORMATION_MESSAGE);
-                } catch(Exception e){
-                    JOptionPane.showMessageDialog(this, "Existem vinculos com a venda, exclua-os primeiro.", "Erro.", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione uma venda.", "Erro: Nenhuma venda selecionada.", JOptionPane.ERROR_MESSAGE);
-        }
-
-        this.lista = controleVenda.listarVendas("");
-        this.modelVenda = new VendaTableModel(this.lista);
-        tabelaVenda.setModel(this.modelVenda);
-    }//GEN-LAST:event_excluirBtnActionPerformed
 
     private void verItensBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verItensBtnActionPerformed
         int linhaSelecionada = tabelaVenda.getSelectedRow();
@@ -282,7 +246,6 @@ public class VendasRealizadas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscaCliente;
-    private javax.swing.JButton excluirBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

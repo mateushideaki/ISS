@@ -25,10 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="RelatorioMensal" max="32767" attributes="0"/>
-                  <Component id="PagamentoCliente" pref="196" max="32767" attributes="0"/>
-              </Group>
+              <Component id="PagamentoCliente" min="-2" pref="196" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="PagamentoFornecedor" pref="196" max="32767" attributes="0"/>
@@ -54,10 +51,7 @@
                   <Component id="PagamentoFornecedor" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="MenuPrincipal" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="RelatorioMensal" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-              </Group>
+              <Component id="MenuPrincipal" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -86,14 +80,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PagamentoFornecedorActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="RelatorioMensal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="RELATORIO MENSAL"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RelatorioMensalActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="MenuPrincipal">

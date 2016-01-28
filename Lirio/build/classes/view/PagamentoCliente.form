@@ -126,7 +126,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="Atualiza">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ATUALIZAR PARCELA"/>
+        <Property name="text" type="java.lang.String" value="VER PARCELAS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Voltar">

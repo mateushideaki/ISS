@@ -6,12 +6,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -34,7 +37,20 @@ public class PagamentoCliente implements Serializable{
     private Cliente cliente;
     @OneToOne
     private Venda venda;
+    
+    @OneToMany(mappedBy = "pagVenda", cascade = CascadeType.REMOVE)
+    private List<ParcelaVenda> lpv;
 
+    public List<ParcelaVenda> getLpv() {
+        return lpv;
+    }
+
+    public void setLpv(List<ParcelaVenda> lpv) {
+        this.lpv = lpv;
+    }
+    
+    
+    
     public float getValorTotal() {
         return valorTotal;
     }

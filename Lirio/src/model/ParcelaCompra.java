@@ -55,8 +55,8 @@ public class ParcelaCompra implements Serializable{
         return status;
     }
 
-    public void pagarParcela() {
-        this.status = "Pago";
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     public String getNome() {
