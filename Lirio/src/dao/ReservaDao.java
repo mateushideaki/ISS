@@ -32,7 +32,7 @@ public class ReservaDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(Reserva.class);
-        Criterion _nome = Restrictions.like("clienteNome", nomeCliente, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("nomeCliente", nomeCliente, MatchMode.ANYWHERE);
         cri.add(_nome);
         cri.addOrder(Order.asc("id"));
         this.listaReservas = cri.list();
@@ -63,7 +63,7 @@ public class ReservaDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
 
-            sessao.update(r);
+            sessao.delete(r);
             trans.commit();
 
         } catch (Exception e) {

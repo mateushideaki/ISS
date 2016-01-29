@@ -5,17 +5,35 @@
  */
 package view;
 
+import controller.ControleReserva;
+import controller.ControleReservaProduto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
+import model.Reserva;
+import model.ReservaProduto;
+import util.ReservaProdutoTableModel;
+import util.ReservaTableModel;
 /**
  *
  * @author usuario
  */
 public class Reservass extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Reservass
-     */
+    private String clienteNome;
+    private ControleReserva controleReserva = new ControleReserva();
+    private List<Reserva> listaReserva = controleReserva.listarReservas("");
+    private ReservaTableModel modelReserva = new ReservaTableModel(listaReserva);
+    private Reserva reserva = new Reserva();
+    
+    private ControleReservaProduto controleRP = new ControleReservaProduto();
+    private List<ReservaProduto> listaRP;
+    private ReservaProdutoTableModel modelRP;
+    private ReservaProduto reservaProduto = new ReservaProduto();
+    
     public Reservass() {
         initComponents();
+        TabelaDeReservas.setModel(modelReserva);
     }
 
     /**
@@ -40,6 +58,7 @@ public class Reservass extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaReservaProduto = new javax.swing.JTable();
+        AlterarReserva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +142,13 @@ public class Reservass extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelaReservaProduto);
 
+        AlterarReserva.setText("ALTERAR RESERVA");
+        AlterarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarReservaPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +173,8 @@ public class Reservass extends javax.swing.JFrame {
                     .addComponent(CadastrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ExcluirReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ProdutosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RealizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RealizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AlterarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,9 +194,11 @@ public class Reservass extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CadastrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CadastrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ExcluirReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ExcluirReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AlterarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -193,11 +222,29 @@ public class Reservass extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaClienteActionPerformed
 
     private void buscaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaClienteKeyReleased
-
+        this.clienteNome = buscaCliente.getText();
+        this.listaReserva = controleReserva.listarReservas(this.clienteNome);
+        this.modelReserva = new ReservaTableModel(listaReserva);
+        TabelaDeReservas.setModel(this.modelReserva);
     }//GEN-LAST:event_buscaClienteKeyReleased
 
     private void ExcluirReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirReservaActionPerformed
+        int linhaSelecionada = TabelaDeReservas.getSelectedRow();
 
+        if (linhaSelecionada >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja excluir esta reserva?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                this.reserva = this.modelReserva.get(linhaSelecionada);
+                controleReserva.excluirReserva(this.reserva);
+                JOptionPane.showMessageDialog(this, "Reserva excluida com sucesso.", "Mensagem informativa.", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma Reserva.", "Erro: Nenhuma reserva selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.listaReserva = controleReserva.listarReservas("");
+        this.modelReserva = new ReservaTableModel(this.listaReserva);
+        TabelaDeReservas.setModel(this.modelReserva);
     }//GEN-LAST:event_ExcluirReservaActionPerformed
 
     private void CadastrarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarReservaActionPerformed
@@ -206,17 +253,51 @@ public class Reservass extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarReservaActionPerformed
 
     private void RealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarVendaActionPerformed
-
+        int linhaSelecionada = TabelaDeReservas.getSelectedRow();
+        if (linhaSelecionada >= 0) {    
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja concluir esta venda desta reserva?", "Esta acao nao podera ser desfeita.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                this.reserva = this.modelReserva.get(linhaSelecionada);
+                controleReserva.excluirReserva(this.reserva);
+                new JanelaEscolhePagamentoReserva(this.reserva.getPreco()).setVisible(true);
+                this.dispose();
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Selecione uma reserva.", "Erro: Nenhuma reserva selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_RealizarVendaActionPerformed
 
     private void ProdutosReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosReservaActionPerformed
+        int linhaSelecionada = TabelaDeReservas.getSelectedRow();
 
+        if (linhaSelecionada >= 0) {
+            this.reserva = modelReserva.get(linhaSelecionada);
+            this.listaRP = controleRP.listarRP(this.reserva);
+            this.modelRP = new ReservaProdutoTableModel(listaRP);
+            TabelaReservaProduto.setModel(modelRP);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione uma reserva.", "Erro: Nenhuma reserva selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ProdutosReservaActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         new MenuInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void AlterarReservaPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarReservaPerformed
+        int linhaSelecionada = TabelaDeReservas.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+        this.reserva = modelReserva.get(linhaSelecionada);
+        new  AtualizarReserva(this.reserva).setVisible(true);
+        this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione uma reserva.", "Erro: Nenhuma reserva selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AlterarReservaPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +335,7 @@ public class Reservass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AlterarReserva;
     private javax.swing.JButton CadastrarReserva;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton ExcluirReserva;

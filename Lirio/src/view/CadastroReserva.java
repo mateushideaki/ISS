@@ -138,7 +138,7 @@ public class CadastroReserva extends javax.swing.JFrame {
             }
         });
 
-        Cancelar.setText("CANCELAR COMPRA");
+        Cancelar.setText("CANCELAR RESERVA");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarActionPerformed(evt);
@@ -429,6 +429,24 @@ public class CadastroReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_RemoverProdActionPerformed
 
     private void RegistrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPedidoActionPerformed
+        if (this.reserva.getPreco() <= 0){
+            JOptionPane.showMessageDialog(this, "Reserva " + this.reserva.getId() + " não possui preço. Por isso não será cadastrada.", "Compra não cadastrada.", JOptionPane.INFORMATION_MESSAGE);
+            new Reservass().setVisible(true);
+            this.dispose();
+        }else{
+            int opcao = JOptionPane.showConfirmDialog(this, "Voce tem certeza que deseja cadastrar esta reserva?", "Confirmar Reserva.", JOptionPane.YES_NO_OPTION);
+            if (opcao == YES_OPTION) {
+                Date d = new Date();
+                Calendar cal = new GregorianCalendar();
+                cal.setTime(d);
+                this.reserva.setDataReserva(d);
+                this.controleReserva.cadastrarReserva(this.reserva);
+
+                controleRP.cadastrarRP(listaReserva);
+                new Reservass().setVisible(true);
+                this.dispose();
+            }
+        }
 
     }//GEN-LAST:event_RegistrarPedidoActionPerformed
 
@@ -456,7 +474,7 @@ public class CadastroReserva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cliente " + this.cliente.getNome() + " selecionado.", "Cliente selecionado.", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Cliente.", "Erro: Nenhum cliente selecionado.", JOptionPane.ERROR_MESSAGE);
-        }        // TODO add your handling code here:
+        }       
     }//GEN-LAST:event_ConfirmarCliActionPerformed
 
     /**
@@ -489,7 +507,6 @@ public class CadastroReserva extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroReserva().setVisible(true);
             }
         });
     }
