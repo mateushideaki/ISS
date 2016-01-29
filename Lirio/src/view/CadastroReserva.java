@@ -40,6 +40,7 @@ public class CadastroReserva extends javax.swing.JFrame {
     private String produtoNome;
     private ControleProduto controleProd = new ControleProduto();
     private List<Produto> listaProd = controleProd.listarProdutos("");
+
     private ProdutoTableModel modelProduto = new ProdutoTableModel(listaProd);
     private Produto p = new Produto();
     
@@ -329,33 +330,37 @@ public class CadastroReserva extends javax.swing.JFrame {
         int posicao = 0;
 
         if (linhaSelecionada >= 0) {
-            if (((int) qtdProduto.getValue() > 0)){   //´PAREI AQUI TA BUGANDO, TEM QUE PEGAR A QUANTIDADE E COMPARAR
-                //if((Integer.parseInt(qtdProduto.getText())) <= linhaSelecionada.getQntAtual())
+            if (((int) qtdProduto.getValue() > 0)){
                 produto = this.modelProduto.get(linhaSelecionada);
-                rp.setProduto(produto);
-                rp.setReserva(this.reserva);
-                rp.setQuantidade((int) qtdProduto.getValue());
-                rp.setPreco((int) qtdProduto.getValue() * produto.getPrecoVenda());
-                while (listIt.hasNext()) {
-                    posicao++;
-                    ReservaProduto rpIt = (ReservaProduto) listIt.next();
-                    if (rpIt.getProduto().getId() == produto.getId()) {
-                        posicao--;
-                        rp.setQuantidade(rp.getQuantidade() + rpIt.getQuantidade());
-                        rp.setPreco(rp.getPreco() + rpIt.getPreco());
-                        reserva.setPreco(reserva.getPreco() - rpIt.getPreco());
-                        listIt.remove();
-                        break;
+                if((int) qtdProduto.getValue() <= produto.getQntAtual()){
+                    rp.setProduto(produto);
+                    rp.setReserva(this.reserva);
+                    rp.setQuantidade((int) qtdProduto.getValue());
+                    rp.setPreco((int) qtdProduto.getValue() * produto.getPrecoVenda());
+                    produto.setQntAtual(produto.getQntAtual() - rp.getQuantidade());
+                    while (listIt.hasNext()) {
+                        posicao++;
+                        ReservaProduto rpIt = (ReservaProduto) listIt.next();
+                        if (rpIt.getProduto().getId() == produto.getId()) {
+                            posicao--;
+                            rp.setQuantidade(rp.getQuantidade() + rpIt.getQuantidade());
+                            rp.setPreco(rp.getPreco() + rpIt.getPreco());
+                            reserva.setPreco(reserva.getPreco() - rpIt.getPreco());
+                            listIt.remove();
+                            break;
+                        }
                     }
+                
+                    this.listaReserva.add(posicao, rp);
+                    this.modelRP = new ReservaProdutoTableModel(this.listaReserva);
+                    tabelaProdutosReservados.setModel(this.modelRP);
+                    this.reserva.setPreco(this.reserva.getPreco() + rp.getPreco());
+                    totalTxt.setText("" + this.reserva.getPreco());
+                    tabelaProduto.repaint();
                 }
-
-                this.listaReserva.add(posicao, rp);
-
-                this.modelRP = new ReservaProdutoTableModel(this.listaReserva);
-                tabelaProdutosReservados.setModel(this.modelRP);
-                this.reserva.setPreco(this.reserva.getPreco() + rp.getPreco());
-                totalTxt.setText("" + this.reserva.getPreco());
-
+                else {
+                JOptionPane.showMessageDialog(this, "A quantidade do produto selecionados é maior que a a quantidade em estoque.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "A quantidade do produto deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
             }
@@ -371,7 +376,56 @@ public class CadastroReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void RemoverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdActionPerformed
+        int linhaSelecionada = tabelaProdutosReservados.getSelectedRow();
+        ReservaProduto rp = new ReservaProduto();
+        ListIterator listIt = this.listaReserva.listIterator();
+        Produto produto = new Produto();
+        int posicao = 0;
 
+        if (linhaSelecionada >= 0) { 
+            if ((int) qtdRemover.getValue() > 0) {
+                    rp = this.modelRP.get(linhaSelecionada);
+                if ((int) qtdRemover.getValue() <= rp.getQuantidade()) {
+                    produto = rp.getProduto();
+                    String cliente = this.reserva.getCliente().getNome();
+                    String nomeProd = produto.getNome();
+                    rp.setProduto(produto);
+                    produto.setQntAtual(produto.getQntAtual()+(int) qtdRemover.getValue());
+                    while (listIt.hasNext()) {
+                        posicao++;
+                        ReservaProduto rpIt = (ReservaProduto) listIt.next();
+                        if (rpIt == rp) {
+                            posicao--;
+                            listIt.remove();
+                            break;
+                        }
+                    }
+
+                    if ((int) qtdRemover.getValue() < rp.getQuantidade()) {
+                        rp.setQuantidade(rp.getQuantidade() - (int) qtdRemover.getValue());
+                        rp.setPreco(rp.getPreco() - (int) qtdRemover.getValue() * produto.getPrecoVenda());
+                        listaReserva.add(posicao, rp);
+                        this.reserva.setPreco(this.reserva.getPreco() - produto.getPrecoVenda() * (int) qtdRemover.getValue());
+                    } else {
+                        this.reserva.setPreco(this.reserva.getPreco() - produto.getPrecoVenda() * rp.getQuantidade());
+                    }
+
+                    this.modelRP = new ReservaProdutoTableModel(this.listaReserva);  //atualiza a tabela
+                    tabelaProdutosReservados.setModel(this.modelRP);
+
+                    totalTxt.setText("" + this.reserva.getPreco());
+                    tabelaProduto.repaint();
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "A quantidade a ser removida é invalida.", "Erro.", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "A quantidade a ser removida deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+        qtdRemover.setValue(0);
     }//GEN-LAST:event_RemoverProdActionPerformed
 
     private void RegistrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPedidoActionPerformed

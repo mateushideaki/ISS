@@ -24,7 +24,7 @@ public class ControleReservaProduto {
         this.listaRP = reservaProdutoDao.listarRP(reserva);
         return this.listaRP;
     }
-    
+        
     public void cadastrarRP(List<ReservaProduto> rp){
         reservaProdutoDao.cadastrarRP(rp);
     }
