@@ -5,9 +5,13 @@
  */
 package view;
 
+import controller.ControleCompra;
 import controller.ControleCompraProduto;
 import controller.ControleProduto;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -16,7 +20,6 @@ import model.CompraProduto;
 import model.Fornecedor;
 import model.Produto;
 import util.CompraProdutoTableModel;
-import util.ProdutosConfirmadosTableModel;
 
 /**
  *
@@ -25,9 +28,10 @@ import util.ProdutosConfirmadosTableModel;
 public class ConfirmarCompra extends javax.swing.JFrame {
 
     private Compra compra = new Compra();
-    //private Fornecedor fornecedor;
-    //private String fornecedorNome;
-    private float total = 0;
+    private Compra compraConfirmada = new Compra();
+    
+    private ControleCompra controleCompra = new ControleCompra();
+    
     private ControleCompraProduto controleCp = new ControleCompraProduto();
     private List<CompraProduto> listaCompraP;
     private CompraProdutoTableModel modelCompraP;
@@ -35,9 +39,8 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     private ControleProduto controleProd = new ControleProduto();
     
     private ControleCompraProduto controleConfirmado = new ControleCompraProduto();
-    private ArrayList<Produto> listaConfirmado = new ArrayList<Produto>();
-    private ProdutosConfirmadosTableModel modelConfirmado;
-    //private CompraProduto compraConfirmado = new CompraProduto();
+    private ArrayList<CompraProduto> listaConfirmado = new ArrayList<CompraProduto>();
+    private CompraProdutoTableModel modelConfirmado;
     
     /**
      * Creates new form ConfirmarCompra
@@ -45,8 +48,9 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     public ConfirmarCompra(Compra comp) {
         initComponents();
         this.compra = comp;
+        this.compra.setId(comp.getId());
         this.listaCompraP = controleCp.listarCP(this.compra);
-        this.modelCompraP = new CompraProdutoTableModel(listaCompraP);
+        this.modelCompraP = new CompraProdutoTableModel(this.listaCompraP);
         TabelaCompraProduto.setModel(modelCompraP);
         LabelFornecedor.setText(comp.getFornecedorNome());
         totalPedido.setText("" + comp.getTotal());
@@ -92,6 +96,11 @@ public class ConfirmarCompra extends javax.swing.JFrame {
         jLabel5.setText("LISTA DE PRODUTOS DA COMPRA:");
 
         ConfirmarCompraB.setText("CONFIRMAR COMPRA");
+        ConfirmarCompraB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCompraBActionPerformed(evt);
+            }
+        });
 
         TabelaCompraProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -261,115 +270,139 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
         int linhaSelecionada = TabelaCompraProduto.getSelectedRow();
         CompraProduto cp = new CompraProduto();
-        CompraProduto confirmado = new CompraProduto();
-        Produto produto = new Produto();
+        CompraProduto produto = new CompraProduto();
         ListIterator listIt = this.listaConfirmado.listIterator();
+        ListIterator listProdIt = this.listaCompraP.listIterator();
+        
         int posicao = 0;
-        float valor = 0;
-
+        int posicao2 = 0;
         if (linhaSelecionada >= 0) {                                            //verifica se algum produto foi selecionado
             if ((int) qtdProduto.getValue() > 0) {                              //verifica se a quantidade e positiva
-                cp = this.modelCompraP.get(linhaSelecionada);
-                int i = 0;
-                while(i <= this.listaConfirmado.size() && cp.getProduto().getId() != this.listaConfirmado.get(i).getId()){
-                    i++;
-                }
-                if(i != listaConfirmado.size()){
-                    produto = cp.getProduto();
-                    if ((int) qtdProduto.getValue() <= cp.getQuantidade()) {     //verifica quantidade
-                        valor = (float) (cp.getCusto()/cp.getQuantidade());
-                        confirmado.setCompra(this.compra);
-                        confirmado.setProduto(produto);
-                        confirmado.setQuantidade((int)qtdProduto.getValue());
-                        confirmado.setCusto((int) qtdProduto.getValue() * valor);
-                        while (listIt.hasNext()) {
-                            posicao++;
-                            CompraProduto cpIt = (CompraProduto) listIt.next();
-                            if (cpIt.getId() == produto.getId()) {
-                                posicao--;
-                                confirmado.setQuantidade(confirmado.getQuantidade() + cpIt.getQuantidade());
-                                confirmado.setCusto(confirmado.getCusto() + cpIt.getCusto());
-                                this.total = this.total - cpIt.getCusto();
-                                listIt.remove();
-                                break;
-                            }
+                produto = this.modelCompraP.get(linhaSelecionada);
+
+                if ((int) qtdProduto.getValue() <= produto.getQuantidade()) {     //verifica se tem no estoque
+
+                    cp.setProduto(produto.getProduto());
+                    cp.setCompra(this.compraConfirmada);
+                    cp.setQuantidade((int) qtdProduto.getValue());
+                    cp.setCusto((int) qtdProduto.getValue() * produto.getCusto()/produto.getQuantidade());
+
+                    while (listProdIt.hasNext()) {                      //remove o produto da lista
+                        posicao2++;
+                        CompraProduto cprodIt = (CompraProduto) listProdIt.next();
+                        if (cprodIt.getProduto().getId() == cp.getProduto().getId()) {
+                            posicao2--;
+                            listProdIt.remove();
+                            break;
                         }
-
-                        produto.setQntAtual(produto.getQntAtual() + (int) qtdProduto.getValue());    //incrementa no estoque
-                        controleProd.alterarProduto(produto);
-
-                        controleCp.alterarCP(cp);
-
-                        this.modelCompraP = new CompraProdutoTableModel(controleCp.listarCP(compra));
-
-
-                        TabelaCompraProduto.setModel(modelCompraP);
-
-                        this.listaConfirmado.add(posicao, produto);                                //add na lista
-
-                        this.modelConfirmado = new ProdutosConfirmadosTableModel(this.listaConfirmado);  //atualiza a tabela
-                        TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
-                        totalConfirmado.setText("" + this.total);
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "So existem " + cp.getQuantidade() + " unidades disponiveis na compra.", "Erro.", JOptionPane.ERROR_MESSAGE);
-                    }
-                }else{
+                    } 
                     
+                    while (listIt.hasNext()) {
+                        posicao++;
+                        CompraProduto cpIt = (CompraProduto) listIt.next();
+                        if (cpIt.getProduto().getId() == produto.getProduto().getId()) {
+                            posicao--;
+                            cp.setQuantidade(cp.getQuantidade() + cpIt.getQuantidade());
+                            cp.setCusto(cp.getCusto() + cpIt.getCusto());
+                            compraConfirmada.setTotal(compraConfirmada.getTotal() - cpIt.getCusto());
+                            listIt.remove();
+                            break;
+                        }
+                    }
+                    if(produto.getQuantidade() == (int)qtdProduto.getValue()){
+                        produto.setCusto(0);
+                        produto.setQuantidade(produto.getQuantidade() - (int) qtdProduto.getValue());
+                    }else{
+                        produto.setCusto(produto.getCusto() - (int)qtdProduto.getValue()*produto.getCusto()/produto.getQuantidade());
+                        produto.setQuantidade(produto.getQuantidade() - (int) qtdProduto.getValue());
+                    }
+                    
+                    controleCp.alterarCP(produto);
+                    this.listaCompraP.add(posicao2, produto);                                //add na lista
+                    
+                    this.modelCompraP = new CompraProdutoTableModel(controleCp.listarCP(compra));
+                    TabelaCompraProduto.setModel(this.modelCompraP);
+
+                    this.listaConfirmado.add(posicao, cp);                                //add na lista
+
+                    this.modelConfirmado = new CompraProdutoTableModel(this.listaConfirmado);  //atualiza a tabela
+                    TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
+                    this.compraConfirmada.setTotal(this.compraConfirmada.getTotal() + cp.getCusto());  //atualiza o total
+                    totalConfirmado.setText("" + this.compraConfirmada.getTotal());
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "So existem " + produto.getQuantidade() + " unidades disponiveis na compra.", "Erro.", JOptionPane.ERROR_MESSAGE);
                 }
-                
             } else {
                 JOptionPane.showMessageDialog(this, "A quantidade do produto deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
         }
-
+        
         qtdProduto.setValue(0);
         
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnRemoverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdActionPerformed
-        /*int linhaSelecionada = tabelaProdutosEscolhidos.getSelectedRow();
-        VendaProduto vp = new VendaProduto();
-        ListIterator listIt = this.listaVenda.listIterator();
-        Produto produto;
-        int posicao = 0;           //posicao onde sera re-inserido o objeto na lista
+        int linhaSelecionada = TabelaCompraProdutoConferidos.getSelectedRow();
+        CompraProduto cp = new CompraProduto();
+        CompraProduto produto = new CompraProduto();
+        ListIterator listIt = this.listaConfirmado.listIterator();
+        ListIterator listProdIt = this.listaCompraP.listIterator();
+        int posicao = 0;
+        int posicao2 = 0;
 
         if (linhaSelecionada >= 0) {                                            //verifica se algum produto foi selecionado
             if ((int) qtdRemover.getValue() > 0) {                              //verifica se a quantidade e positiva
-                vp = this.modelVP.get(linhaSelecionada);
-                produto = vp.getProduto();
-
+                cp = this.modelConfirmado.get(linhaSelecionada);
+                
+                while (listProdIt.hasNext()) {                      //remove o produto da lista
+                    posicao2++;
+                    CompraProduto cprodIt = (CompraProduto) listProdIt.next();
+                    if (cprodIt.getProduto().getId() == cp.getProduto().getId()) {
+                        posicao2--;
+                        break;
+                    }
+                }                
+                
+                produto = listaCompraP.get(posicao2);
+                
                 while (listIt.hasNext()) {                      //remove o produto da lista
                     posicao++;
-                    VendaProduto vpIt = (VendaProduto) listIt.next();
-                    if (vpIt == vp) {
+                    CompraProduto cpIt = (CompraProduto) listIt.next();
+                    if (cpIt.getProduto().getId() == cp.getProduto().getId()) {
                         posicao--;
                         listIt.remove();
                         break;
                     }
                 }
-
-                if ((int) qtdRemover.getValue() < vp.getQuantidade()) {        //se for verdadeiro adiciona com a quantidade calculada
-                    vp.setQuantidade(vp.getQuantidade() - (int) qtdRemover.getValue());
-                    vp.setCusto(vp.getCusto() - (int) qtdRemover.getValue() * produto.getPrecoVenda());
-                    listaVenda.add(posicao, vp);
-                    produto.setQntAtual(produto.getQntAtual() + (int) qtdRemover.getValue()); //volta ao estoque
-                    this.venda.setTotal(this.venda.getTotal() - vp.getProduto().getPrecoVenda() * (int) qtdRemover.getValue());
-                } else {
-                    produto.setQntAtual(produto.getQntAtual() + vp.getQuantidade());
-                    this.venda.setTotal(this.venda.getTotal() - vp.getProduto().getPrecoVenda() * vp.getQuantidade());
+                
+                if ((int) qtdRemover.getValue() < cp.getQuantidade()) {     
+                    
+                    produto.setCusto(produto.getCusto() + (int) qtdRemover.getValue() * cp.getCusto()/cp.getQuantidade());
+                    this.compraConfirmada.setTotal(this.compraConfirmada.getTotal() - (int) qtdRemover.getValue() * cp.getCusto()/cp.getQuantidade());
+                    cp.setCusto(cp.getCusto() - (int) qtdRemover.getValue() * cp.getCusto()/cp.getQuantidade());
+                    cp.setQuantidade(cp.getQuantidade() - (int) qtdRemover.getValue());
+                    produto.setQuantidade(produto.getQuantidade() + (int)qtdRemover.getValue());
+                    listaConfirmado.add(posicao, cp);
+                }else {
+                    produto.setCusto(produto.getCusto() + cp.getCusto());
+                    this.compraConfirmada.setTotal(this.compraConfirmada.getTotal() - cp.getCusto());
+                    
+                    cp.setCusto(0);
+                    produto.setQuantidade(produto.getQuantidade() + cp.getQuantidade());
+                    cp.setQuantidade(0);
                 }
+                this.controleCp.alterarCP(produto);
 
-                controleProd.alterarProduto(produto);
-                this.modelProduto = new ProdutoTableModel(this.controleProd.listarProdutos(""));
-                tabelaProdutos.setModel(this.modelProduto);
+                this.modelCompraP = new CompraProdutoTableModel(this.controleCp.listarCP(this.compra));
+                TabelaCompraProduto.setModel(this.modelCompraP);
+                
+                this.modelConfirmado = new CompraProdutoTableModel(this.listaConfirmado);  //atualiza a tabela
+                TabelaCompraProdutoConferidos.setModel(this.modelConfirmado);
 
-                this.modelVP = new VendaProdutoTableModel(this.listaVenda);  //atualiza a tabela
-                tabelaProdutosEscolhidos.setModel(this.modelVP);
-
-                totalTxt.setText("" + this.venda.getTotal());
+                totalConfirmado.setText("" + this.compraConfirmada.getTotal());
 
             } else {
                 JOptionPane.showMessageDialog(this, "A quantidade a ser removida deve ser superior a zero.", "Erro.", JOptionPane.ERROR_MESSAGE);
@@ -378,13 +411,81 @@ public class ConfirmarCompra extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione um Produto.", "Erro: Nenhum Produto selecionado.", JOptionPane.ERROR_MESSAGE);
         }
         qtdRemover.setValue(0);
-        */
     }//GEN-LAST:event_btnRemoverProdActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        ListIterator listIt = listaCompraP.listIterator();
+        CompraProduto prod;
+        
+        while (listIt.hasNext()) {                              
+            CompraProduto cpIt = (CompraProduto) listIt.next();
+            prod = cpIt;
+            
+            ListIterator listProdIt = listaConfirmado.listIterator();
+            while(listProdIt.hasNext()){
+
+                CompraProduto cprodIt = (CompraProduto) listProdIt.next();
+                if (cprodIt.getProduto().getId() == prod.getProduto().getId()) {
+                    prod.setQuantidade(prod.getQuantidade()+cprodIt.getQuantidade());
+                    prod.setCusto(prod.getCusto() + cprodIt.getCusto());
+                    listProdIt.remove();
+                    this.controleCp.alterarCP(prod);
+                    break;
+                }
+            }
+        }
+        
         new Compras().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void ConfirmarCompraBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCompraBActionPerformed
+
+        if (this.compraConfirmada.getTotal() <= 0){
+            JOptionPane.showMessageDialog(this, "Compra " + this.compraConfirmada.getId() + " não possui valor. Por isso não será confirmado.", "Compra não confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            new Compras().setVisible(true);
+            this.dispose();
+        }else{
+            
+            Date d = new Date();
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(d);
+            this.compra.setFlag("2");
+            this.compra.setDataRecebimento(d);
+            this.compra.setTotal(this.compraConfirmada.getTotal());
+            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " DataCompra: " + this.compra.getDataCompra() + "Fornecedor: "+ this.compra.getFornecedorNome() + " total: " + this.compra.getTotal() + " flag: "+ this.compra.getFlag(), "Compra.", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.controleCompra.alterarCompra(this.compra);
+            JOptionPane.showMessageDialog(this, "Aqui.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            
+            ListIterator listIt = listaCompraP.listIterator();
+            CompraProduto prod;
+            while (listIt.hasNext()) {                              
+                CompraProduto cpIt = (CompraProduto) listIt.next();
+                prod = cpIt;
+            
+                ListIterator listProdIt = listaConfirmado.listIterator();
+                while(listProdIt.hasNext()){
+
+                    CompraProduto cprodIt = (CompraProduto) listProdIt.next();
+                    if (cprodIt.getProduto().getId() == prod.getProduto().getId()) {
+                        prod.setQuantidade(cprodIt.getQuantidade());
+                        prod.setCusto(cprodIt.getCusto());
+                        listProdIt.remove();
+                        Produto produto = new Produto();
+                        produto = prod.getProduto();
+                        produto.setQntAtual(produto.getQntAtual()+prod.getQuantidade());
+                        this.controleProd.alterarProduto(produto);
+                        this.controleCp.alterarCP(prod);
+                        break;
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + ": Valor = " + this.compra.getTotal() + ". Foi efetuada.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            new Compras().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_ConfirmarCompraBActionPerformed
 
     /**
      * @param args the command line arguments

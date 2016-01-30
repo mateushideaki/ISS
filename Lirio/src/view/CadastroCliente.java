@@ -323,6 +323,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        new Clientes().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 

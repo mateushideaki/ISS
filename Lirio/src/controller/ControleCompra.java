@@ -33,7 +33,6 @@ public class ControleCompra {
  
     public void alterarCompra(Compra c){
         compraDao.alterarCompra(c);
-        
     }
 
     public Compra getCompra() {
