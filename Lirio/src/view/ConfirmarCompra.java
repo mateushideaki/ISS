@@ -442,7 +442,7 @@ public class ConfirmarCompra extends javax.swing.JFrame {
     private void ConfirmarCompraBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCompraBActionPerformed
 
         if (this.compraConfirmada.getTotal() <= 0){
-            JOptionPane.showMessageDialog(this, "Compra " + this.compraConfirmada.getId() + " não possui valor. Por isso não será confirmado.", "Compra não confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " não possui valor. Por isso não será confirmado.", "Compra não confirmada.", JOptionPane.INFORMATION_MESSAGE);
             new Compras().setVisible(true);
             this.dispose();
         }else{
@@ -450,13 +450,16 @@ public class ConfirmarCompra extends javax.swing.JFrame {
             Date d = new Date();
             Calendar cal = new GregorianCalendar();
             cal.setTime(d);
-            this.compra.setFlag("2");
-            this.compra.setDataRecebimento(d);
-            this.compra.setTotal(this.compraConfirmada.getTotal());
-            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + " DataCompra: " + this.compra.getDataCompra() + "Fornecedor: "+ this.compra.getFornecedorNome() + " total: " + this.compra.getTotal() + " flag: "+ this.compra.getFlag(), "Compra.", JOptionPane.INFORMATION_MESSAGE);
+            Compra confirmada = new Compra();
+            confirmada.setDataCompra(this.compra.getDataCompra());
+            confirmada.setId(this.compra.getId());
+            confirmada.setFlag("2");
+            confirmada.setDataRecebimento(d);
+            confirmada.setFornecedor(this.compra.getFornecedor());
+            confirmada.setFornecedorNome(this.compra.getFornecedorNome());
+            confirmada.setTotal(this.compraConfirmada.getTotal());
             
-            this.controleCompra.alterarCompra(this.compra);
-            JOptionPane.showMessageDialog(this, "Aqui.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            this.controleCompra.alterarCompra(confirmada);
             
             ListIterator listIt = listaCompraP.listIterator();
             CompraProduto prod;
@@ -481,8 +484,8 @@ public class ConfirmarCompra extends javax.swing.JFrame {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(this, "Compra " + this.compra.getId() + ": Valor = " + this.compra.getTotal() + ". Foi efetuada.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
-            new Compras().setVisible(true);
+            JOptionPane.showMessageDialog(this, "Compra: " + confirmada.getId() + "\nFornecedor: "+confirmada.getFornecedorNome()+ "\nValor: " + confirmada.getTotal() + "\n\nFoi efetuada.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            new JanelaEscolhePagamentoCompra(confirmada).setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_ConfirmarCompraBActionPerformed

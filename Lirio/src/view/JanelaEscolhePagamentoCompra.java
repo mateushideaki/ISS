@@ -4,18 +4,23 @@
  * and open the template in the editor.
  */
 package view;
-
+import model.Compra;
 /**
  *
  * @author lucas
  */
 public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
 
+    private Compra compra;
+    
     /**
      * Creates new form JanelaEscolhePagamento
      */
-    public JanelaEscolhePagamentoCompra() {
+    public JanelaEscolhePagamentoCompra(Compra c) {
+        this.compra = c;
         initComponents();
+        // Compra.getValor = Valor da compra
+        //Compra.getDataRecebimento = Data que recebeu a compra, caso use para pagamento a prazo
     }
 
     /**
@@ -133,7 +138,6 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JanelaEscolhePagamentoCompra().setVisible(true);
             }
         });
     }

@@ -75,7 +75,7 @@ public class CompraDao {
     }
 
     public void alterarCompra(Compra c) {
-    try {
+        try {
             if (sessao.isConnected()) {
                 sessao.close();
             }
