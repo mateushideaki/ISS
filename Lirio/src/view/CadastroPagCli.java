@@ -165,7 +165,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastraPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastraPagActionPerformed
-        PagamentoCliente pag = new PagamentoCliente();
+        PagamentoClienteView pag = new PagamentoClienteView();
         int numParcelas = Integer.parseInt(this.numP.getText());
         float vAdicional = Integer.parseInt(this.juros.getText());
         float valorFinal = this.venda.getTotal() * (1 + (vAdicional / 100));
@@ -174,7 +174,7 @@ public class CadastroPagCli extends javax.swing.JFrame {
             cv.alterarVenda(venda);
         }
         controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal() / numParcelas, this.venda.getTotal());
-        new MenuInicial().setVisible(true);
+        new VendasRealizadas().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CadastraPagActionPerformed
 

@@ -8,7 +8,6 @@ package dao;
 import java.util.List;
 import model.ParcelaCompra;
 import model.ParcelaVenda;
-import model.Venda;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,7 +34,7 @@ public class ParcelaDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(ParcelaVenda.class);
-        Criterion _nome = Restrictions.like("clienteNome", nomeCliente, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("idStr", nomeCliente, MatchMode.ANYWHERE);
         cri.add(_nome);
         cri.addOrder(Order.asc("id"));
         this.listaParcelasVenda = cri.list();
@@ -49,7 +48,7 @@ public class ParcelaDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(ParcelaCompra.class);
-        Criterion _nome = Restrictions.like("nome", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("idStr", nomeFornecedor, MatchMode.ANYWHERE);
         cri.add(_nome);
         cri.addOrder(Order.asc("id"));
         this.listaParcelasCompra = cri.list();

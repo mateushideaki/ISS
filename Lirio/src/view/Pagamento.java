@@ -99,11 +99,12 @@ public class Pagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuPrincipalActionPerformed
 
     private void PagamentoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagamentoFornecedorActionPerformed
-        new PagamentoFornecedor().setVisible(true);
+        new PagamentoFornecedorView().setVisible(true);
     }//GEN-LAST:event_PagamentoFornecedorActionPerformed
 
     private void PagamentoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagamentoClienteActionPerformed
-        new PagamentoCliente().setVisible(true);
+        new PagamentoClienteView().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_PagamentoClienteActionPerformed
 
     /**

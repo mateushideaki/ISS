@@ -9,35 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.PagamentoCliente;
+
 /**
  *
  * @author Mateus
  */
-public class PagamentoClienteTableModel extends AbstractTableModel{
+public class PagamentoClienteTableModel extends AbstractTableModel {
+
     private static final int id = 0;
     private static final int CodCli = 1;
     private static final int NomeCli = 2;
     private static final int ParcelasPagas = 3;
-    private static final int ParcelasNaoPagas = 3;
-    private static final int ValorRestante = 4;
+    private static final int ParcelasNaoPagas = 4;
+    private static final int ValorRestante = 5;
+    private static final int ValorTotal = 6;
 
     private List<PagamentoCliente> lista;
-
 
     public PagamentoClienteTableModel(List<PagamentoCliente> lista) {
         this.lista = new ArrayList<PagamentoCliente>(lista);
     }
-    
-    public void setLista(List<PagamentoCliente> l){
+
+    public void setLista(List<PagamentoCliente> l) {
         this.lista = new ArrayList<PagamentoCliente>(l);
     }
-    
+
     public int getRowCount() {
         return lista.size();
     }
 
     public int getColumnCount() {
-        return 4;
+        return 7;
     }
 
     public String getColumnName(int column) {
@@ -60,6 +62,9 @@ public class PagamentoClienteTableModel extends AbstractTableModel{
         if (column == ValorRestante) {
             return "Valor_Restante";
         }
+        if (column == ValorTotal) {
+            return "Total";
+        }
         return ""; //Nunca deve ocorrer  
     }
 
@@ -78,24 +83,22 @@ public class PagamentoClienteTableModel extends AbstractTableModel{
             return v.getParcelasNaoPagas();
         } else if (column == ValorRestante) {
             return v.getValorRestante();
+        } else if (column == ValorTotal) {
+            return v.getValorTotal();
         }
-        
+
         return ""; //Nunca deve ocorrer  
     }
-
-
 
     public Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
 
-    public boolean isCellEditable(int rowIndex, int columnIndex) { 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-
 
     public PagamentoCliente get(int row) {
         return lista.get(row);
     }
 }
-

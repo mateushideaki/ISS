@@ -6,6 +6,8 @@
 package view;
 
 import controller.ControlePagamento;
+import controller.ControleVenda;
+import javax.swing.JOptionPane;
 import model.Venda;
 import model.Cliente;
 
@@ -14,11 +16,13 @@ import model.Cliente;
  * @author lucas
  */
 public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
+
     ControlePagamento cp = new ControlePagamento();
+    ControleVenda cv = new ControleVenda();
     Venda venda;
     Cliente c;
     float tot;
-    
+
     /**
      * Creates new form JanelaEscolhePagamentoVenda
      */
@@ -27,7 +31,7 @@ public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
         this.venda = v;
         this.c = venda.getCliente();
         this.tot = t;
-        totalTxt.setText(""+t);
+        totalTxt.setText("" + t);
     }
 
     /**
@@ -118,9 +122,17 @@ public class JanelaEscolhePagamentoVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_AprazoActionPerformed
 
     private void AvistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvistaActionPerformed
-        cp.pagamentoAVista(venda, c, tot);
-        new VendasRealizadas().setVisible(true);
-        this.dispose();
+        float percent = Float.parseFloat(JOptionPane.showInputDialog(null, "Digite o desconto %: "));
+        if (percent >= 0) {
+            this.tot = this.venda.getTotal() - (this.venda.getTotal() * percent/100);
+            this.venda.setTotal(tot);
+            this.cv.alterarVenda(this.venda);
+            cp.pagamentoAVista(venda, c, tot);
+            new VendasRealizadas().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "O desconto deve ser maior ou igual a zero.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AvistaActionPerformed
 
     /**

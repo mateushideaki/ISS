@@ -18,8 +18,8 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
     private static final int CodFor = 1;
     private static final int NomeFor = 2;
     private static final int ParcelasPagas = 3;
-    private static final int ParcelasNaoPagas = 3;
-    private static final int ValorRestante = 4;
+    private static final int ParcelasNaoPagas = 4;
+    private static final int ValorRestante = 5;
 
     private List<PagamentoFornecedor> lista;
 
@@ -37,7 +37,7 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
     }
 
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     public String getColumnName(int column) {

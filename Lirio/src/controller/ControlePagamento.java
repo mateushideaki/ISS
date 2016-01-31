@@ -14,7 +14,6 @@ import model.Cliente;
 import model.Compra;
 import model.FactoryPagamento;
 import model.Fornecedor;
-import model.Pagamento;
 import model.PagamentoCliente;
 import model.PagamentoFornecedor;
 import model.ParcelaCompra;
@@ -63,6 +62,8 @@ public class ControlePagamento {
             parcela.getPagVenda().setParcelasNaoPagas(parcela.getPagVenda().getParcelasNaoPagas() -1);
             parcela.getPagVenda().setParcelasPagas(parcela.getPagVenda().getParcelasPagas() +1);
             parcela.getPagVenda().setValorRestante(parcela.getPagVenda().getValorRestante() - parcela.getPreco());
+            parcelaDao.alterarParcela(parcela);
+            pagamentoDao.alterarPagamentoCliente(parcela.getPagVenda());
             return "sucesso";
         } else {
             return "parcelaPaga";
@@ -73,6 +74,7 @@ public class ControlePagamento {
     
     public void pagamentoAVista(Venda venda, Cliente cli, float valorTotal){
         PagamentoCliente pag = new PagamentoCliente();
+        System.out.println(Integer.toString(venda.getId()));
         pag.setVenda(venda);
         pag.setCliente(cli);
         pag.setNomeCliente();
@@ -87,8 +89,8 @@ public class ControlePagamento {
         ParcelaVenda p = new ParcelaVenda();
         p.setDataVencimento(d);
         p.setDataPagamento(d);
-        p.setNome(pag.getNomeCliente());
         p.setPagVenda(pag);
+        p.setIdStr(Integer.toString(venda.getId()));
         p.setPreco(pag.getValorParcela());
         p.setStatus("Pago");
         pagamentoDao.cadastrarPagamentoCliente(pag);
@@ -112,8 +114,8 @@ public class ControlePagamento {
         Date d = c.getTime();
         ParcelaCompra p = new ParcelaCompra();
         p.setDataVencimento(d);
-        p.setNome(pag.getNomeFornecedor());
         p.setPagCompra(pag);
+        p.setIdStr(Integer.toString(compra.getId()));
         p.setPreco(pag.getValorParcela());
         p.setStatus("Pago");
         pagamentoDao.cadastrarPagamentoFornecedor(pag);
@@ -154,9 +156,9 @@ public class ControlePagamento {
             c.set(ano, mes, dia);
             d = c.getTime();
             parcela.setDataVencimento(d);
-            parcela.setNome(pag.getNomeFornecedor());
             parcela.setPagCompra(pag);
             parcela.setPreco(pag.getValorParcela());
+            parcela.setIdStr(Integer.toString(pag.getId()));
             parcelaDao.cadastrarParcela(parcela);
             if (d.getMonth() < 12) {
                 mes = d.getMonth() + 1;
@@ -203,9 +205,9 @@ public class ControlePagamento {
             c.set(ano, mes, dia);
             d = c.getTime();
             parcela.setDataVencimento(d);
-            parcela.setNome(pag.getNomeCliente());
             parcela.setPagVenda(pag);
             parcela.setPreco(pag.getValorParcela());
+            parcela.setIdStr(Integer.toString(pag.getId()));
             parcelaDao.cadastrarParcela(parcela);
             if (d.getMonth() < 12) {
                 mes = d.getMonth() + 1;

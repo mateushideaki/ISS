@@ -36,9 +36,9 @@ public class PagamentoDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(PagamentoFornecedor.class);
-        Criterion _nome = Restrictions.like("fornecedorNome", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("nomeFor", nomeFornecedor, MatchMode.ANYWHERE);
         cri.add(_nome);
-        cri.addOrder(Order.asc("id"));
+        cri.addOrder(Order.asc("nomeFor"));
         this.listaPagFor = cri.list();
         return this.listaPagFor;
     }
@@ -50,9 +50,9 @@ public class PagamentoDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(PagamentoCliente.class);
-        Criterion _nome = Restrictions.like("clienteNome", nomeCliente, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("nomeCliente", nomeCliente, MatchMode.ANYWHERE);
         cri.add(_nome);
-        cri.addOrder(Order.asc("id"));
+        cri.addOrder(Order.asc("nomeCliente"));
         this.listaPagCli = cri.list();
         return this.listaPagCli;
     }

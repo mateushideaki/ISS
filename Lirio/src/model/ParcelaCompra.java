@@ -25,7 +25,7 @@ public class ParcelaCompra implements Serializable{
     private float preco;
     private Date dataVencimento;
     private Date dataPagamento;
-    private String nome;
+    private String idStr;
     private String status;
     @ManyToOne
     private PagamentoFornecedor pagCompra;
@@ -36,6 +36,7 @@ public class ParcelaCompra implements Serializable{
 
     public void setPagCompra(PagamentoFornecedor pagCompra) {
         this.pagCompra = pagCompra;
+        this.setIdStr(Integer.toString(this.pagCompra.getId()));
     }
 
     public Date getDataPagamento() {
@@ -58,14 +59,16 @@ public class ParcelaCompra implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    public String getNome() {
-        return nome;
+
+    public String getIdStr() {
+        return idStr;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIdStr(String idStr) {
+        this.idStr = idStr;
     }
+    
+    
 
     public int getId() {
         return id;
