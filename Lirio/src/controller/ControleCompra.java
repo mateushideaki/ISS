@@ -22,6 +22,11 @@ public class ControleCompra {
         return this.listaCompras;
     }
     
+    public List<Compra> listarComprasEfetuadas(String busca){
+        this.listaCompras = compraDao.listarComprasEfetuadas(busca);
+        return this.listaCompras;
+    }
+    
     public void cadastrarCompra(Compra c){
         compraDao.cadastrarCompra(c);
     }

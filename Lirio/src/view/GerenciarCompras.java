@@ -5,7 +5,15 @@
  */
 package view;
 
+import controller.ControleCompra;
+import controller.ControleCompraProduto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Compra;
+import model.CompraProduto;
 import model.Fornecedor;
+import util.CompraProdutoTableModel;
+import util.CompraConfirmadaTableModel;
 
 /**
  *
@@ -13,11 +21,23 @@ import model.Fornecedor;
  */
 public class GerenciarCompras extends javax.swing.JFrame {
 
+    private String fornecedorNome;
+    private ControleCompra controleCompra = new ControleCompra();
+    private List<Compra> listaCompra = controleCompra.listarComprasEfetuadas("");
+    private CompraConfirmadaTableModel modelCompra = new CompraConfirmadaTableModel(listaCompra);
+    private Compra compra = new Compra();
+    
+    private ControleCompraProduto controleCP = new ControleCompraProduto();
+    private List<CompraProduto> listaCP;
+    private CompraProdutoTableModel modelCP;
+    private CompraProduto compraProduto = new CompraProduto();
+    
     /**
      * Creates new form Compra
      */
     public GerenciarCompras() {
         initComponents();
+        TabelaDeCompras.setModel(modelCompra);
     }
 
     /**
@@ -30,19 +50,27 @@ public class GerenciarCompras extends javax.swing.JFrame {
     private void initComponents() {
 
         GerenciarCompras = new javax.swing.JLabel();
-        Compras = new javax.swing.JButton();
+        Pedidos = new javax.swing.JButton();
         MenuPrincipal = new javax.swing.JButton();
         Fornecedores = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TabelaDeCompras = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        buscaFornecedor = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TabelaCompraProduto = new javax.swing.JTable();
+        ProdutosCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         GerenciarCompras.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         GerenciarCompras.setText("GERENCIAR COMPRAS");
 
-        Compras.setText("COMPRAS");
-        Compras.addActionListener(new java.awt.event.ActionListener() {
+        Pedidos.setText("PEDIDOS COMPRA");
+        Pedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComprasActionPerformed(evt);
+                PedidosActionPerformed(evt);
             }
         });
 
@@ -60,20 +88,80 @@ public class GerenciarCompras extends javax.swing.JFrame {
             }
         });
 
+        TabelaDeCompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(TabelaDeCompras);
+
+        jLabel4.setText("Compras Realizadas (Pelo Fornecedor):");
+
+        buscaFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaFornecedorActionPerformed(evt);
+            }
+        });
+        buscaFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaFornecedorKeyReleased(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("LISTA DE PRODUTOS DA COMPRA:");
+
+        TabelaCompraProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(TabelaCompraProduto);
+
+        ProdutosCompra.setText("VER PRODUTOS");
+        ProdutosCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProdutosCompraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buscaFornecedor))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Pedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(Fornecedores, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                     .addComponent(MenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(Fornecedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                    .addComponent(ProdutosCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(247, 247, 247)
                 .addComponent(GerenciarCompras)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -82,13 +170,27 @@ public class GerenciarCompras extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(GerenciarCompras)
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(buscaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Pedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(Fornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ProdutosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,15 +202,40 @@ public class GerenciarCompras extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_MenuPrincipalActionPerformed
 
-    private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
+    private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         new Compras().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_ComprasActionPerformed
+    }//GEN-LAST:event_PedidosActionPerformed
 
     private void FornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FornecedoresActionPerformed
         new Fornecedores().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FornecedoresActionPerformed
+
+    private void buscaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaFornecedorActionPerformed
+
+    private void buscaFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaFornecedorKeyReleased
+        this.fornecedorNome = buscaFornecedor.getText();
+        this.listaCompra = controleCompra.listarComprasEfetuadas(this.fornecedorNome);
+        this.modelCompra = new CompraConfirmadaTableModel(listaCompra);
+        TabelaDeCompras.setModel(this.modelCompra);
+    }//GEN-LAST:event_buscaFornecedorKeyReleased
+
+    private void ProdutosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosCompraActionPerformed
+        int linhaSelecionada = TabelaDeCompras.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.compra = modelCompra.get(linhaSelecionada);
+            this.listaCP = controleCP.listarCP(this.compra);
+            this.modelCP = new CompraProdutoTableModel(listaCP);
+            TabelaCompraProduto.setModel(modelCP);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Selecione uma compra.", "Erro: Nenhuma compra selecionada.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ProdutosCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,10 +270,18 @@ public class GerenciarCompras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Compras;
     private javax.swing.JButton Fornecedores;
     private javax.swing.JLabel GerenciarCompras;
     private javax.swing.JButton MenuPrincipal;
+    private javax.swing.JButton Pedidos;
+    private javax.swing.JButton ProdutosCompra;
+    private javax.swing.JTable TabelaCompraProduto;
+    private javax.swing.JTable TabelaDeCompras;
+    private javax.swing.JTextField buscaFornecedor;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
     float getTotal() {

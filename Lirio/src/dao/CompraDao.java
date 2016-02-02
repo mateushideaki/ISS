@@ -41,6 +41,22 @@ public class CompraDao {
         return this.listaCompras;
     }
 
+    public List<Compra> listarComprasEfetuadas(String nomeFornecedor) {
+        if (sessao.isConnected()) {
+            sessao.close();
+        }
+        sessao = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria cri = sessao.createCriteria(Compra.class);
+        Criterion _nome = Restrictions.like("fornecedorNome", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _flag = Restrictions.like("flag", "2" ,MatchMode.ANYWHERE);
+        cri.add(_nome);
+        cri.add(_flag);
+        cri.addOrder(Order.asc("id"));
+        this.listaCompras = cri.list();
+        return this.listaCompras;
+    }
+    
     public void cadastrarCompra(Compra c) {
         try {
             if (sessao.isConnected()) {
