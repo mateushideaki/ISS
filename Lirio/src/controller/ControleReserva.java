@@ -67,5 +67,28 @@ public class ControleReserva {
         return true;
     }
     
-    
+     public String removeProdutoLista(int linha,int qnt,int qntatual,List p) {
+         if (linha >0){
+             if (qnt >0){
+                 if (qnt < qntatual){
+                     return("Quantidade decrementada");
+                 }
+                 else{
+                     if (qnt == qntatual){
+                         return("Produto Removido");
+                     }
+                     else{
+                         return("ERRO:Quantidade a ser removida é maior que quantidade na lista");
+                     }
+                 }
+             }
+             else{
+                 return("ERRO:Quantidade menor que 1");
+             }
+         }
+         else{
+             return("ERRO:Selecione um produto");
+         }
+       
+    }
 }
