@@ -8,6 +8,10 @@ import dao.CompraDao;
 import java.util.List;
 import java.util.Objects;
 import model.Compra;
+import model.Fornecedor;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 /**
  *
  * @author lucas
@@ -40,6 +44,19 @@ public class ControleCompra {
         compraDao.alterarCompra(c);
     }
 
+    public void confirmarCompra(int id, String nome, float total, Fornecedor forn, Date dataCompra, Date dataRecebimento){
+        Compra c = new Compra();
+        c.setId(id);
+        c.setFornecedorNome(nome);
+        c.setFornecedor(forn);
+        c.setDataCompra(dataCompra);
+        c.setTotal(total);
+        c.setDataRecebimento(dataRecebimento);
+        c.setFlag("2");
+        
+        compraDao.alterarCompra(c);
+    }
+    
     public Compra getCompra() {
         return compra;
     }

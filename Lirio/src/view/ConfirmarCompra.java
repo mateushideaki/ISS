@@ -457,6 +457,7 @@ public class ConfirmarCompra extends javax.swing.JFrame {
             Calendar cal = new GregorianCalendar();
             cal.setTime(d);
             Compra confirmada = new Compra();
+            
             confirmada.setDataCompra(this.compra.getDataCompra());
             confirmada.setId(this.compra.getId());
             confirmada.setFlag("2");
@@ -467,7 +468,14 @@ public class ConfirmarCompra extends javax.swing.JFrame {
             
             this.controleCompra.alterarCompra(confirmada);
             
+            int id = this.compra.getId();
+            Date dataCompra = this.compra.getDataCompra();
+            Date dataRecebimento = d;
+            String nome = this.compra.getFornecedorNome();
+            Fornecedor forn = this.compra.getFornecedor();
+            Float total = this.compraConfirmada.getTotal();
             ListIterator listIt = listaCompraP.listIterator();
+            this.controleCompra.confirmarCompra(id, nome, total, forn, dataCompra, dataRecebimento);
             CompraProduto prod;
             while (listIt.hasNext()) {                              
                 CompraProduto cpIt = (CompraProduto) listIt.next();
@@ -490,7 +498,8 @@ public class ConfirmarCompra extends javax.swing.JFrame {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(this, "Compra: " + confirmada.getId() + "\nFornecedor: "+confirmada.getFornecedorNome()+ "\nValor: " + confirmada.getTotal() + "\n\nFoi efetuada.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Compra: " + id + "\nFornecedor: "+nome+ "\nValor: " + total + "\n\nFoi efetuada.", "Compra confirmada.", JOptionPane.INFORMATION_MESSAGE);
+            
             new JanelaEscolhePagamentoCompra(confirmada).setVisible(true);
             this.dispose();
         }
