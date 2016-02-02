@@ -56,7 +56,7 @@ public class ControlePagamento {
     public String pagarParcela(ParcelaVenda parcela){
         Calendar c = Calendar.getInstance();
         Date d = c.getTime();
-        if(!parcela.getStatus().equals("Pago")){
+        if(parcela.getStatus().equals("Pendente")){
             parcela.setStatus("Pago");
             parcela.setDataPagamento(d);
             parcela.getPagVenda().setParcelasNaoPagas(parcela.getPagVenda().getParcelasNaoPagas() -1);
@@ -65,9 +65,9 @@ public class ControlePagamento {
             parcelaDao.alterarParcela(parcela);
             pagamentoDao.alterarPagamentoCliente(parcela.getPagVenda());
             return "sucesso";
-        } else {
+        } else if (parcela.getStatus().equals("Pago")){
             return "parcelaPaga";
-        }
+        } else return "Erro, status inconsistente.";
     }
     
     
