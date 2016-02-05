@@ -9,6 +9,7 @@ import controller.ControlePagamento;
 import controller.ControleVenda;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Venda;
 
 /**
@@ -165,17 +166,35 @@ public class CadastroPagCli extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastraPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastraPagActionPerformed
-        PagamentoClienteView pag = new PagamentoClienteView();
-        int numParcelas = Integer.parseInt(this.numP.getText());
-        float vAdicional = Integer.parseInt(this.juros.getText());
-        float valorFinal = this.venda.getTotal() * (1 + (vAdicional / 100));
-        if (valorFinal != this.venda.getTotal()) {
-            this.venda.setTotal(valorFinal);
-            cv.alterarVenda(venda);
+        int dia = Integer.parseInt(diaPag.getText());
+        try {
+            Float jur = Float.parseFloat(juros.getText());
+            int numParcelas = Integer.parseInt(numP.getText());
+            if (0 < dia && dia <= 31) {
+                if (jur >= 0 && jur <= 12) {
+                    if (numParcelas > 0) {
+                        float vAdicional = jur;
+                        float valorFinal = this.venda.getTotal() * (1 + (vAdicional / 100));
+                        if (valorFinal != this.venda.getTotal()) {
+                            this.venda.setTotal(valorFinal);
+                            cv.alterarVenda(venda);
+                        }
+                        controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal() / numParcelas, this.venda.getTotal());
+                        new VendasRealizadas().setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Número de parcelas negativo.", "Erro:", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Juros inválido, digite um valor entre 0 e 12.", "Erro:", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Dia inválido.", "Erro:", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Juros inválido, a casa decimal deve ser separada por ponto.", "Erro:", JOptionPane.ERROR_MESSAGE);
         }
-        controler.cadastrarPagamento(venda, venda.getCliente(), Integer.parseInt(this.diaPag.getText()), numParcelas, this.venda.getTotal() / numParcelas, this.venda.getTotal());
-        new VendasRealizadas().setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_CadastraPagActionPerformed
 
     private void jurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jurosActionPerformed

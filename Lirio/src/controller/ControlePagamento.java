@@ -70,11 +70,27 @@ public class ControlePagamento {
         } else return "Erro, status inconsistente.";
     }
     
+    public String pagarParcela(ParcelaCompra parcela){
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        if(parcela.getStatus().equals("Pendente")){
+            parcela.setStatus("Pago");
+            parcela.setDataPagamento(d);
+            parcela.getPagCompra().setParcelasNaoPagas(parcela.getPagCompra().getParcelasNaoPagas() -1);
+            parcela.getPagCompra().setParcelasPagas(parcela.getPagCompra().getParcelasPagas() +1);
+            parcela.getPagCompra().setValorRestante(parcela.getPagCompra().getValorRestante() - parcela.getPreco());
+            parcelaDao.alterarParcela(parcela);
+            pagamentoDao.alterarPagamentoFornecedor(parcela.getPagCompra());
+            return "sucesso";
+        } else if (parcela.getStatus().equals("Pago")){
+            return "parcelaPaga";
+        } else return "Erro, status inconsistente.";
+    }
+    
     
     
     public void pagamentoAVista(Venda venda, Cliente cli, float valorTotal){
         PagamentoCliente pag = new PagamentoCliente();
-        System.out.println(Integer.toString(venda.getId()));
         pag.setVenda(venda);
         pag.setCliente(cli);
         pag.setNomeCliente();
@@ -101,7 +117,7 @@ public class ControlePagamento {
     
     public void pagamentoAVista(Compra compra, Fornecedor forn, float valorTotal){
         PagamentoFornecedor pag = new PagamentoFornecedor();
-        pag.setCompra(compra); 
+        pag.setCompra(compra);
         pag.setFornecedor(forn);
         pag.setNomeFornecedor();
         pag.setDiaVencimento(0);
@@ -114,6 +130,7 @@ public class ControlePagamento {
         Date d = c.getTime();
         ParcelaCompra p = new ParcelaCompra();
         p.setDataVencimento(d);
+        p.setDataPagamento(d);
         p.setPagCompra(pag);
         p.setIdStr(Integer.toString(compra.getId()));
         p.setPreco(pag.getValorParcela());
@@ -139,11 +156,11 @@ public class ControlePagamento {
 
         auxD = c.getTime();
         dia = pag.getDiaVencimento();
-        if (dia < auxD.getDay()) {
+        if (dia > auxD.getDay()) {
             mes = auxD.getMonth();
-            ano = auxD.getYear();
+            ano = auxD.getYear() + 1900;
         } else if (auxD.getMonth() < 12) {
-            mes = auxD.getMonth()+ 1900 + 1;
+            mes = auxD.getMonth() + 1;
             ano = auxD.getYear() + 1900;
         } else {
             mes = 1;
@@ -152,7 +169,6 @@ public class ControlePagamento {
 
         for (int i = 1; i <= pag.getParcelasNaoPagas(); i++) {
             parcela = new ParcelaCompra();
-            d = c.getTime();
             c.set(ano, mes, dia);
             d = c.getTime();
             parcela.setDataVencimento(d);
@@ -189,9 +205,9 @@ public class ControlePagamento {
 
         auxD = c.getTime();
         dia = pag.getDiaVencimento();
-        if (dia < auxD.getDay()) {
+        if (dia > auxD.getDay()) {
             mes = auxD.getMonth();
-            ano = auxD.getYear();
+            ano = auxD.getYear() + 1900;
         } else if (auxD.getMonth() < 12) {
             mes = auxD.getMonth() + 1;
             ano = auxD.getYear() + 1900;

@@ -20,6 +20,7 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
     private static final int ParcelasPagas = 3;
     private static final int ParcelasNaoPagas = 4;
     private static final int ValorRestante = 5;
+    private static final int Total = 6;
 
     private List<PagamentoFornecedor> lista;
 
@@ -37,7 +38,7 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
     }
 
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     public String getColumnName(int column) {
@@ -60,6 +61,9 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
         if (column == ValorRestante) {
             return "Valor_Restante";
         }
+        if (column == Total) {
+            return "Total";
+        }
         return ""; //Nunca deve ocorrer  
     }
 
@@ -78,6 +82,8 @@ public class PagamentoFornecedorTableModel extends AbstractTableModel{
             return v.getParcelasNaoPagas();
         } else if (column == ValorRestante) {
             return v.getValorRestante();
+        } else if (column == Total) {
+            return v.getValorTotal();
         }
         
         return ""; //Nunca deve ocorrer  

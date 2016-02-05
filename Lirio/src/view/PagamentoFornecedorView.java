@@ -5,17 +5,56 @@
  */
 package view;
 
+import controller.ControlePagamento;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
+import model.PagamentoFornecedor;
+import util.PagamentoFornecedorTableModel;
+
 /**
  *
  * @author lucas
  */
 public class PagamentoFornecedorView extends javax.swing.JFrame {
-
+    private String fornecedorNome;
+    private ControlePagamento controlePag = new ControlePagamento();
+    private List<PagamentoFornecedor> lista = controlePag.listarPagamentoFor("");
+    private PagamentoFornecedorTableModel tableModel = new PagamentoFornecedorTableModel(lista);
+    private PagamentoFornecedor pf = new PagamentoFornecedor();
     /**
      * Creates new form PagamentoFornecedor
      */
     public PagamentoFornecedorView() {
         initComponents();
+        tabelaPag.setModel(tableModel);
+        tabelaPag.setAutoResizeMode(1);
+
+        TableColumn column = null;
+        for (int i = 0; i < 6; i++) {
+            column = tabelaPag.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(15); 
+            } 
+            if (i == 1){
+                column.setPreferredWidth(60);
+            }
+            if (i == 2){
+                column.setPreferredWidth(65);
+            }
+            if (i == 3){
+                column.setPreferredWidth(100);
+            }
+            if (i == 4){
+                column.setPreferredWidth(120);
+            }
+            if (i == 5){
+                column.setPreferredWidth(100);
+            }
+            if (i == 6){
+                column.setPreferredWidth(10);
+            }
+        }
     }
 
     /**
@@ -27,31 +66,51 @@ public class PagamentoFornecedorView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        verParcelas = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        buscaTxt2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        Atualiza = new javax.swing.JButton();
-        Confirma = new javax.swing.JButton();
-        Voltar = new javax.swing.JButton();
-        ExcluirPag = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        tabelaPag = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        verParcelas.setText("VER PARCELAS");
+        verParcelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verParcelasActionPerformed(evt);
+            }
+        });
+
+        Voltar.setText("VOLTAR");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("PAGAMENTO FORNECEDOR");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Pesquise um fornecedor:");
+
+        buscaTxt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                buscaTxt2ActionPerformed(evt);
+            }
+        });
+        buscaTxt2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaTxt2KeyReleased(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("PAGAMENTOS REGISTRADOS:");
+
+        tabelaPag.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -62,106 +121,89 @@ public class PagamentoFornecedorView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("PAGAMENTOS PENDENTES:");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID_Pag", "Fornecedor", "ValorParcela", "ParcelasPendentes"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        Atualiza.setText("ATUALIZAR PARCELA");
-
-        Confirma.setText("CONFIRMAR");
-
-        Voltar.setText("VOLTAR");
-        Voltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VoltarActionPerformed(evt);
-            }
-        });
-
-        ExcluirPag.setText("EXCLUIR PAGAMENTO");
-
-        jLabel2.setText("Pesquise um fornecedor:");
+        jScrollPane2.setViewportView(tabelaPag);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buscaTxt2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(40, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(31, 31, 31)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Atualiza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Confirma, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ExcluirPag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Voltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                    .addComponent(verParcelas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(119, 119, 119))
+                .addGap(237, 237, 237))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buscaTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Confirma)
-                        .addGap(82, 82, 82)
-                        .addComponent(Atualiza)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ExcluirPag)))
-                .addGap(31, 31, 31)
-                .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(verParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void verParcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verParcelasActionPerformed
+        int linhaSelecionada = tabelaPag.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            this.pf = this.tableModel.get(linhaSelecionada);
+            new ParcelasCompra(this.pf).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um pagamento.", "Erro: Nenhum pagamento selecionado.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_verParcelasActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
-       this.dispose();
+        new MenuInicial().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
+
+    private void buscaTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTxt2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaTxt2ActionPerformed
+
+    private void buscaTxt2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaTxt2KeyReleased
+        this.fornecedorNome = buscaTxt.getText();
+        this.lista = controlePag.listarPagamentoFor(fornecedorNome);
+        this.tableModel = new PagamentoFornecedorTableModel(lista);
+        tabelaPag.setModel(tableModel);
+    }//GEN-LAST:event_buscaTxt2KeyReleased
 
     /**
      * @param args the command line arguments
@@ -200,17 +242,15 @@ public class PagamentoFornecedorView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Atualiza;
-    private javax.swing.JButton Confirma;
-    private javax.swing.JButton ExcluirPag;
     private javax.swing.JButton Voltar;
+    private javax.swing.JTextField buscaTxt;
+    private javax.swing.JTextField buscaTxt1;
+    private javax.swing.JTextField buscaTxt2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaPag;
+    private javax.swing.JButton verParcelas;
     // End of variables declaration//GEN-END:variables
 }

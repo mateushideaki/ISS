@@ -36,9 +36,9 @@ public class PagamentoDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(PagamentoFornecedor.class);
-        Criterion _nome = Restrictions.like("nomeFor", nomeFornecedor, MatchMode.ANYWHERE);
+        Criterion _nome = Restrictions.like("nomeFornecedor", nomeFornecedor, MatchMode.ANYWHERE);
         cri.add(_nome);
-        cri.addOrder(Order.asc("nomeFor"));
+        cri.addOrder(Order.asc("id"));
         this.listaPagFor = cri.list();
         return this.listaPagFor;
     }

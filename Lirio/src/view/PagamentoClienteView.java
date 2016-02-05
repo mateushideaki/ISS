@@ -9,6 +9,7 @@ import controller.ControlePagamento;
 import model.PagamentoCliente;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import util.PagamentoClienteTableModel;
 
 /**
@@ -29,7 +30,33 @@ public class PagamentoClienteView extends javax.swing.JFrame {
     public PagamentoClienteView() {
         initComponents();
         tabelaPag.setModel(tableModel);
-        
+        tabelaPag.setAutoResizeMode(1);
+
+        TableColumn column = null;
+        for (int i = 0; i < 6; i++) {
+            column = tabelaPag.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(15); 
+            } 
+            if (i == 1){
+                column.setPreferredWidth(60);
+            }
+            if (i == 2){
+                column.setPreferredWidth(65);
+            }
+            if (i == 3){
+                column.setPreferredWidth(100);
+            }
+            if (i == 4){
+                column.setPreferredWidth(120);
+            }
+            if (i == 5){
+                column.setPreferredWidth(100);
+            }
+            if (i == 6){
+                column.setPreferredWidth(15);
+            }
+        }
     }
 
     /**
@@ -139,11 +166,14 @@ public class PagamentoClienteView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 31, Short.MAX_VALUE)
                         .addComponent(Atualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(119, 119, 119)
+                        .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
 
         pack();

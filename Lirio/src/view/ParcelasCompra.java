@@ -8,33 +8,33 @@ package view;
 import controller.ControlePagamento;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.PagamentoCliente;
-import model.ParcelaVenda;
-import util.PagamentoClienteTableModel;
-import util.ParcelaVendaTableModel;
+import model.PagamentoFornecedor;
+import model.ParcelaCompra;
+import util.ParcelaCompraTableModel;
 
 /**
  *
  * @author Mateus
  */
-public class ParcelasVenda extends javax.swing.JFrame {
+public class ParcelasCompra extends javax.swing.JFrame {
 
-    private PagamentoCliente pc;
-    private ParcelaVenda pv;
+    private PagamentoFornecedor pf;
+    private ParcelaCompra pc;
     private ControlePagamento controlePag = new ControlePagamento();
-    private List<ParcelaVenda> lista;
-    private ParcelaVendaTableModel tableModel;
+    private List<ParcelaCompra> lista;
+    private ParcelaCompraTableModel tableModel;
 
     /**
-     * Creates new form ParcelasVenda
+     * Creates new form ParcelasCompra
      */
-    public ParcelasVenda(PagamentoCliente p) {
+    public ParcelasCompra(PagamentoFornecedor p) {
         initComponents();
-        this.pc = p;
-        lista = controlePag.listarParcelaVenda(Integer.toString(pc.getVenda().getId()));
-        tableModel = new ParcelaVendaTableModel(lista);
+        this.codCompra.setText("" + p.getId());
+        this.pf = p;
+        lista = controlePag.listarParcelaCompra(Integer.toString(pf.getCompra().getId()));
+        tableModel = new ParcelaCompraTableModel(lista);
         tabelaParcelas.setModel(tableModel);
-        this.codVenda.setText(Integer.toString(this.pc.getVenda().getId()));
+        this.codCompra.setText(Integer.toString(this.pf.getCompra().getId()));
     }
 
     /**
@@ -48,7 +48,7 @@ public class ParcelasVenda extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaParcelas = new javax.swing.JTable();
-        codVenda = new javax.swing.JLabel();
+        codCompra = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         pagarParcela = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -68,11 +68,11 @@ public class ParcelasVenda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaParcelas);
 
-        codVenda.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        codVenda.setText("001");
+        codCompra.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        codCompra.setText("001");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setText("PARCELAS DA VENDA");
+        jLabel2.setText("PARCELAS DA COMPRA");
 
         pagarParcela.setText("PAGAR PARCELA");
         pagarParcela.addActionListener(new java.awt.event.ActionListener() {
@@ -94,20 +94,18 @@ public class ParcelasVenda extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pagarParcela, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(codVenda)
-                        .addGap(231, 231, 231))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pagarParcela, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(codCompra)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,14 +113,14 @@ public class ParcelasVenda extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(codVenda))
+                    .addComponent(codCompra))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(pagarParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -135,12 +133,12 @@ public class ParcelasVenda extends javax.swing.JFrame {
         int linhaSelecionada = tabelaParcelas.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            this.pv = this.tableModel.get(linhaSelecionada);
-            String ret = this.controlePag.pagarParcela(pv);
+            this.pc = this.tableModel.get(linhaSelecionada);
+            String ret = this.controlePag.pagarParcela(pc);
             if (ret.equals("sucesso")) {
                 JOptionPane.showMessageDialog(this, "Parcela paga com sucesso.", "Mensagem informativa", JOptionPane.INFORMATION_MESSAGE);
-                lista = controlePag.listarParcelaVenda(Integer.toString(pc.getVenda().getId()));
-                tableModel = new ParcelaVendaTableModel(lista);
+                lista = controlePag.listarParcelaCompra(Integer.toString(pf.getCompra().getId()));
+                tableModel = new ParcelaCompraTableModel(lista);
                 tabelaParcelas.setModel(tableModel);
             } else {
                 JOptionPane.showMessageDialog(this, "Esta parcela já foi paga.", "Aviso:", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +150,7 @@ public class ParcelasVenda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        new PagamentoClienteView().setVisible(true);
+        new PagamentoFornecedorView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -173,26 +171,26 @@ public class ParcelasVenda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ParcelasVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParcelasCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ParcelasVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParcelasCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ParcelasVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParcelasCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ParcelasVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParcelasCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ParcelasVenda(null).setVisible(true);
+                new ParcelasCompra(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel codVenda;
+    private javax.swing.JLabel codCompra;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

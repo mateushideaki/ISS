@@ -6,11 +6,16 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 
@@ -23,15 +28,30 @@ public class PagamentoFornecedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Fornecedor fornecedor;
     private String nomeFornecedor;
-    private Compra compra;
+
     private int parcelasPagas;
     private int parcelasNaoPagas;
     private float valorTotal;
     private float valorParcela;
     private float valorRestante;
     private int diaVencimento;
+    @ManyToOne
+    private Fornecedor fornecedor;
+    @OneToOne
+    private Compra compra;
+    
+    @OneToMany(mappedBy = "pagCompra", cascade = CascadeType.REMOVE)
+    private List<ParcelaCompra> lpf;
+
+    public List<ParcelaCompra> getLpf() {
+        return lpf;
+    }
+
+    public void setLpf(List<ParcelaCompra> lpf) {
+        this.lpf = lpf;
+    }
+    
     
     
     public float getValorTotal() {
@@ -130,6 +150,8 @@ public class PagamentoFornecedor implements Serializable {
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
+    
+    
 
     @Override
     public int hashCode() {

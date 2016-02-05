@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package view;
+import controller.ControlePagamento;
 import model.Compra;
 /**
  *
  * @author lucas
  */
 public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
-
+    ControlePagamento controler = new ControlePagamento();
     private Compra compra;
     
     /**
@@ -19,6 +20,7 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
     public JanelaEscolhePagamentoCompra(Compra c) {
         this.compra = c;
         initComponents();
+        totalTxt1.setText(""+this.compra.getTotal());
         // Compra.getValor = Valor da compra
         //Compra.getDataRecebimento = Data que recebeu a compra, caso use para pagamento a prazo
     }
@@ -35,7 +37,8 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Avista = new javax.swing.JButton();
         Aprazo = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        totalTxt = new javax.swing.JLabel();
+        totalTxt1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,37 +59,43 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("TOTAL:     R$0.00");
+        totalTxt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        totalTxt.setText("TOTAL:     R$");
+
+        totalTxt1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        totalTxt1.setText("0.00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(Avista, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)
-                        .addComponent(Aprazo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 56, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(Avista, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Aprazo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(totalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalTxt)
+                    .addComponent(totalTxt1))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Aprazo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Avista, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,12 +107,13 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AprazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprazoActionPerformed
-        new CadastroPagFc().setVisible(true);
+        new CadastroPagFc(this.compra).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AprazoActionPerformed
 
     private void AvistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvistaActionPerformed
-        new MenuInicial().setVisible(true);
+        controler.pagamentoAVista(compra, compra.getFornecedor(), compra.getTotal());
+        new PagamentoFornecedorView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AvistaActionPerformed
 
@@ -146,6 +156,7 @@ public class JanelaEscolhePagamentoCompra extends javax.swing.JFrame {
     private javax.swing.JButton Aprazo;
     private javax.swing.JButton Avista;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel totalTxt;
+    private javax.swing.JLabel totalTxt1;
     // End of variables declaration//GEN-END:variables
 }
