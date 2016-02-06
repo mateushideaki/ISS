@@ -40,7 +40,6 @@ public class ClienteWebDao {
             sessao = HibernateUtil.getSessionFactory().openSession();
             trans = sessao.beginTransaction();
             
-            cw.setFlag("0");
             sessao.update(cw);
             trans.commit();
 

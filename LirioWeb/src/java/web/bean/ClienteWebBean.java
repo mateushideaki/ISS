@@ -32,12 +32,9 @@ public class ClienteWebBean {
     
     public String cadastrarClienteWeb(){
         clienteWebDao.cadastrarClienteWeb(clienteWeb);
-        clienteWeb.setNome(null);
-        clienteWeb.setEmail(null);
-        clienteWeb.setTelefone(null);
         clienteWeb.setSenha(null);
-        clienteWeb.setCpf(null);
-        clienteWeb.setEndereco(null);
+        clienteWeb.setEmail(null);
+        clienteWeb.setLogin(null);
         
         return "index";
     }
@@ -57,13 +54,16 @@ public class ClienteWebBean {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.clienteWeb);
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.clienteWeb);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -76,6 +76,8 @@ public class ClienteWebBean {
         }
         return true;
     }
+
+    
     
     
     
