@@ -10,8 +10,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import model.Reserva;
 import model.ReservaProduto;
+import model.Produto;
+import dao.ProdutoDao;
 import dao.ReservaProdutoDao;
 import dao.ReservaDao;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author usuario
@@ -19,9 +23,16 @@ import dao.ReservaDao;
 @ManagedBean
 @SessionScoped
 public class ReservaBean {
+    
     private ReservaDao rd = new ReservaDao();
     private ReservaProdutoDao rpd = new ReservaProdutoDao();
     private Reserva r = new Reserva();
+    private ProdutoDao pd = new ProdutoDao();
+    private Produto p = new Produto();
     private ReservaProduto rp = new ReservaProduto();
+    private List<Reserva> listaR= rd.listarReservas("");
+    private List<ReservaProduto> listaRP= rpd.listarRP(r);
+    private List<Produto> listaP= pd.listarProdutos("");
+    
     
 }
