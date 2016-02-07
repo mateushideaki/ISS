@@ -48,9 +48,9 @@ public class ClienteDao {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         Criteria cri = sessao.createCriteria(Cliente.class);
-        Criterion _nome = Restrictions.like("cpf", cpf, MatchMode.ANYWHERE);
+        Criterion _cpf = Restrictions.like("cpf", cpf, MatchMode.ANYWHERE);
         Criterion _flag = Restrictions.like("flag", "1" ,MatchMode.ANYWHERE);
-        cri.add(_nome);
+        cri.add(_cpf);
         cri.add(_flag);
         cri.addOrder(Order.asc("cpf"));
         this.listaClientes = cri.list();

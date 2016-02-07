@@ -13,8 +13,8 @@
                     Login(CPF): <h:inputText id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}"/>
                     Senha: <h:inputSecret id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}"/>
         
-                    <h:commandButton value="Logar" action="#{clienteWebBean.cadastrarClienteWeb}"/>
-                    <h:commandButton value="Cadastrar" action="#{clienteWebBean.verificarCpf(clienteWebBean.clienteWeb.login)}"/>
+                    <h:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
+                    <h:commandButton value="Cadastrar" action="index"/>
                 </h:panelGrid>
                 
             </h:form>

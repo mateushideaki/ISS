@@ -16,7 +16,9 @@
                     Email: <h:inputText id ="emailTxt" value="#{clienteWebBean.clienteWeb.email}"/>
                     
                     <h:commandButton value="Cadastrar" action="#{clienteWebBean.cadastrarClienteWeb}"/>
-                    <h:commandButton value="Verificar Cpf" action="#{clienteWebBean.verificarCpf(clienteWebBean.clienteWeb.login)}"/>
+                    <h:commandButton value="Verificar Cpf" action="#{clienteWebBean.verificarCpf()}"/>
+                    <h:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
+                    <h:commandButton value="Proxima pagina" action="logar"/>
                 </h:panelGrid>
                 <h:dataTable value="" var="hu3">
                     <h:column>

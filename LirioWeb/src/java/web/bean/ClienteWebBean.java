@@ -31,20 +31,33 @@ public class ClienteWebBean {
     private Cliente cliente = new Cliente();
     private ClienteDao clienteDao = new ClienteDao();
     private List<Cliente> listaClientes;
+    private List<ClienteWeb> listaClientesWeb;
     
     public ClienteWebBean() {
     }
 
-    public String verificarCpf(String cpf){
-        this.listaClientes = clienteDao.listarClientesCpf(cpf);
-        if(listaClientes.isEmpty()){
+    public String verificarCpf(){
+        this.listaClientes = clienteDao.listarClientesCpf(clienteWeb.getLogin());
+        if(this.listaClientes.isEmpty()){
             return "cpf não está no banco de dados";
         }else{
-            return "cpf está no banco de dados";
-        }
-        
+            this.listaClientesWeb = clienteWebDao.verificarCpf(clienteWeb.getLogin());
+            if (this.listaClientesWeb.isEmpty()) {
+                return "Este cpf pode ser cadastrado";
+            }else{
+                return "Este cpf já foi cadastrado";
+            }
+        }       
     }
     
+    public String verificarConta(){
+        this.listaClientesWeb = clienteWebDao.verificarConta(clienteWeb.getLogin(),clienteWeb.getSenha());
+        if (this.listaClientesWeb.isEmpty()) {
+            return "Login ou senha inválidos";
+        }else{
+            return "logado";
+        }     
+    } 
     
     public String cadastrarClienteWeb(){
         clienteWebDao.cadastrarClienteWeb(clienteWeb);

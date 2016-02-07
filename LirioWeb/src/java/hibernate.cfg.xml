@@ -9,5 +9,6 @@
     <property name="hibernate.connection.password">2kwyzf</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="web.model.ClienteWeb"/>
+    <mapping class="model.Cliente"/>
   </session-factory>
 </hibernate-configuration>
