@@ -17,6 +17,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
 import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JFrame {
     private ControleCliente controler = new ControleCliente();
+    private List<Cliente> listaClientes;
     /**
      * Creates new form CadastroCliente
      */
@@ -281,38 +283,46 @@ public class CadastroCliente extends javax.swing.JFrame {
             if(rg.getText().endsWith(" ") || enderecoCliente.getText().endsWith(" ") || nomeCliente.getText().endsWith(" ") || telCliente.getText().endsWith(" ")){
                             JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser digitados.", "Erro.", JOptionPane.ERROR_MESSAGE);
             }else{
+                
                 cliente.setRg(rg.getText());
-                cliente.setCpf(cpf.getText());
-                cliente.setEndereco(enderecoCliente.getText());
-                String dia = dataNasc.getText().substring(0,2);
-                int diaInt = Integer.valueOf(dia);
-                String mes = dataNasc.getText().substring(3,5);
-                int mesInt= Integer.valueOf(mes);
-                String ano = dataNasc.getText().substring(6,10);
-                int anoInt = Integer.valueOf(ano);
-                Calendar c = Calendar.getInstance();
-                c.set(anoInt,mesInt-1,diaInt);
-                Date d = c.getTime();
-                cliente.setDataNasc(d);
-                cliente.setNome(nomeCliente.getText());
-                cliente.setTel(telCliente.getText());
-                cliente.setTel2(tel2Cliente.getText());
-                cliente.setFlag("1");
-                if(Masc.isSelected()){
-                    cliente.setSexo("M");
-                    cliente.setEmail(emailCliente.getText());
-                    controler.cadastrarCliente(cliente);
-                    new Clientes().setVisible(true);
-                    this.dispose();
-                }else if(Fem.isSelected()){
-                    cliente.setSexo("F");
-                    cliente.setEmail(emailCliente.getText());
-                    controler.cadastrarCliente(cliente);
-                    new Clientes().setVisible(true);
-                    this.dispose();
+                listaClientes = controler.listarClientesCpf(cpf.getText());
+                if(listaClientes.isEmpty()){
+                    cliente.setCpf(cpf.getText());
+                    cliente.setEndereco(enderecoCliente.getText());
+                    String dia = dataNasc.getText().substring(0,2);
+                    int diaInt = Integer.valueOf(dia);
+                    String mes = dataNasc.getText().substring(3,5);
+                    int mesInt= Integer.valueOf(mes);
+                    String ano = dataNasc.getText().substring(6,10);
+                    int anoInt = Integer.valueOf(ano);
+                    Calendar c = Calendar.getInstance();
+                    c.set(anoInt,mesInt-1,diaInt);
+                    Date d = c.getTime();
+                    cliente.setDataNasc(d);
+                    cliente.setNome(nomeCliente.getText());
+                    cliente.setTel(telCliente.getText());
+                    cliente.setTel2(tel2Cliente.getText());
+                    cliente.setFlag("1");
+                    if(Masc.isSelected()){
+                        cliente.setSexo("M");
+                        cliente.setEmail(emailCliente.getText());
+                        controler.cadastrarCliente(cliente);
+                        new Clientes().setVisible(true);
+                        this.dispose();
+                    }else if(Fem.isSelected()){
+                        cliente.setSexo("F");
+                        cliente.setEmail(emailCliente.getText());
+                        controler.cadastrarCliente(cliente);
+                        new Clientes().setVisible(true);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Não foi selecionado nenhum sexo", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                 }else{
-                    JOptionPane.showMessageDialog(null, "Não foi selecionado nenhum sexo", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Este CPF ja foi cadastrado", "Erro de validação", JOptionPane.ERROR_MESSAGE);
                 }
+                
             }
             
             

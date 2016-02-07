@@ -40,6 +40,22 @@ public class ClienteDao {
         this.listaClientes = cri.list();
         return this.listaClientes;
     }
+    
+    public List<Cliente> listarClientesCpf(String cpf) {
+        if (sessao.isConnected()) {
+            sessao.close();
+        }
+        sessao = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria cri = sessao.createCriteria(Cliente.class);
+        Criterion _nome = Restrictions.like("cpf", cpf, MatchMode.ANYWHERE);
+        Criterion _flag = Restrictions.like("flag", "1" ,MatchMode.ANYWHERE);
+        cri.add(_nome);
+        cri.add(_flag);
+        cri.addOrder(Order.asc("cpf"));
+        this.listaClientes = cri.list();
+        return this.listaClientes;
+    }
 
     public void cadastrarCliente(Cliente c) {
         try {

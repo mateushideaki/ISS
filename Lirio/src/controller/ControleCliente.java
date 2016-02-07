@@ -23,6 +23,11 @@ public class ControleCliente {
         return this.listaClientes;
     }
     
+    public List<Cliente> listarClientesCpf(String busca){
+        this.listaClientes = clienteDao.listarClientesCpf(busca);
+        return this.listaClientes;
+    }
+    
     public void cadastrarCliente(Cliente c){
         clienteDao.cadastrarCliente(c);
     }

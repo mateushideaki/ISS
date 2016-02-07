@@ -13,7 +13,7 @@ import web.util.HibernateUtil;
  * @author lucas
  */
 public class ClienteWebDao {
-    private Session sessao;
+    private Session sessao= util.HibernateUtil.getSessionFactory().openSession();
     private Transaction trans;
     
     public void cadastrarClienteWeb(ClienteWeb cw){

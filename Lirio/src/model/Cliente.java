@@ -7,25 +7,31 @@ package model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import org.hibernate.mapping.OneToOne;
 /**
  *
  * @author lucas
  */
 @Entity
+//@Table(name="cliente", uniqueConstraints = {@UniqueConstraint(columnNames= {"id", "cpf"})})
 public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
     private String rg;
+    @Column(unique=true)
     @JoinColumn(name = "cpf", unique = true)
     private String cpf;
     private String endereco;

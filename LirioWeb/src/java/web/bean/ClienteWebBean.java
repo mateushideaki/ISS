@@ -5,9 +5,12 @@
  */
 package web.bean;
 
+import dao.ClienteDao;
+import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import model.Cliente;
 import web.dao.ClienteWebDao;
 import web.model.ClienteWeb;
 
@@ -25,17 +28,29 @@ public class ClienteWebBean {
     
     private ClienteWeb clienteWeb = new ClienteWeb();
     private ClienteWebDao clienteWebDao = new ClienteWebDao();
+    private Cliente cliente = new Cliente();
+    private ClienteDao clienteDao = new ClienteDao();
+    private List<Cliente> listaClientes;
     
     public ClienteWebBean() {
     }
 
+    public String verificarCpf(String cpf){
+        this.listaClientes = clienteDao.listarClientesCpf(cpf);
+        if(listaClientes.isEmpty()){
+            return "cpf não está no banco de dados";
+        }else{
+            return "cpf está no banco de dados";
+        }
+        
+    }
+    
     
     public String cadastrarClienteWeb(){
         clienteWebDao.cadastrarClienteWeb(clienteWeb);
         clienteWeb.setSenha(null);
         clienteWeb.setEmail(null);
         clienteWeb.setLogin(null);
-        
         return "index";
     }
     
