@@ -5,7 +5,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" >
     <head>
         <title>Lirio Web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,6 +16,11 @@ and open the template in the editor.
     <body>
         <center>
             <div>Reserva</div>
+            <h:form id="form">
+                <p:dataList value="#{ReservaBean.ListaP}" var="prod" type="ordered">
+                    #{prod.id}, #{prod.nome}
+                </p:dataList>
+            </h:form>
         </center>
     </body>
 </html>

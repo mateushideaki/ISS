@@ -14,6 +14,7 @@ import model.Produto;
 import dao.ProdutoDao;
 import dao.ReservaProdutoDao;
 import dao.ReservaDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
-public class ReservaBean {
+public class ReservaBean implements Serializable {
     
     private ReservaDao rd = new ReservaDao();
     private ReservaProdutoDao rpd = new ReservaProdutoDao();
