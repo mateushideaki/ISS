@@ -11,14 +11,18 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui" >
     <head>
         <title>Lirio Web</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body>  
         <center>
             <div>Reserva</div>
             <h:form id="form">
-                <p:dataList value="#{ReservaBean.ListaP}" var="prod" type="ordered">
-                    #{prod.id}, #{prod.nome}
+                <p:dataList value="#{resBean.getListaP()}" var="prod" id="tabela" type="ordened">
+                    <p:column>
+                        <f:facet name="header">
+                            ID
+                        </f:facet>
+                        <h:outputText value="#{prod.id}"/>
+                    </p:column>
                 </p:dataList>
             </h:form>
         </center>

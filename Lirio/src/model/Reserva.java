@@ -30,7 +30,7 @@ public class Reserva implements Serializable{
     private Date dataReserva;
     @ManyToOne
     private Cliente cliente;
-    @OneToMany(mappedBy = "reserva", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
     private List<ReservaProduto> lrp;
     private String nomeCliente;
     private float preco;

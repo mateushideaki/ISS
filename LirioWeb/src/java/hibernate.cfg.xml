@@ -10,5 +10,8 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="web.model.ClienteWeb"/>
     <mapping class="model.Cliente"/>
+    <mapping class="model.Produto"/>
+    <mapping class="model.Reserva"/>
+    <mapping class="model.ReservaProduto"/>
   </session-factory>
 </hibernate-configuration>

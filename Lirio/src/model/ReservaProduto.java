@@ -6,11 +6,13 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 
 /**
  *
@@ -22,9 +24,9 @@ public class ReservaProduto implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Reserva reserva;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Produto produto;
     private int quantidade;
     private float preco;
