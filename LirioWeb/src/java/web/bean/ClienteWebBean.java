@@ -8,8 +8,10 @@ package web.bean;
 import dao.ClienteDao;
 import java.util.List;
 import java.util.Objects;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import model.Cliente;
 import web.dao.ClienteWebDao;
 import web.model.ClienteWeb;
@@ -32,21 +34,35 @@ public class ClienteWebBean {
     private ClienteDao clienteDao = new ClienteDao();
     private List<Cliente> listaClientes;
     private List<ClienteWeb> listaClientesWeb;
-    private String loginMessage = "";
+    private String confirmaSenha;
+
+    public String getConfirmaSenha() {
+        return confirmaSenha;
+    }
+
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+    private String loginMessage;
     
     public ClienteWebBean() {
+        this.loginMessage = "";
     }
 
     public String verificarCpf(){
+        
         this.listaClientes = clienteDao.listarClientesCpf(clienteWeb.getLogin());
         if(this.listaClientes.isEmpty()){
-            return "cpf não está no banco de dados";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error!", "Este CPF não está no banco de dados."));
+            return null;
         }else{
             this.listaClientesWeb = clienteWebDao.verificarCpf(clienteWeb.getLogin());
             if (this.listaClientesWeb.isEmpty()){
-                return "Este cpf pode ser cadastrado";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Este CPF pode ser cadastrado."));
+                return null;
             }else{
-                return "Este cpf já foi cadastrado";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CPF já está cadastrado."));
+                return null;
             }
         }       
     }
@@ -54,14 +70,16 @@ public class ClienteWebBean {
     public String verificarConta(){
         this.listaClientesWeb = clienteWebDao.verificarConta(clienteWeb.getLogin(),clienteWeb.getSenha());
         if (this.listaClientesWeb.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage("Erro",
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", "Erro!"));
             this.loginMessage = "Login ou senha inválidos";
-            return null;
+            return "logar";
         }else if(listaClientesWeb.get(0).getLogin().equals(clienteWeb.getLogin()) && listaClientesWeb.get(0).getSenha().equals(clienteWeb.getSenha())){
             this.loginMessage = "";
             return "logado";
         }else{
             this.loginMessage = "Login ou senha inválidos";
-            return null;
+            return "logar";
         }     
     } 
     

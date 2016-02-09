@@ -2,28 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lirio Web</title>
     </h:head>
     <h:body>
         <center>
             <h:form>
-                
-                <p:outputLabel value="Login de ClientesWeb" />
+                <p:outputLabel value="Login de ClientesWeb" style="font-size: 30px" />
                 <br/><br/>
                 <p:panelGrid columns="3">
                     Login(CPF): <p:inputMask id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99"/>
-                    <p:commandButton value="Cadastrar" action="cadastro"/>
+                    <p:commandButton value="Cadastrar" action="cadastro" style="width:225px;height:30px"/>
                     Senha: <p:password id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}" />
+                    <p:commandButton value="Esqueci a Senha" action="esqueciSenha" style="width:225px;height:30px"/>
                     <p:spacer/>
-                    <p:spacer/>
-                    <p:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
+                    <p:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}" style="width:225px;height:30px" />
                     <p:spacer/>
                 </p:panelGrid>
-                <br>
-                    <p:outputLabel value="#{clienteWebBean.loginMessage}"/>
-                </br>
+                <p:messages for="loginTxt"/>
             </h:form>
         </center>
     </h:body>
