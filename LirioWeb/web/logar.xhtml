@@ -1,22 +1,29 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Lirio Web</title>
     </h:head>
     <h:body>
         <center>
             <h:form>
-                Login de ClientesWeb <br/><br/>
-                <h:panelGrid columns = "2">
-                    Login(CPF): <h:inputText id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}"/>
-                    Senha: <h:inputSecret id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}"/>
-        
-                    <h:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
-                    <h:commandButton value="Cadastrar" action="index"/>
-                </h:panelGrid>
                 
+                <p:outputLabel value="Login de ClientesWeb" />
+                <br/><br/>
+                <p:panelGrid columns="3">
+                    Login(CPF): <p:inputMask id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99"/>
+                    <p:commandButton value="Cadastrar" action="cadastro"/>
+                    Senha: <p:password id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}" />
+                    <p:spacer/>
+                    <p:spacer/>
+                    <p:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
+                    <p:spacer/>
+                </p:panelGrid>
+                <br>
+                    <p:outputLabel value="#{clienteWebBean.loginMessage}"/>
+                </br>
             </h:form>
         </center>
     </h:body>

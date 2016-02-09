@@ -32,6 +32,7 @@ public class ClienteWebBean {
     private ClienteDao clienteDao = new ClienteDao();
     private List<Cliente> listaClientes;
     private List<ClienteWeb> listaClientesWeb;
+    private String loginMessage = "";
     
     public ClienteWebBean() {
     }
@@ -42,7 +43,7 @@ public class ClienteWebBean {
             return "cpf não está no banco de dados";
         }else{
             this.listaClientesWeb = clienteWebDao.verificarCpf(clienteWeb.getLogin());
-            if (this.listaClientesWeb.isEmpty()) {
+            if (this.listaClientesWeb.isEmpty()){
                 return "Este cpf pode ser cadastrado";
             }else{
                 return "Este cpf já foi cadastrado";
@@ -53,9 +54,14 @@ public class ClienteWebBean {
     public String verificarConta(){
         this.listaClientesWeb = clienteWebDao.verificarConta(clienteWeb.getLogin(),clienteWeb.getSenha());
         if (this.listaClientesWeb.isEmpty()) {
-            return "Login ou senha inválidos";
-        }else{
+            this.loginMessage = "Login ou senha inválidos";
+            return null;
+        }else if(listaClientesWeb.get(0).getLogin().equals(clienteWeb.getLogin()) && listaClientesWeb.get(0).getSenha().equals(clienteWeb.getSenha())){
+            this.loginMessage = "";
             return "logado";
+        }else{
+            this.loginMessage = "Login ou senha inválidos";
+            return null;
         }     
     } 
     
@@ -64,12 +70,7 @@ public class ClienteWebBean {
         clienteWeb.setSenha(null);
         clienteWeb.setEmail(null);
         clienteWeb.setLogin(null);
-        return "index";
-    }
-    
-    public String removerClienteWeb(){
-        clienteWebDao.removerClienteWeb(clienteWeb);
-        return "removido";
+        return "logar";
     }
     
     public ClienteWeb getClienteWeb() {
@@ -78,6 +79,14 @@ public class ClienteWebBean {
 
     public void setClienteWeb(ClienteWeb clienteWeb) {
         this.clienteWeb = clienteWeb;
+    }
+    
+    public String getLoginMessage() {
+        return loginMessage;
+    }
+
+    public void setLoginMessage(String message) {
+        this.loginMessage = message;
     }
 
     @Override
