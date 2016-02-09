@@ -8,7 +8,9 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,13 +26,15 @@ import javax.persistence.OneToMany;
 
 public class Reserva implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
     @Column(name = "data_Reserva")
     private Date dataReserva;
     @ManyToOne
+    @Cascade(CascadeType.ALL)
     private Cliente cliente;
-    @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reserva")
+    @Cascade(CascadeType.ALL)
     private List<ReservaProduto> lrp;
     private String nomeCliente;
     private float preco;

@@ -6,7 +6,8 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,11 @@ public class ReservaProduto implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
     private Reserva reserva;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
     private Produto produto;
     private int quantidade;
     private float preco;
