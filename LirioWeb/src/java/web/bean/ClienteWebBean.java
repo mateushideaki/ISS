@@ -6,6 +6,7 @@
 package web.bean;
 
 import dao.ClienteDao;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.faces.application.FacesMessage;
@@ -35,7 +36,7 @@ public class ClienteWebBean {
     private List<Cliente> listaClientes;
     private List<ClienteWeb> listaClientesWeb;
     private String confirmaSenha;
-
+    
     public String getConfirmaSenha() {
         return confirmaSenha;
     }
@@ -47,22 +48,23 @@ public class ClienteWebBean {
     
     public ClienteWebBean() {
         this.loginMessage = "";
+             
     }
 
     public String verificarCpf(){
         
         this.listaClientes = clienteDao.listarClientesCpf(clienteWeb.getLogin());
         if(this.listaClientes.isEmpty()){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error!", "Este CPF não está no banco de dados."));
-            return null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Este CPF não está no banco de dados."));
+            return "fail";
         }else{
             this.listaClientesWeb = clienteWebDao.verificarCpf(clienteWeb.getLogin());
             if (this.listaClientesWeb.isEmpty()){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Este CPF pode ser cadastrado."));
-                return null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "CPF Cadastrado."));
+                return "sucess";
             }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CPF já está cadastrado."));
-                return null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error!", "CPF já está cadastrado."));
+                return "fail";
             }
         }       
     }
@@ -71,7 +73,7 @@ public class ClienteWebBean {
         this.listaClientesWeb = clienteWebDao.verificarConta(clienteWeb.getLogin(),clienteWeb.getSenha());
         if (this.listaClientesWeb.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage("Erro",
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", "Erro!"));
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha inválidos!", "Erro!"));
             this.loginMessage = "Login ou senha inválidos";
             return "logar";
         }else if(listaClientesWeb.get(0).getLogin().equals(clienteWeb.getLogin()) && listaClientesWeb.get(0).getSenha().equals(clienteWeb.getSenha())){
@@ -81,14 +83,40 @@ public class ClienteWebBean {
             this.loginMessage = "Login ou senha inválidos";
             return "logar";
         }     
-    } 
+    }
     
-    public String cadastrarClienteWeb(){
-        clienteWebDao.cadastrarClienteWeb(clienteWeb);
+    public void limparFaceContext(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Iterator<FacesMessage> it = context.getMessages();
+        while ( it.hasNext() ) {
+            it.next();
+            it.remove();
+        }
+    }
+    
+    public String cancelar(){
         clienteWeb.setSenha(null);
         clienteWeb.setEmail(null);
         clienteWeb.setLogin(null);
-        return "logar";
+        clienteWeb.setPergunta(null);
+        clienteWeb.setResposta(null);
+        return "logar";      
+    }
+    
+    public String cadastrarClienteWeb(){
+        this.limparFaceContext();
+        String retorno = this.verificarCpf();
+        if(retorno.equals("sucess")){
+            clienteWebDao.cadastrarClienteWeb(clienteWeb);
+            clienteWeb.setSenha(null);
+            clienteWeb.setEmail(null);
+            clienteWeb.setLogin(null);
+            clienteWeb.setPergunta(null);
+            clienteWeb.setResposta(null);
+            return "logar";
+        }else{
+            return null;
+        }        
     }
     
     public ClienteWeb getClienteWeb() {

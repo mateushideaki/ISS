@@ -11,23 +11,24 @@
         <center>
             <h:form>
                 <p:outputLabel value="Login de ClientesWeb" style="font-size: 30px" />
-                <br/><br/>
                 <p:panelGrid id="grid" columns="3">
-                    Login(CPF): <p:inputMask id ="default" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99" required="true"/>
-                    <p:message for="default" />
-                    Senha: <p:password id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}" required="true"/>
-                    <p:message for="senhaTxt"/>
-                    Confirmar Senha: <p:password id="senha2Txt" value="#{clienteWebBean.confirmaSenha}" required="true"/>
-                    <p:message for="senha2Txt"/>
-                    Email: <p:inputText id="emailTxt" value="#{clienteWebBean.clienteWeb.email}"/>
+                    <p:outputLabel for="loginTxt" value="Login:" />
+                    <p:inputMask id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99" required="true" />
+                    <p:message for="loginTxt" />
+                    <p:outputLabel for="senhaTxt" value="Senha:" />
+                    <p:inputText id="senhaTxt" value="#{clienteWebBean.clienteWeb.login}" required="true"/>
+                    <p:outputLabel for="emailTxt" value="Email:" />
+                    <p:inputText id="emailTxt" value="#{clienteWebBean.clienteWeb.email}" required="true"/>
+                    <p:message for="emailTxt"/>
+                    <p:outputLabel for="perguntaTxt" value="Pergunta Secreta:" />
+                    <p:inputText id="perguntaTxt" value="#{clienteWebBean.clienteWeb.pergunta}" required="true"/>
+                    <p:message for="perguntaTxt"/>
+                    <p:outputLabel for="perguntaTxt" value="Pergunta Secreta:" />
+                    <p:inputText id="perguntaTxt" value="#{clienteWebBean.clienteWeb.resposta}" required="true"/>
+                    <p:message for="respostaTxt"/>
+                    <p:commandButton value="Cadastrar" action="#{clienteWebBean.cadastrarClienteWeb}" style="width:225px;height:30px;color: green"/>
                     <p:spacer/>
-                    Pergunta Secreta: <p:inputText id="perguntaTxt" value="#{clienteWebBean.clienteWeb.pergunta}" />
-                    <p:spacer/>
-                    Resposta Secreta: <p:inputText id="respostaTxt" value="#{clienteWebBean.clienteWeb.resposta}" />
-                    <p:spacer/>
-                    <p:spacer/>
-                    <p:commandButton id="cadastrar" value="Cadastrar" action="#{clienteWebBean.cadastrarClienteWeb()}" style="width:225px;height:30px;color: green" update="grid"/>
-                    <p:commandButton value="Cancelar" action="logar" style="width:225px;height:30px" />
+                    <p:commandButton value="Cancelar" action="#{clienteWebBean.cadastrarClienteWeb}" style="width:225px;height:30px;color: red"/> 
                 </p:panelGrid>
             </h:form>
         </center>

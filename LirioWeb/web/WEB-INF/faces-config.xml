@@ -15,4 +15,17 @@
             <to-view-id>/logado.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/cadastro.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{ClienteWebBean.cadastrar}</from-action>
+            <from-outcome>logar</from-outcome>
+            <to-view-id>/logar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{clienteWebBean.cancelar}</from-action>
+            <from-outcome>logar</from-outcome>
+            <to-view-id>/logar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
