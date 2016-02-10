@@ -15,11 +15,11 @@
                 <br/><br/>
                 <p:panelGrid id="grid" columns="3">
                     Login(CPF): <p:inputMask id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99" />
-                    <p:commandButton value="Cadastrar" action="cadastro" style="width:225px;height:30px"/>
+                    <p:commandButton value="Cadastrar" action="cadastro" style="width:225px;height:30px; color: green"/>
                     Senha: <p:password id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}" />
-                    <p:commandButton value="Esqueci a Senha" action="esqueciSenha" style="width:225px;height:30px"/>
+                    <p:commandButton value="Esqueci a Senha" action="#{clienteWebBean.esqueciSenha}" style="width:225px;height:30px; color: red"/>
                     <p:spacer/>
-                    <p:commandButton value="Logar" actionListener="#{clienteWebBean.verificarConta()}" style="width:225px;height:30px" update="grid"/>
+                    <p:commandButton value="Logar" action="#{clienteWebBean.verificarConta}" style="width:225px;height:30px; color: blue" update="grid"/>
                     <p:spacer/>
                 </p:panelGrid>
                 

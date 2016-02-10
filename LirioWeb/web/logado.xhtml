@@ -1,25 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lirio Web</title>
     </h:head>
     <h:body>
         <center>
             <h:form>
+                <p:outputLabel value="Cliente Logado" style="font-size: 30px" />
+                <p:separator />
+                <p:dataTable var="cliente" value="#{clienteWebBean.clienteWeb}">
+                    <p:column headerText="NOME">
+                        <h:outputText value="#{clienteWebBean.cliente.nome}" />
+                    </p:column>
+                    <p:column headerText="CPF">
+                        <h:outputText value="#{clienteWebBean.clienteWeb.login}" />
+                    </p:column>
+                    <p:column headerText="E-MAIL">
+                        <h:outputText value="#{clienteWebBean.clienteWeb.email}" />
+                    </p:column>
+                </p:dataTable>
+                <p:spacer/>
+                <p:spacer/>
+                <p:separator />
+                <p:spacer/>
+                <p:separator />
+                <p:spacer/>
+                <p:spacer/>
                 
-                Conta Logada <br/><br/>
-                <h:panelGrid columns = "2">
-                    Login(CPF): <h:inputText id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}"/>
-                    Senha: <h:inputSecret id ="senhaTxt" value="#{clienteWebBean.clienteWeb.senha}"/>
-        
-                    <h:commandButton value="Logar" action="#{clienteWebBean.verificarConta()}"/>
-                    <h:commandButton value="Cadastrar" action="cadastro"/>
-                </h:panelGrid>
-                <br>
-                    <h:outputText value="#{clienteWebBean.loginMessage}"/>
-                </br>
+                <p:panelGrid id="grid" columns="2">
+                    <p:commandButton value="Reserva" action="reserva" style="width:225px;height:30px; color: green"/>
+                    <p:commandButton value="Logout" action="#{clienteWebBean.logout}" style="width:225px;height:30px; color: red"/>
+                </p:panelGrid>
             </h:form>
         </center>
     </h:body>

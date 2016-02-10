@@ -10,16 +10,20 @@
     <h:body>
         <center>
             <h:form>
-                <p:outputLabel value="Login de ClientesWeb" style="font-size: 30px" />
+                <p:outputLabel value="Esqueci a Senha" style="font-size: 30px" />
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
                 <p:panelGrid id="grid" columns="2">
-                    <p:outputLabel for="loginTxt" value="Login:" />
-                    <p:inputMask id ="loginTxt" value="#{clienteWebBean.clienteWeb.login}" mask="999.999.999-99" required="true" />
-                    <p:outputLabel for="senhaTxt" value="Senha:" />
-                    <p:password id="senhaTxt" value="1234"/>
-                    <p:outputLabel for="senha2Txt" value="Confirmar Senha:" />
-                    <p:password id="senha2Txt" value="#{clienteWebBean.confirmaSenha}" required="true"/>
+                    <p:outputLabel value="Login:"/>
+                    <p:outputLabel value="#{clienteWebBean.clienteWeb.login}"/>
+                    <p:outputLabel value="Pergunta Secreta:"/>
+                    <p:outputLabel value="#{clienteWebBean.clienteWeb.pergunta}"/>
+                    <p:outputLabel value="Resposta Secreta:"/>
+                    <p:inputText id="respostaTxt" value="#{clienteWebBean.confirmaResposta}"/>
+                    <p:spacer/>
+                    <p:spacer/>
+                    <p:commandButton value="Relembrar a senha" action="#{clienteWebBean.relembrarSenha}" style="width:225px;height:30px; color: green" />
+                    <p:commandButton value="Cancelar" action="#{clienteWebBean.cancelar}" style="width:225px;height:30px; color: red"/>
                </p:panelGrid>
-                
             </h:form>
         </center>
     </h:body>
