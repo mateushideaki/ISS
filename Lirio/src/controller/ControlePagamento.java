@@ -156,7 +156,7 @@ public class ControlePagamento {
 
         auxD = c.getTime();
         dia = pag.getDiaVencimento();
-        if (dia > auxD.getDay()) {
+        if (dia > auxD.getDate()) {
             mes = auxD.getMonth();
             ano = auxD.getYear() + 1900;
         } else if (auxD.getMonth() < 12) {
@@ -205,7 +205,7 @@ public class ControlePagamento {
 
         auxD = c.getTime();
         dia = pag.getDiaVencimento();
-        if (dia > auxD.getDay()) {
+        if (dia > auxD.getDate()) {
             mes = auxD.getMonth();
             ano = auxD.getYear() + 1900;
         } else if (auxD.getMonth() < 12) {
