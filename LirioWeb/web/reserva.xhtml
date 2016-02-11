@@ -14,16 +14,34 @@ and open the template in the editor.
     </head>
     <body>  
         <center>
-            <div>Reserva</div>
+
             <h:form id="form">
-                <p:dataList value="#{resBean.getListaP()}" var="prod" id="tabela" type="ordened">
-                    <p:column>
-                        <f:facet name="header">
-                            ID
-                        </f:facet>
-                        <h:outputText value="#{prod.id}"/>
+                <p:outputLabel value="Reserva" style="font-size: 30px" />
+                <p:dataTable var="prod">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="P1"/>
                     </p:column>
-                </p:dataList>
+                    <p:column headerText="DATA">
+                        <p:outputLabel value="P1"/>
+                    </p:column>
+                    <p:column headerText="PRODUTOS">
+                        <p:outputLabel value="P1"/>
+                    </p:column>
+                </p:dataTable>
+            
+            <p:spacer/>
+            <p:spacer/>
+            <p:separator />
+            <p:spacer/>
+            <p:separator />
+            <p:spacer/>
+            <p:spacer/>
+            
+            <p:panelGrid id="grid" columns="2">
+                <p:commandButton value="Nova Reserva" action="novaReserva" style="width:225px;height:30px; color: green"/>
+                <p:commandButton value="Excluir Reserva" style="width:225px;height:30px; color: red"/>
+            </p:panelGrid>
+            <p:commandButton value="Retornar" action="logado" style="width:225px;height:30px; color: red"/>
             </h:form>
         </center>
     </body>
