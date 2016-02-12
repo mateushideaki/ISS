@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui" >
-    <head>
+    <h:head>
         <title>Lirio Web</title>
 
-    </head>
-    <body>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandButton value="Instruções" icon="ui-icon-info" action="instrucoes" style="font-size: 15px; width:225px;height:30px;" />
+        </h:form>
+        
         <center>
             <h:form id="form">
                 <p:outputLabel value="Cadastrar Reserva" style="font-size: 30px" />
                 <p:spacer/>
                 <p:separator />
                 <p:outputLabel value="Produtos" style="font-size: 20px" />
-                <p:dataTable var="prod">
+                <p:contextMenu for="lisp">
+                    <p:menuitem value="Adicionar ao Carrinho" icon="ui-icon-circle-plus"  update="@all">
+ 
+                    </p:menuitem>
+                </p:contextMenu>
+                <p:dataTable value="#{resBean.listaP}" var="prod" id="lisp" rowKey="#{prod.id}" selection="#{reaBean.p}" selectionMode="single">
                     <p:column headerText="ID">
-                        <p:outputLabel value="P1"/>
+                        <p:outputLabel value="#{prod.id}"/>
                     </p:column>
                     <p:column headerText="NOME">
-                        <p:outputLabel value="P1"/>
+                        <p:outputLabel value="#{prod.nome}"/>
+                    </p:column>
+                    <p:column headerText="CATEGORIA">
+                        <p:outputLabel value="#{prod.categoria}"/>
                     </p:column>
                     <p:column headerText="QUANTIDADE">
-                        <p:outputLabel value="P1"/>
+                        <p:outputLabel value="#{prod.qntAtual}"/>
                     </p:column>
                     <p:column headerText="PRECO">
-                        <p:outputLabel value="P1"/>
+                        <p:outputLabel value="#{prod.precoVenda}"/>
                     </p:column>
                 </p:dataTable>
             
@@ -42,12 +49,7 @@ and open the template in the editor.
             <p:separator />
             <p:spacer/>
             <p:spacer/>
-            
-            <p:panelGrid id="grid" columns="2">
-                <p:commandButton value="Adicionar Produto" style="width:225px;height:30px; color: green"/>
-                <p:commandButton value="Remover Produto" style="width:225px;height:30px; color: red"/>
-            </p:panelGrid>
-            
+
             <p:spacer/>
             <p:spacer/>
             <p:separator />
@@ -87,5 +89,5 @@ and open the template in the editor.
             </p:panelGrid>
             </h:form>
         </center>
-    </body>
+    </h:body>
 </html>

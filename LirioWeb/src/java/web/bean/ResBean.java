@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
  *
  * @author usuario
@@ -32,14 +33,13 @@ public class ResBean implements Serializable {
     private ProdutoDao pd = new ProdutoDao();
     private Produto p = new Produto();
     private ReservaProduto rp = new ReservaProduto();
-    private List<Reserva> listaR;
+    private List<Reserva> listaR = rd.listarReservas("");
     private List<ReservaProduto> listaRP;
     private List<Produto> listaP;
 
     public ResBean(){
         this.listaP = this.pd.listarProdutos("");
         //this.listaRP = this.rpd.listarRP(r);
-        //this.listaR = this.rd.listarReservas("");
     }
     
     public ReservaProdutoDao getRpd() {
@@ -113,6 +113,16 @@ public class ResBean implements Serializable {
     public void setListaP(List<Produto> listaP) {
         this.listaP = listaP;
     }
+    
+    public void listarReservas(String nomeCliente) {
+        this.listaR = rd.listarReservas(nomeCliente);
+    }
+    
+    public String excluirReserva(){
+        rd.excluirReserva(r);
+        this.r = null;
+        return null;
+     }
 
     @Override
     public int hashCode() {
