@@ -16,12 +16,13 @@ import dao.ReservaProdutoDao;
 import dao.ReservaDao;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author usuario
  */
-@Named(value = "resBean")
+
 @ManagedBean
 @SessionScoped
 public class ResBean implements Serializable {
@@ -31,11 +32,14 @@ public class ResBean implements Serializable {
     private ProdutoDao pd = new ProdutoDao();
     private Produto p = new Produto();
     private ReservaProduto rp = new ReservaProduto();
-    private List<Reserva> listaR= rd.listarReservas("");
-    private List<ReservaProduto> listaRP= rpd.listarRP(r);
-    private List<Produto> listaP = pd.listarProdutos("");
+    private List<Reserva> listaR;
+    private List<ReservaProduto> listaRP;
+    private List<Produto> listaP;
 
     public ResBean(){
+        this.listaP = this.pd.listarProdutos("");
+        //this.listaRP = this.rpd.listarRP(r);
+        //this.listaR = this.rd.listarReservas("");
     }
     
     public ReservaProdutoDao getRpd() {
@@ -109,6 +113,33 @@ public class ResBean implements Serializable {
     public void setListaP(List<Produto> listaP) {
         this.listaP = listaP;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.r);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ResBean other = (ResBean) obj;
+        if (!Objects.equals(this.r, other.r)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }
         
