@@ -26,10 +26,8 @@ public class ReservaProduto implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
     private Reserva reserva;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
     private Produto produto;
     private int quantidade;
     private float preco;

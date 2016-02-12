@@ -17,7 +17,7 @@ and open the template in the editor.
 
             <h:form id="form">
                 <p:outputLabel value="Reserva" style="font-size: 30px" />
-                <p:dataTable var="prod">
+                <p:dataTable value="#{resBean.getListaP()}" var="prod">
                     <p:column headerText="ID">
                         <p:outputLabel value="P1"/>
                     </p:column>

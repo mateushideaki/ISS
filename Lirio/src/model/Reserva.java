@@ -31,7 +31,6 @@ public class Reserva implements Serializable{
     @Column(name = "data_Reserva")
     private Date dataReserva;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
     private Cliente cliente;
     @OneToMany(mappedBy = "reserva")
     @Cascade(CascadeType.ALL)
