@@ -10,21 +10,30 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:commandButton value="Instruções" icon="ui-icon-info" action="instrucoes" style="font-size: 15px; width:225px;height:30px;" />
+            <p:commandButton value="Instruções" icon="ui-icon-info" action="insReserva" style="font-size: 15px; width:225px;height:30px;" />
         </h:form>
         
         <center>
             <h:form id="form">
+
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:growl id="message" showDetail="true" />
                 <p:outputLabel value="Cadastrar Reserva" style="font-size: 30px" />
                 <p:spacer/>
                 <p:separator />
                 <p:outputLabel value="Produtos" style="font-size: 20px" />
                 <p:contextMenu for="lisp">
-                    <p:menuitem value="Adicionar ao Carrinho" icon="ui-icon-circle-plus"  update="@all">
- 
+                    <p:menuitem value="Adicionar ao Carrinho" icon="ui-icon-circle-plus" actionListener="#{resBean.addCarrinho()}" update="@all">
+                         <p:confirm header="Confirmation" message="Qual a quantidade que deseja Adicionar?" icon="ui-icon-alert">
+                         </p:confirm>
                     </p:menuitem>
                 </p:contextMenu>
-                <p:dataTable value="#{resBean.listaP}" var="prod" id="lisp" rowKey="#{prod.id}" selection="#{reaBean.p}" selectionMode="single">
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:spinner id="qnt" value="#{resBean.contador}" />
+                    <p:commandButton value="Adicionar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+                <p:dataTable value="#{resBean.listaP}" var="prod" id="lisp" rowKey="#{prod.id}" selection="#{resBean.p}" selectionMode="single">
                     <p:column headerText="ID">
                         <p:outputLabel value="#{prod.id}"/>
                     </p:column>
@@ -84,8 +93,8 @@
             <p:spacer/>
             <p:outputLabel value="Total:  R$ 00,00" style="font-size: 20px" />
             <p:panelGrid id="grido" columns="2">
-                <p:commandButton value="Cadastrar" action="reserva" style="width:225px;height:30px; color: green"/>
-                <p:commandButton value="Cancelar" action="reserva" style="width:225px;height:30px; color: red"/>
+                <p:commandButton value="Criar Reserva" action="reserva" style="width:225px;height:30px; color: green"/>
+                <p:commandButton value="Voltar" action="reserva" style="width:225px;height:30px; color: red"/>
             </p:panelGrid>
             </h:form>
         </center>

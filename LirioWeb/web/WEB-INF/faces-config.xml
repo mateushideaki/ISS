@@ -35,11 +35,4 @@
             <to-view-id>/reserva.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/reserva.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>novaReserva</from-outcome>
-            <to-view-id>/novaReserva.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 </faces-config>
