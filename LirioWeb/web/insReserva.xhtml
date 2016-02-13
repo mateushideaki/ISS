@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Lirio Web</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandButton value="Voltar a Tela Reserva" action="reserva" style="font-size: 15px; width:225px;height:30px;" />
+        </h:form>
+        <center>
+            <h:form>
+                <p:outputLabel value="Instruções" style="font-size: 30px" />
+                <p:panelGrid style="margin-top:30px">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column  style="font-size: 30px" colspan="2">Reserva</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column >Campos/ Botões</p:column>
+                            <p:column >Definições</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column style="font-weight: bold;">Tabela:</p:column>
+                        <p:column >Mostra as suas reservas ja cadastradas</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="font-weight: bold;">Clicar Com Botão Direito Em Uma Reserva</p:column>
+                        <p:column >Habilita a opção de excluir reserva selecionada</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column ><p:commandButton value="Nova Reserva" style="width:225px;height:30px; color: green"/></p:column>
+                        <p:column >Troca a tela para a tela de cadastro de uma nova reserva</p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column ><p:commandButton value="Retornar" style="width:225px;height:30px; color: red"/></p:column>
+                        <p:column >Retorna para a tela de "Cliente Logado"</p:column>
+                    </p:row>
+                    
+                </p:panelGrid>
+            </h:form>
+        </center>
+    </h:body>
+</html>
