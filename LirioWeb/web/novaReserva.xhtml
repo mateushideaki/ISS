@@ -24,8 +24,7 @@
                 <p:outputLabel value="Produtos" style="font-size: 20px" />
                 <p:contextMenu for="lisp">
                     <p:menuitem value="Adicionar ao Carrinho" icon="ui-icon-circle-plus" actionListener="#{resBean.addCarrinho()}" update="@all">
-                         <p:confirm header="Confirmation" message="Qual a quantidade que deseja Adicionar?" icon="ui-icon-alert">
-                         </p:confirm>
+                         <p:confirm header="Confirmation" message="Qual a quantidade que deseja Adicionar?" icon="ui-icon-alert"/>
                     </p:menuitem>
                 </p:contextMenu>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
