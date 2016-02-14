@@ -45,7 +45,7 @@
             <p:spacer/>
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:spinner id="basic" value="#{resBean.cont}" />
-            <p:commandButton value="Adicionar" action="#{resBean.addCarrinho}" update="@all"  icon="ui-icon-check" />
+            <p:commandButton value="Adicionar" action="#{resBean.addCarrinho}" icon="ui-icon-check" update="@all"/>
             <p:separator />
             <p:spacer/>
             <p:separator />
@@ -61,20 +61,20 @@
             
 
             <p:outputLabel value="Produtos No Carrinho" style="font-size: 20px" />
-            <p:dataTable var="produ">
-                <p:column headerText="ID">
-                    <p:outputLabel value="P1"/>
-                </p:column>
-                <p:column headerText="NOME">
-                    <p:outputLabel value="P1"/>
-                </p:column>
-                <p:column headerText="QUANTIDADE">
-                    <p:outputLabel value="P1"/>
-                </p:column>
-                <p:column headerText="PRECO">
-                    <p:outputLabel value="P1"/>
-                </p:column>
-            </p:dataTable>
+                <p:dataTable value="#{resBean.listaReserva}" var="re" id="lisr" rowKey="#{re.id}" selection="#{resBean.rr}" selectionMode="single">
+                    <p:column headerText="ID PRODUTO">
+                        <p:outputLabel value="#{re.produto.id}"/>
+                    </p:column>
+                    <p:column headerText="NOME">
+                        <p:outputLabel value="#{re.produto.nome}"/>
+                    </p:column>
+                    <p:column headerText="QUANTIDADE">
+                        <p:outputLabel value="#{re.quantidade}"/>
+                    </p:column>
+                    <p:column headerText="PRECO">
+                        <p:outputLabel value="#{re.preco}"/>
+                    </p:column>
+                </p:dataTable>
             
             <p:spacer/>
             <p:spacer/>
@@ -83,7 +83,8 @@
             <p:separator />
             <p:spacer/>
             <p:spacer/>
-            <p:outputLabel value="Total:  R$ 00,00" style="font-size: 20px" />
+            <p:outputLabel value="Total: " style="font-size: 20px" />
+            <p:outputLabel value="#{resBean.r.preco}" style="font-size: 20px" />
             <p:panelGrid id="grido" columns="2">
                 <p:commandButton value="Criar Reserva" action="reserva" style="width:225px;height:30px; color: green"/>
                 <p:commandButton value="Voltar" action="reserva" style="width:225px;height:30px; color: red"/>

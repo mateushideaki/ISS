@@ -35,7 +35,7 @@ public class ResBean implements Serializable {
     private ReservaDao rd = new ReservaDao();
     private ReservaProdutoDao rpd = new ReservaProdutoDao();
     private Reserva r = new Reserva();
-    private Reserva rr = new Reserva();
+    private ReservaProduto rr = new ReservaProduto();
     private ProdutoDao pd = new ProdutoDao();
     private Produto p = new Produto();
     private ReservaProduto rp = new ReservaProduto();
@@ -44,6 +44,7 @@ public class ResBean implements Serializable {
     private ArrayList<ReservaProduto> listaReserva = new ArrayList<ReservaProduto>();
     private List<Produto> listaP;
     private int cont;
+    private double total;
 
     public ResBean(){
         this.listaP = this.pd.listarProdutos("");
@@ -64,6 +65,22 @@ public class ResBean implements Serializable {
 
     public void setRd(ReservaDao rd) {
         this.rd = rd;
+    }
+
+    public ReservaProduto getRr() {
+        return rr;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void setRr(ReservaProduto rr) {
+        this.rr = rr;
     }
 
     public Reserva getR() {
