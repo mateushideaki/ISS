@@ -35,6 +35,7 @@ public class ResBean implements Serializable {
     private ReservaDao rd = new ReservaDao();
     private ReservaProdutoDao rpd = new ReservaProdutoDao();
     private Reserva r = new Reserva();
+    private Reserva rr = new Reserva();
     private ProdutoDao pd = new ProdutoDao();
     private Produto p = new Produto();
     private ReservaProduto rp = new ReservaProduto();
@@ -42,11 +43,11 @@ public class ResBean implements Serializable {
     private List<ReservaProduto> listaRP;
     private ArrayList<ReservaProduto> listaReserva = new ArrayList<ReservaProduto>();
     private List<Produto> listaP;
-    private int contador = 0;
+    private int cont;
 
     public ResBean(){
         this.listaP = this.pd.listarProdutos("");
-        //this.listaRP = this.rpd.listarRP(r);
+        
     }
     
     public ReservaProdutoDao getRpd() {
@@ -105,6 +106,14 @@ public class ResBean implements Serializable {
         this.listaR = listaR;
     }
 
+    public int getCont() {
+        return cont;
+    }
+
+    public void setCont(int cont) {
+        this.cont = cont;
+    }
+
     public List<ReservaProduto> getListaRP() {
         return listaRP;
     }
@@ -117,20 +126,21 @@ public class ResBean implements Serializable {
         return listaP;
     }
 
-    public String addCarrinho() {
+    public void addCarrinho() {
         ListIterator listIt = this.listaReserva.listIterator();
         int posicao = 0;
-        if (contador < 0) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error!", "Quantidade Tem Que Ser Maior Que 0."));
-            return "fail";
-        } else if (p.getQntAtual() < contador) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error!", "Quantidade Inserida Maior Que Quantidade Em Estoque."));
-            return "fail";
+        if (cont < 1) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Quantidade Tem Que Ser Maior Que 0."));
+            
+        } else if (p.getQntAtual() < cont) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Quantidade Inserida Maior Que Quantidade Em Estoque."));
+            
         } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Produto adicionado ao carrinho."));
             rp.setProduto(p);
             rp.setReserva(this.r);
-            rp.setQuantidade(contador);
-            rp.setPreco(contador * p.getPrecoVenda());
+            rp.setQuantidade(cont);
+            rp.setPreco(cont * p.getPrecoVenda());
             p.setQntAtual(p.getQntAtual() - rp.getQuantidade());
             while (listIt.hasNext()) {
                 posicao++;
@@ -146,8 +156,6 @@ public class ResBean implements Serializable {
             }
             this.listaReserva.add(posicao, rp);
             this.r.setPreco(this.r.getPreco() + rp.getPreco());
-            this.contador = 0;
-            return "sucess";
         }
     }
     public void setListaP(List<Produto> listaP) {
@@ -172,13 +180,6 @@ public class ResBean implements Serializable {
         this.listaReserva = listaReserva;
     }
 
-    public int getContador() {
-        return contador;
-    }
-
-    public void setContador(int contador) {
-        this.contador = contador;
-    }
 
     @Override
     public int hashCode() {

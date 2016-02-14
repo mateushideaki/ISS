@@ -16,22 +16,13 @@
         <center>
             <h:form id="form">
 
-                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                <p:growl id="message" showDetail="true" />
+
                 <p:outputLabel value="Cadastrar Reserva" style="font-size: 30px" />
                 <p:spacer/>
                 <p:separator />
                 <p:outputLabel value="Produtos" style="font-size: 20px" />
-                <p:contextMenu for="lisp">
-                    <p:menuitem value="Adicionar ao Carrinho" icon="ui-icon-circle-plus" actionListener="#{resBean.addCarrinho()}" update="@all">
-                         <p:confirm header="Confirmation" message="Qual a quantidade que deseja Adicionar?" icon="ui-icon-alert"/>
-                    </p:menuitem>
+                <p:contextMenu>
                 </p:contextMenu>
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                    <p:spinner id="qnt" value="#{resBean.contador}" />
-                    <p:commandButton value="Adicionar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                    <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                </p:confirmDialog>
                 <p:dataTable value="#{resBean.listaP}" var="prod" id="lisp" rowKey="#{prod.id}" selection="#{resBean.p}" selectionMode="single">
                     <p:column headerText="ID">
                         <p:outputLabel value="#{prod.id}"/>
@@ -52,12 +43,14 @@
             
             <p:spacer/>
             <p:spacer/>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:spinner id="basic" value="#{resBean.cont}" />
+            <p:commandButton value="Adicionar" action="#{resBean.addCarrinho}" update="@all"  icon="ui-icon-check" />
             <p:separator />
             <p:spacer/>
             <p:separator />
             <p:spacer/>
             <p:spacer/>
-
             <p:spacer/>
             <p:spacer/>
             <p:separator />
