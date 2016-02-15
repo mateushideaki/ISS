@@ -1,0 +1,14 @@
+model/ParcelaVenda_.java
+model/Fornecedor_.java
+model/FornecedorProduto_.java
+model/ReservaProduto_.java
+model/CompraProduto_.java
+model/Venda_.java
+model/PagamentoCliente_.java
+model/ParcelaCompra_.java
+model/VendaProduto_.java
+model/PagamentoFornecedor_.java
+model/Compra_.java
+model/Reserva_.java
+model/Produto_.java
+model/Cliente_.java
