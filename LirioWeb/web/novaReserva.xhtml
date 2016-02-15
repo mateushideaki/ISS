@@ -16,7 +16,7 @@
         <center>
             <h:form id="form">
 
-
+                #{resBean.r.setCliente(clienteWebBean.cliente)}
                 <p:outputLabel value="Cadastrar Reserva" style="font-size: 30px" />
                 <p:spacer/>
                 <p:separator />
@@ -61,9 +61,9 @@
             
 
             <p:outputLabel value="Produtos No Carrinho" style="font-size: 20px" />
-                <p:dataTable value="#{resBean.listaReserva}" var="re" id="lisr" rowKey="#{re.id}" selection="#{resBean.rr}" selectionMode="single">
-                    <p:column headerText="ID PRODUTO">
-                        <p:outputLabel value="#{re.produto.id}"/>
+                <p:dataTable value="#{resBean.listaReserva}" var="re" id="lisr" rowKey="#{re.produto.id}" selection="#{resBean.rr}" selectionMode="single">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{re.produto.getId()}"/>
                     </p:column>
                     <p:column headerText="NOME">
                         <p:outputLabel value="#{re.produto.nome}"/>
@@ -78,15 +78,17 @@
             
             <p:spacer/>
             <p:spacer/>
+            <p:spinner id="basic2" value="#{resBean.cont2}" />
+            <p:commandButton value="Remover" action="#{resBean.rmvCarrinho()}" icon="ui-icon-close" update="@all"/>
             <p:separator />
             <p:spacer/>
             <p:separator />
             <p:spacer/>
             <p:spacer/>
             <p:outputLabel value="Total: " style="font-size: 20px" />
-            <p:outputLabel value="#{resBean.r.preco}" style="font-size: 20px" />
+            <p:outputLabel value="#{resBean.total}" style="font-size: 20px" />
             <p:panelGrid id="grido" columns="2">
-                <p:commandButton value="Criar Reserva" action="reserva" style="width:225px;height:30px; color: green"/>
+                <p:commandButton value="Criar Reserva" action="#{resBean.registrarReserva()}" style="width:225px;height:30px; color: green"/>
                 <p:commandButton value="Voltar" action="reserva" style="width:225px;height:30px; color: red"/>
             </p:panelGrid>
             </h:form>

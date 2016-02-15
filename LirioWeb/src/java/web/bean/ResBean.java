@@ -18,6 +18,9 @@ import dao.ReservaProdutoDao;
 import dao.ReservaDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
@@ -44,7 +47,8 @@ public class ResBean implements Serializable {
     private ArrayList<ReservaProduto> listaReserva = new ArrayList<ReservaProduto>();
     private List<Produto> listaP;
     private int cont;
-    private double total;
+    private int cont2;
+    private double total = 0;
 
     public ResBean(){
         this.listaP = this.pd.listarProdutos("");
@@ -57,6 +61,14 @@ public class ResBean implements Serializable {
 
     public void setRpd(ReservaProdutoDao rpd) {
         this.rpd = rpd;
+    }
+
+    public int getCont2() {
+        return cont2;
+    }
+
+    public void setCont2(int cont2) {
+        this.cont2 = cont2;
     }
 
     public ReservaDao getRd() {
@@ -145,6 +157,7 @@ public class ResBean implements Serializable {
 
     public void addCarrinho() {
         ListIterator listIt = this.listaReserva.listIterator();
+        ReservaProduto rpp = new ReservaProduto();
         int posicao = 0;
         if (cont < 1) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Quantidade Tem Que Ser Maior Que 0."));
@@ -154,25 +167,78 @@ public class ResBean implements Serializable {
             
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Produto adicionado ao carrinho."));
-            rp.setProduto(p);
-            rp.setReserva(this.r);
-            rp.setQuantidade(cont);
-            rp.setPreco(cont * p.getPrecoVenda());
-            p.setQntAtual(p.getQntAtual() - rp.getQuantidade());
+            rpp.setProduto(p);
+            rpp.setReserva(this.r);
+            rpp.setQuantidade(cont);
+            rpp.setPreco(cont * p.getPrecoVenda());
+            
+            p.setQntAtual(p.getQntAtual() - rpp.getQuantidade());
             while (listIt.hasNext()) {
                 posicao++;
                 ReservaProduto rpIt = (ReservaProduto) listIt.next();
                 if (rpIt.getProduto().getId() == p.getId()) {
                     posicao--;
-                    rp.setQuantidade(rp.getQuantidade() + rpIt.getQuantidade());
-                    rp.setPreco(rp.getPreco() + rpIt.getPreco());
+                    rpp.setQuantidade(rpp.getQuantidade() + rpIt.getQuantidade());
+                    rpp.setPreco(rpp.getPreco() + rpIt.getPreco());
                     r.setPreco(r.getPreco() - rpIt.getPreco());
                     listIt.remove();
                     break;
                 }
             }
-            this.listaReserva.add(posicao, rp);
-            this.r.setPreco(this.r.getPreco() + rp.getPreco());
+            this.listaReserva.add(posicao, rpp);
+            this.r.setPreco(this.r.getPreco() + rpp.getPreco());
+        }
+    }
+    
+    public void rmvCarrinho() {
+        ListIterator listIt = this.listaReserva.listIterator();
+        Produto prod = new Produto();
+        int posicao = 0;
+        if (cont2 < 1) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Quantidade Tem Que Ser Maior Que 0."));
+            
+        } else if (rr.getQuantidade() < cont2) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Quantidade Inserida Maior Que Quantidade Na Reserva."));
+            
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Quantidade removida do carrinho."));
+            prod = rr.getProduto();
+            prod.setQntAtual(prod.getQntAtual()+ cont2);
+            p.setQntAtual(p.getQntAtual() - rr.getQuantidade());
+                    while (listIt.hasNext()) {
+                        posicao++;
+                        ReservaProduto rpIt = (ReservaProduto) listIt.next();
+                        if (rpIt == rr) {
+                            posicao--;
+                            listIt.remove();
+                            break;
+                        }
+                    }
+                    if (cont2 < rr.getQuantidade()) {
+                        rr.setQuantidade(rr.getQuantidade() - cont2);
+                        rr.setPreco(rr.getPreco() - cont2 * prod.getPrecoVenda());
+                        listaReserva.add(posicao, rr);
+                        this.r.setPreco(this.r.getPreco() - prod.getPrecoVenda() * cont2);
+                    } else {
+                        this.r.setPreco(this.r.getPreco() - prod.getPrecoVenda() * rr.getQuantidade());
+                    }
+        }
+    }
+    
+    public void registrarReserva(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Reserva castrada."));
+        if(this.r.getPreco() <= 0){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Reserva com Preço 0. A reserva nao sera cadastrada."));
+        }
+        else{
+                
+                Date d = new Date();
+                Calendar cal = new GregorianCalendar();
+                cal.setTime(d);
+                this.r.setDataReserva(d);
+                this.rd.cadastrarReserva(this.r);
+                this.rpd.cadastrarRP(this.listaReserva);
+
         }
     }
     public void setListaP(List<Produto> listaP) {
