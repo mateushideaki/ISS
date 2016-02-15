@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Lirio Web</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandButton value="Voltar a Tela Nova Reserva" action="novaReserva" style="font-size: 15px; width:225px;height:30px;" />
+        </h:form>
+        <center>
+            <h:form>
+                <p:outputLabel value="Instruções" style="font-size: 30px" />
+                <p:panelGrid style="margin-top:30px">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column  style="font-size: 30px" colspan="2">Reserva</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column >Campos/ Botões</p:column>
+                            <p:column >Definições</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column style="font-weight: bold;">Tabela Produto:</p:column>
+                        <p:column >Mostra os produtos cadastrados no sistema</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="font-weight: bold;">Tabela Produtos No Carrinho:</p:column>
+                        <p:column >Mostra os produtos no carrinho de compras</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="font-weight: bold;">Clicar em um produto</p:column>
+                        <p:column >Seleciona um produto para possivel adição ou remoção</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column ><p:commandButton value="Adicionar" icon="ui-icon-check"/></p:column>
+                        <p:column >Adiciona O produto selecionado da tabela de produtos ao carrinho</p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column ><p:commandButton value="Remover" icon="ui-icon-close"/></p:column>
+                        <p:column >Remove O produto selecionado da tabela de produtos no carrinho </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column > <p:spinner id="basic3" value="#{resBean.total}" /></p:column>
+                        <p:column >Regula a quantia a ser adicionada ou removida </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column ><p:commandButton value="Nova Reserva" style="width:225px;height:30px; color: green"/></p:column>
+                        <p:column >Troca a tela para a tela de cadastro de uma nova reserva</p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column ><p:commandButton value="Voltar" style="width:225px;height:30px; color: red"/></p:column>
+                        <p:column >Retorna a tela de reservas</p:column>
+                    </p:row>
+                   
+                </p:panelGrid>
+            </h:form>
+        </center>
+    </h:body>
+</html>

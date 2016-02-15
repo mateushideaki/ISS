@@ -10,13 +10,14 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:commandButton value="Instruções" icon="ui-icon-info" action="insReserva" style="font-size: 15px; width:225px;height:30px;" />
+            <p:commandButton value="Instruções de Nova Reserva" icon="ui-icon-info" action="insNovaReserva" style="font-size: 15px; width:225px;height:30px;" />
         </h:form>
         
         <center>
             <h:form id="form">
 
-                #{resBean.r.setCliente(clienteWebBean.cliente)}
+                #{resBean.reserva.setCliente(clienteWebBean.cliente)}
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <p:outputLabel value="Cadastrar Reserva" style="font-size: 30px" />
                 <p:spacer/>
                 <p:separator />
@@ -43,7 +44,6 @@
             
             <p:spacer/>
             <p:spacer/>
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:spinner id="basic" value="#{resBean.cont}" />
             <p:commandButton value="Adicionar" action="#{resBean.addCarrinho}" icon="ui-icon-check" update="@all"/>
             <p:separator />
@@ -86,11 +86,17 @@
             <p:spacer/>
             <p:spacer/>
             <p:outputLabel value="Total: " style="font-size: 20px" />
-            <p:outputLabel value="#{resBean.total}" style="font-size: 20px" />
+            <p:outputLabel value="#{resBean.reserva.preco}" style="font-size: 20px" />
             <p:panelGrid id="grido" columns="2">
-                <p:commandButton value="Criar Reserva" action="#{resBean.registrarReserva()}" style="width:225px;height:30px; color: green"/>
+                <p:commandButton value="Criar Reserva" action="#{resBean.registrarReserva()}" style="width:225px;height:30px; color: green">
+                    <p:confirm header="Confirmation" message="Tem Certeza Que Deseja Cadastrar Essa ?" icon="ui-icon-alert" />
+                </p:commandButton>
                 <p:commandButton value="Voltar" action="reserva" style="width:225px;height:30px; color: red"/>
             </p:panelGrid>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
             </h:form>
         </center>
     </h:body>

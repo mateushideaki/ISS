@@ -38,6 +38,7 @@ public class ResBean implements Serializable {
     private ReservaDao rd = new ReservaDao();
     private ReservaProdutoDao rpd = new ReservaProdutoDao();
     private Reserva r = new Reserva();
+    private Reserva reserva = new Reserva();
     private ReservaProduto rr = new ReservaProduto();
     private ProdutoDao pd = new ProdutoDao();
     private Produto p = new Produto();
@@ -48,6 +49,7 @@ public class ResBean implements Serializable {
     private List<Produto> listaP;
     private int cont;
     private int cont2;
+    private int num =0;
     private double total = 0;
 
     public ResBean(){
@@ -151,6 +153,14 @@ public class ResBean implements Serializable {
         this.listaRP = listaRP;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     public List<Produto> getListaP() {
         return listaP;
     }
@@ -168,10 +178,10 @@ public class ResBean implements Serializable {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Produto adicionado ao carrinho."));
             rpp.setProduto(p);
-            rpp.setReserva(this.r);
+            rpp.setReserva(this.reserva);
             rpp.setQuantidade(cont);
             rpp.setPreco(cont * p.getPrecoVenda());
-            
+            num++;
             p.setQntAtual(p.getQntAtual() - rpp.getQuantidade());
             while (listIt.hasNext()) {
                 posicao++;
@@ -180,13 +190,14 @@ public class ResBean implements Serializable {
                     posicao--;
                     rpp.setQuantidade(rpp.getQuantidade() + rpIt.getQuantidade());
                     rpp.setPreco(rpp.getPreco() + rpIt.getPreco());
-                    r.setPreco(r.getPreco() - rpIt.getPreco());
+                    reserva.setPreco(reserva.getPreco() - rpIt.getPreco());
+                    num--;
                     listIt.remove();
                     break;
                 }
             }
             this.listaReserva.add(posicao, rpp);
-            this.r.setPreco(this.r.getPreco() + rpp.getPreco());
+            this.reserva.setPreco(this.reserva.getPreco() + rpp.getPreco());
         }
     }
     
@@ -218,27 +229,30 @@ public class ResBean implements Serializable {
                         rr.setQuantidade(rr.getQuantidade() - cont2);
                         rr.setPreco(rr.getPreco() - cont2 * prod.getPrecoVenda());
                         listaReserva.add(posicao, rr);
-                        this.r.setPreco(this.r.getPreco() - prod.getPrecoVenda() * cont2);
+                        this.reserva.setPreco(this.reserva.getPreco() - prod.getPrecoVenda() * cont2);
                     } else {
-                        this.r.setPreco(this.r.getPreco() - prod.getPrecoVenda() * rr.getQuantidade());
+                        num--;
+                        this.reserva.setPreco(this.reserva.getPreco() - prod.getPrecoVenda() * rr.getQuantidade());
                     }
         }
     }
     
-    public void registrarReserva(){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Reserva castrada."));
-        if(this.r.getPreco() <= 0){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Reserva com Preço 0. A reserva nao sera cadastrada."));
+    public String registrarReserva(){
+        if(this.reserva.getPreco() <= 0){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Reserva Sem Produtos. A reserva nao sera cadastrada."));
+            return null;
         }
         else{
                 
                 Date d = new Date();
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(d);
-                this.r.setDataReserva(d);
-                this.rd.cadastrarReserva(this.r);
+                this.reserva.setDataReserva(d);
+                this.rd.cadastrarReserva(this.reserva);
                 this.rpd.cadastrarRP(this.listaReserva);
-
+                this.reserva = new Reserva();
+                this.listaReserva = new ArrayList<ReservaProduto>();
+                return "reserva";
         }
     }
     public void setListaP(List<Produto> listaP) {
@@ -248,13 +262,21 @@ public class ResBean implements Serializable {
     public void listarReservas(String nomeCliente) {
         this.listaR = rd.listarReservas(nomeCliente);
     }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
     
     public String excluirReserva(){
         rd.excluirReserva(r);
         this.r = null;
         return null;
      }
-
+    
     public ArrayList<ReservaProduto> getListaReserva() {
         return listaReserva;
     }
